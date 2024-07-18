@@ -1,6 +1,11 @@
 import React from "react";
-import Logo from "../../assets/Pictures/Logo.png";
 import { NavLink } from "react-router-dom";
+// UI & icon
+import { MdOutlineHome } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlinePhone } from "react-icons/md";
+import Logo from "../../assets/Pictures/Logo2.png";
+import License from "../License/License";
 export default function Footer() {
   const footerContent = [
     {
@@ -67,14 +72,14 @@ export default function Footer() {
       ],
     },
   ];
-  const callHover = () => {
-    console.log("Check >>> hover");
-  };
   return (
     <div className="h-full" style={{ backgroundColor: "rgb(241, 218, 178)" }}>
-      <div className="top-8 left-8 flex flex-col  gap-[10px] pt-3 pb-3 pl-5 pr-5">
-        <div className="max-w-[300px] h-[150px] ml-auto mr-auto md:ml-0 md:mr-0">
+      <div className="top-8 left-8 flex flex-col  gap-9 pt-3 pb-3 pl-5 pr-5">
+        <div className="flex flex-col items-center justify-between max-w-[350px] w-[250px] h-[150px] translate-x-[-20px] md:ml-0 md:mr-0">
           <img className="w-full h-full object-scale-down" src={Logo}></img>
+          <p className="text-[18px] text-center italic ">
+            Freshly baked, everyday
+          </p>
         </div>
         <div className="flex flex-col md:flex-row md:justify-center md:gap-[150px] lg:gap-[350px] ">
           {footerContent &&
@@ -82,7 +87,7 @@ export default function Footer() {
             footerContent.map((section) => {
               return (
                 <div key={section.id} className="flex flex-col mb-3">
-                  <h4 className="font-semibold uppercase mb-2 text-1xl">
+                  <h4 className="font-semibold capitalize mb-2 text-[20px]">
                     {section.title}
                   </h4>
                   {section.items &&
@@ -92,8 +97,8 @@ export default function Footer() {
                         <NavLink
                           key={item.id}
                           to={item.direction}
-                          className="text-[20px] mb-1 no-underline text-black capitalize cursor-pointer"
-                          onMouseEnter={() => callHover()}
+                          className="text-[18px] mb-1 no-underline text-black capitalize cursor-pointer navlink-hover w-fit"
+                          style={{ "--line-hover": "black" }}
                         >
                           {item.name}
                         </NavLink>
@@ -102,8 +107,26 @@ export default function Footer() {
                 </div>
               );
             })}
+          <div>
+            <h4 className="font-semibold capitalize text-[20px] mb-2">
+              Contact
+            </h4>
+            <span className="flex flex-row gap-2 text-[18px] items-center mb-2">
+              <MdOutlineHome size={20} />
+              <p className="m-0">123, Adress ABC, HCMC</p>
+            </span>
+            <span className="flex flex-row gap-2 text-[18px] items-center mb-2">
+              <MdOutlineEmail size={20} />
+              <p className="m-0">email@gmail.com</p>
+            </span>
+            <span className="flex flex-row gap-2 text-[18px] items-center mb-2">
+              <MdOutlinePhone size={20} />
+              <p className="m-0">+84 8787878787</p>
+            </span>
+          </div>
         </div>
       </div>
+      <License></License>
     </div>
   );
 }

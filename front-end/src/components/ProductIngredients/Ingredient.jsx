@@ -1,0 +1,30 @@
+import React from "react";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { MdExpandMore } from "react-icons/md";
+export default function Ingredient(props) {
+  const { ingredients } = props;
+  return (
+    <>
+      {ingredients ? (
+        <div>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<MdExpandMore />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <h4 className="capitalize text-[18px] font-semibold">
+                ingredients
+              </h4>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="text-[16px] leading-8">{ingredients}</p>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </>
+  );
+}

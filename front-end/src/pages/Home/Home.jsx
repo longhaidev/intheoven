@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import _ from "lodash";
 // cpn
-import Header from "../../components/Header/Header";
 import Banner from "../../components/Banner/Banner";
 import FoodSection from "../../components/FoodSection/FoodSection";
 import OurStory from "../../components/OurStory/OurStory";
-import NewLetter from "../../components/NewsLetter/NewsLetter";
-import Footer from "../../shared/Footer/Footer";
+
 // fake data
 import categories from "../../assets/FakeData/categories.json";
 const Home = () => {
@@ -18,10 +15,10 @@ const Home = () => {
     let bakeryGroup = [];
     let beverageGroup = [];
     let raw = _.chain(categories)
-      .groupBy("category_group")
+      .groupBy("group")
       .map((item) => {
         item.forEach((product) => {
-          if (product.category_group === "bakery") {
+          if (product.group === "bakery") {
             bakeryGroup.push(product);
           } else {
             beverageGroup.push(product);

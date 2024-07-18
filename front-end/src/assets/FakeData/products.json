@@ -19,7 +19,7 @@
                 ,
                 "ingredients": "",
                 "price": 420,
-                "stock": 20,
+                "stock": 0,
                 "img": "https://images.pexels.com/photos/461060/pexels-photo-461060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                 "quantity": 0
             },
@@ -40,7 +40,7 @@
                 
                 "ingredients": "",
                 "price": 420,
-                "stock": 20,
+                "stock": 45,
                 "img": "https://cdn.prod.website-files.com/649249d29a20bd6bc3deac48/65ce6c94f24816ea491f65c6_24Feb_Beligium%20Waffle.jpg",
                 "quantity": 0
             },
@@ -488,7 +488,7 @@
                 
                 "ingredients": "",
                 "price": 420,
-                "stock": 20,
+                "stock": 0,
                 "img": "https://cdn.prod.website-files.com/6419b668828857182d1e7359/64639f3e4f3b525d461b0e24_Copy%20of%20Matcha%20Latte.png",
                 "quantity": 0
             },

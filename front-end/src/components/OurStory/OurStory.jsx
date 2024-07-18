@@ -9,14 +9,14 @@ export default function OurStory(props) {
       <div className="pt-[50px] pb-[50px] pl-[15px] pr-[15px] md:pl-[25px] md:pr-[25px] md:flex md:flex-row md:gap-[100px] lg:mb-[20px] lg:pr-[40px] lg:pl-[40px]">
         <div className="md:w-[45%] lg:w-[60%]">
           <div className="text-center md:!text-left lg:!text-left">
-            <h3 className="text-3xl mb-6 md:text-4xl lg:text-4xl">
+            <h3 className="text-[32px] mb-6 md:text-4xl lg:text-4xl">
               In the Oven -{" "}
               <span className="text-xl lg:text-3xl">
                 <i>Our story</i>
               </span>
             </h3>
           </div>
-          <span className="text-[16px] md:text-[17px] lg:text-[18px]">
+          <span className="text-[18px] md:text-[17px] lg:text-[18px]">
             <p>Trải nghiệm ẩm thực bánh mì tuyệt vời tại BreadTalk Vietnam!</p>
             <p>
               Hành trình 13 năm hoàn thiện và phát triển. Gần 30 cơ sở phục vụ.
