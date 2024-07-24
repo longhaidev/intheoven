@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-export default function CheckOutButton(props) {
+export default function ConfirmOrder(props) {
   const { styles } = props;
   let theme = createTheme({
     palette: {
@@ -25,19 +25,16 @@ export default function CheckOutButton(props) {
     },
   }));
   const navigate = useNavigate();
-  const handleCheckOut = () => {
-    console.log("checkout");
-    navigate("/checkout");
-  };
+  const handlePlaceOrder = () => {};
   return (
     <>
       <ColorButton
         sx={styles}
         variant="outline"
         className="w-full"
-        onClick={() => handleCheckOut()}
+        onClick={() => handlePlaceOrder()}
       >
-        Process to checkout
+        Confirm oder
       </ColorButton>
     </>
   );

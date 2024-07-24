@@ -11,13 +11,15 @@ export default function RelatedProductCard(props) {
   const isAdded = cartItem.some((item) => item.id === productDetail.id);
 
   return (
-    <div draggable={false} className="w-[45%] product-hover">
-      <div className="w-full h-[220px] ml-auto mr-auto flex flex-col justify-between items-center select-none capitalize text-[14px] relative ">
-        <img
-          className="w-full h-full object-cover rounded-md "
-          src={productDetail.img}
-          draggable={false}
-        ></img>
+    <div draggable={false} className="lg:product-hover">
+      <div className="w-[220px] h-[200px] ml-auto mr-auto flex flex-col justify-between items-center select-none capitalize text-[14px] relative ">
+        <div>
+          <img
+            className="w-[220px] h-[200px] object-cover rounded-md "
+            src={productDetail.img}
+            draggable={false}
+          ></img>
+        </div>
         {isAdded && (
           <span className="absolute right-0 top-0 flex flex-col items-center justify-center">
             <FaBookmark color="red" size={40} className="relative" />
@@ -26,7 +28,7 @@ export default function RelatedProductCard(props) {
             </p>
           </span>
         )}
-        <div className="absolute w-full flex flex-col h-[70%] items-center justify-end gap-[5px] pl-[15px] pr-[15px] product-active">
+        <div className="absolute w-full flex flex-col h-[95%] items-center justify-end gap-[5px] pl-[15px] pr-[15px] lg:product-active md:h-[95%]">
           <AddToCartButton
             product={productDetail}
             productQuantity={1}

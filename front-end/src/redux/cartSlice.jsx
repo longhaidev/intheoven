@@ -1,12 +1,13 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+const INITIAL_STATE = {
+  cart: [],
+  totalQuantity: 0,
+  totalPrice: 0,
+};
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    cart: [],
-    totalQuantity: 0,
-    totalPrice: 0,
-  },
+  initialState: INITIAL_STATE,
   reducers: {
     addToCart: (state, action) => {
       const product = action.payload;
@@ -83,6 +84,10 @@ const cartSlice = createSlice({
         // toast.success(`Decreased 1 ${product.name} in cart`);
       }
     },
+    clearCart: (state) => {
+      toast.success("Clear cart successfully");
+      return { ...INITIAL_STATE };
+    },
   },
 });
 
@@ -92,4 +97,5 @@ export const {
   removeFromCart,
   increaseProductQuantity,
   decreaseProductQuantity,
+  clearCart,
 } = cartSlice.actions;

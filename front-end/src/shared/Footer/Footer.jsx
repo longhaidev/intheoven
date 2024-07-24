@@ -81,7 +81,7 @@ export default function Footer() {
             Freshly baked, everyday
           </p>
         </div>
-        <div className="flex flex-col md:flex-row md:justify-center md:gap-[150px] lg:gap-[350px] ">
+        <div className="flex flex-col md:flex-row md:justify-between ">
           {footerContent &&
             footerContent.length > 0 &&
             footerContent.map((section) => {

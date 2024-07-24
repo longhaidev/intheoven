@@ -13,6 +13,7 @@ import {
   Radio,
   FormControl,
 } from "@mui/material";
+import ConfirmOrder from "../../components/Button/ConfirmOrder";
 
 export default function Checkout() {
   useEffect(() => {
@@ -50,15 +51,19 @@ export default function Checkout() {
   const handlePlaceOrder = () => {
     console.log("Ordered");
   };
-  console.log(">>> check render");
+  console.log(">>> check render from checkout");
   return (
     <div>
       <PageDirect pageName="checkout"></PageDirect>
-      <div className="pl-[20px] pr-[20px] !mb-[30px] !mt-[30px]">
+      <div className="pl-[20px] pr-[20px] !mb-[30px] !mt-[30px] lg:max-w-[1200px] lg:w-[1200px] lg:mr-auto lg:ml-auto">
         <div className="mb-4">
-          <h4 className="mb-4 text-[20px] font-semibold">Billing Details</h4>
+          <h4 className="mb-4 text-[20px] font-semibold md:text-[22px]">
+            Billing Details
+          </h4>
           <div className="mb-2">
-            <h6 className="font-semibold mb-2">Delivery</h6>
+            <h6 className="font-semibold mb-2 text-[18px] md:text-[20px]">
+              Delivery
+            </h6>
             <TextField
               size="small"
               className="w-full mb-3"
@@ -67,47 +72,50 @@ export default function Checkout() {
               variant="outlined"
               onChange={(event) => setName(event.target.value)}
             />
-            <TextField
-              size="small"
-              className="w-full mb-3"
-              id="outlined-basic"
-              label="Full address"
-              variant="outlined"
-              onChange={(event) => setAddress(event.target.value)}
-            />
-            <TextField
-              size="small"
-              className="w-full mb-3"
-              select
-              id="outlined-basic"
-              label="City"
-              variant="outlined"
-              defaultValue="HCM"
-              onChange={(event) => setCity(event.target.value)}
-            >
-              {citySelect.map((item) => (
-                <MenuItem key={item.value} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              size="small"
-              className="w-full mb-3"
-              id="outlined-basic"
-              label="Phone"
-              variant="outlined"
-              onChange={(event) => setPhone(event.target.value)}
-            />
-            <TextField
-              size="small"
-              className="w-full mb-3"
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-
+            <div className="md:flex md:flex-row md:justify-center md:items-center md:gap-4">
+              <TextField
+                size="small"
+                className="w-full mb-3"
+                id="outlined-basic"
+                label="Full address"
+                variant="outlined"
+                onChange={(event) => setAddress(event.target.value)}
+              />
+              <TextField
+                size="small"
+                className="w-full mb-3"
+                select
+                id="outlined-basic"
+                label="City"
+                variant="outlined"
+                defaultValue="HCM"
+                onChange={(event) => setCity(event.target.value)}
+              >
+                {citySelect.map((item) => (
+                  <MenuItem key={item.value} value={item.value}>
+                    {item.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
+            <div className="md:flex md:flex-row md:justify-center md:items-center md:gap-4">
+              <TextField
+                size="small"
+                className="w-full mb-3"
+                id="outlined-basic"
+                label="Phone"
+                variant="outlined"
+                onChange={(event) => setPhone(event.target.value)}
+              />
+              <TextField
+                size="small"
+                className="w-full mb-3"
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
             <TextField
               size="small"
               className="w-full"
@@ -141,8 +149,8 @@ export default function Checkout() {
             </div>
           </div>
           <div>
-            <h6 className="font-semibold">Payment Method</h6>
-            <p className="text-[14px] text-gray-400 m-0">
+            <h6 className="font-semibold text-[18px]">Payment Method</h6>
+            <p className="text-[16px] text-gray-400 m-0 italic  ">
               All transactions are secure and encrypted.
             </p>
             <FormControl>
@@ -170,15 +178,21 @@ export default function Checkout() {
         </div>
 
         <div>
-          <h4 className="text-[20px] font-semibold">Your order</h4>
+          <h4 className="text-[20px] font-semibold md:text-[22px]">
+            Your order
+          </h4>
           <div>
             <span className="flex flex-row gap-2 items-center">
-              <h6 className="text-[16px] font-semibold">Products: </h6>
+              <h6 className="text-[18px] font-semibold md:text-[20px]">
+                Products:{" "}
+              </h6>
               {cartTotal && (
-                <p className="mb-[8px] text-[16px]">{cartTotal} total</p>
+                <p className="mb-[8px] text-[18px] md:text-[20px]">
+                  {cartTotal} total
+                </p>
               )}
             </span>
-            <div className="p-[10px] border border-gray-300 rounded-sm mb-3">
+            <div className="p-[25px] border border-gray-300 rounded-sm mb-3 overflow-scroll h-full md:h-[400px] ">
               {cartItem && cartItem.length > 0 ? (
                 cartItem.map((productItem) => {
                   return (
@@ -186,11 +200,11 @@ export default function Checkout() {
                       key={productItem.id}
                       className={`flex flex-row justify-between ${
                         cartItem.length > 1
-                          ? " mb-3 border-b border-b-gray-200"
+                          ? " mb-3 border-b border-b-gray-200 md:pb-[10px]"
                           : ""
                       } `}
                     >
-                      <div className="w-[70px] h-[70px]">
+                      <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px]">
                         <img
                           className="w-full h-full object-cover rounded-md"
                           src={productItem.img}
@@ -198,11 +212,11 @@ export default function Checkout() {
                       </div>
                       <div>
                         <span className="text-right">
-                          <p>{productItem.name}</p>
-                          <span className="flex flex-row gap-2 justify-end">
+                          <p className="md:text-[18px]">{productItem.name}</p>
+                          <span className="flex flex-row gap-2 justify-end md:text-[18px]">
                             {productItem.quantity} x{" "}
                             <p className="text-red-700 font-semibold">
-                              {(productItem.price * 1000).toLocaleString()}
+                              {(productItem.price * 1000).toLocaleString()}₫
                             </p>
                           </span>
                         </span>
@@ -218,38 +232,61 @@ export default function Checkout() {
             </div>
           </div>
           <div>
-            <span className="flex flex-row gap-2 mb-2 w-full justify-between">
-              <h5 className="m-0  text-[16px]">Subtotal</h5>
-              <p className="m-0 text-[16px]">
-                {cartPrice ? (cartPrice * 1000).toLocaleString() : "0"}
-              </p>
-            </span>
-            <span className="flex flex-row gap-2 mb-2 w-full justify-between">
-              <h5 className="m-0 text-[16px]">Shipping</h5>
-              <p className="m-0 text-[16px]">50.000</p>
-            </span>
-            <span className="flex flex-row gap-2 mb-2 w-full justify-between text-red-700 font-bold">
-              <h5 className="m-0 text-[16px] font-semibold">Total</h5>
-              <p className="m-0 text-[16px]">
-                {cartPrice ? ((cartPrice + 50) * 1000).toLocaleString() : "0"}
-              </p>
-            </span>
+            <div className="flex flex-col w-full text-[18px]">
+              <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
+                <p className="text-gray-500">Subtotal</p>
+                <p className="text-red-700 font-semibold">
+                  {(cartPrice * 1000).toLocaleString()}₫
+                </p>
+              </span>
+              <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
+                <p className="text-gray-500">Shipping estimate</p>
+                <p className="text-red-700 font-semibold">
+                  {(cartPrice * 0.008 * 1000).toLocaleString()}₫
+                </p>
+              </span>
+              <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
+                <p className="text-gray-500">Tax estimate</p>
+                <p className="text-red-700 font-semibold">
+                  {(cartPrice * 0.05 * 1000).toLocaleString()}₫
+                </p>
+              </span>
+            </div>
+            <h3 className="text-[20px]  w-full  font-semibold mt-[1rem]">
+              <span className="flex flex-row justify-between">
+                <p>Order total</p>
+                <p className="text-red-700">
+                  {(
+                    (cartPrice + cartPrice * 0.05 + cartPrice * 0.1) *
+                    1000
+                  ).toLocaleString()}
+                  ₫
+                </p>
+              </span>
+            </h3>
           </div>
         </div>
-        <div
+        {/* <div
           onClick={() => handlePlaceOrder()}
           className="w-full p-[15px] text-center text-black text-xl rounded-md cursor-pointer mb-2 mt-4"
           style={{ backgroundColor: "rgb(250 174 41)" }}
         >
           <button className=" text-[18px] capitalize">Place Checkout</button>
-        </div>
-        <div className="w-full text-center mb-3">
+        </div> */}
+        <ConfirmOrder
+          styles={{
+            paddingTop: "15px",
+            paddingBottom: "15px",
+            borderRadius: "70px",
+          }}
+        ></ConfirmOrder>
+        <div className="w-full text-center mt-[8px] mb-3">
           <NavLink
             to="/cart"
-            className="navlink-hover capitalize text-[14px] italic"
-            style={{ "--line-hover": "rgb(241, 218, 178)" }}
+            className="navlink-hover  text-[14px] italic md:text-[16px]"
+            style={{ "--line-hover": "#ff6d00" }}
           >
-            back to cart ?
+            Back to cart ?
           </NavLink>
         </div>
       </div>
