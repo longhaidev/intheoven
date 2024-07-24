@@ -14,6 +14,7 @@ import categoryData from "../../assets/FakeData/categories.json";
 import raw from "../../assets/FakeData/products.json";
 // redux
 import { useSelector } from "react-redux";
+import ProductCard from "../../components/ProductCard/ProductCard";
 export default function Product() {
   const responsiveCarousel = {
     desktop: {
@@ -39,8 +40,6 @@ export default function Product() {
 
   const [products, setProducts] = useState([]);
   const [bannerCategory, setBannerCategory] = useState("");
-  const [hover, setHover] = useState("");
-  const [currentHover, setCurrentHover] = useState("");
 
   useEffect(() => {
     getProductList();
@@ -59,13 +58,10 @@ export default function Product() {
       }
     });
   };
-  const handleHover = (name) => {
-    setCurrentHover(name);
-    setHover("cart-button-hover-active");
-  };
+
   return (
     <div>
-      <div className=" bg-black">
+      <div className=" bg-black relative">
         <div className="opacity-40 h-[170px]">
           <img
             draggable={false}
@@ -73,13 +69,19 @@ export default function Product() {
             src={bannerCategory}
           ></img>
         </div>
-        <div className="flex flex-col absolute w-full h-[41.5%] justify-center top-0">
+        <div className="flex flex-col absolute w-full h-full justify-center items-center top-0">
           <div className="flex flex-col items-center">
-            <span className=" text-white text-[26px] flex flex-row gap-2 ">
+            <h3
+              className="text-white text-[24px] capitalize font-semibold"
+              draggable={false}
+            >
+              {category}
+            </h3>
+            <span className=" text-white text-[20px] flex flex-row gap-2 ">
               <NavLink
                 draggable={false}
                 to="/"
-                className="text-white text-[26px] no-underline capitalize mb-2"
+                className="text-white  no-underline capitalize mb-2"
               >
                 Home
               </NavLink>
@@ -87,7 +89,7 @@ export default function Product() {
               <NavLink
                 draggable={false}
                 to="/menus/all"
-                className="text-white text-[26px] no-underline capitalize"
+                className="text-white  no-underline capitalize"
               >
                 Menu
               </NavLink>
@@ -95,21 +97,18 @@ export default function Product() {
               <NavLink
                 draggable={false}
                 to="/menus/all"
-                className="text-white text-[26px] no-underline capitalize"
+                className="text-white  no-underline capitalize"
               >
                 {category}
               </NavLink>
             </span>
-            <h3 className="text-white text-[28px] capitalize" draggable={false}>
-              {category}
-            </h3>
           </div>
         </div>
       </div>
 
       <div
         style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        className="sticky top-[55px] pt-[8px] pb-[6px] z-[1]"
+        className="sticky top-[55px] pt-[8px] pb-[6px] z-[1] md:pt-[20px] md:pb-[18px]"
       >
         <Carousel
           responsive={responsiveCarousel}
@@ -137,7 +136,7 @@ export default function Product() {
                   key={categoryItem.id}
                   to={categoryItem.link}
                 >
-                  <div className="w-[30px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px]">
+                  <div className="w-[25px] pt-[5px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px] md:w-[40px]">
                     <img
                       className="w-full h-full object-cover"
                       src={categoryItem.icon}
@@ -152,95 +151,19 @@ export default function Product() {
       </div>
 
       {/* Products */}
-      <div className="mt-[50px] mb-[50px] relative z-[0]">
+      <div className="mt-[20px] mb-[20px] flex flex-col items-center relative z-[0]  md:flex-row md:flex-wrap md:gap-1 md:w-max-[900px] md:w-[750px] md:mr-auto md:ml-auto md:justify-around md:mb-0 lg:gap-14 lg:w-max-[1200px] lg:ml-auto lg:mr-auto lg:w-[1200px] lg:justify-normal lg:pl-[20px]">
+        <h2 className="text-left w-full pl-[9%] pr-[9%] capitalize text-[24px] font-semibold">
+          {category}
+        </h2>
         {products &&
           products.length > 0 &&
           products.map((productItem) => {
-            let isValidStock = productItem.stock > 0;
             return (
-              <div
+              <ProductCard
                 key={productItem.id}
-                className={`flex flex-col items-center gap-1  mb-[15%] transition-all ${
-                  isValidStock > 0 ? "" : "grayscale"
-                }`}
-              >
-                <div
-                  className={`flex flex-col items-center gap-2 relative ${
-                    isValidStock > 0
-                      ? "hover:scale-[1.07] hover:transition-all transition-[.3s]"
-                      : ""
-                  }`}
-                  onMouseEnter={() => handleHover(productItem.name)}
-                  onMouseLeave={() => setHover("")}
-                >
-                  {productItem.stock <= 0 && (
-                    <div className="absolute z-[1] w-full h-[85%] text-center flex flex-col justify-center text-[16px] text-white uppercase font-semibold">
-                      <p>Sold out</p>
-                    </div>
-                  )}
-
-                  <div
-                    className="w-[250px] h-[200px] relative"
-                    onClick={() =>
-                      navigate(`/menus/${category}/${productItem.id}`)
-                    }
-                  >
-                    <img
-                      draggable={false}
-                      className="rounded-lg w-full h-full object-cover cursor-pointer"
-                      src={productItem.img}
-                    ></img>
-                    {cartItem.find((item) => item.id === productItem.id) && (
-                      <span className="absolute right-0 top-0 flex flex-col items-center justify-center">
-                        <FaBookmark
-                          color="red"
-                          size={40}
-                          className="relative"
-                        />
-                        <p className="absolute top-[10px] m-0 text-white text-[11px] italic">
-                          Added
-                        </p>
-                      </span>
-                    )}
-                  </div>
-                  <div>
-                    <span className="flex flex-col gap-[5px] items-center">
-                      <p className="m-0 text-[16px] font-[600]">
-                        {productItem.name}
-                      </p>
-                      <p className="m-0 text-[14px]">
-                        {(productItem.price * 1000).toLocaleString()}₫
-                      </p>
-                    </span>
-                  </div>
-                  {/* onhover button show */}
-                  {isValidStock && (
-                    <div
-                      className={`cart-button-hover absolute bottom-[50px] w-full h-[25%] ${
-                        productItem.name === currentHover && isValidStock
-                          ? hover
-                          : ""
-                      }`}
-                    >
-                      <div className="w-full h-full flex flex-row gap-2 items-center pl-[10px] pr-[10px] z-[1]">
-                        <AddToCartButton
-                          product={productItem}
-                          productQuantity={1}
-                          fontSize="13px"
-                          bgColor="white"
-                        ></AddToCartButton>
-                        <BuyNowButton
-                          product={productItem}
-                          productQuantity={1}
-                          fontSize="13px"
-                          bgColor="rgb(241, 218, 178)"
-                        ></BuyNowButton>
-                        <p className="m-0 absolute bg-black w-full h-full right-0 bottom-0 opacity-30 z-[-1] rounded-bl-md rounded-br-md"></p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+                category={category}
+                productItem={productItem}
+              ></ProductCard>
             );
           })}
       </div>

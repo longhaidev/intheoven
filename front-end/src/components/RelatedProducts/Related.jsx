@@ -4,25 +4,28 @@ import { NavLink } from "react-router-dom";
 import "./Related.scss";
 // components
 import RelatedProductCard from "../ProductCard/RelatedProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 export default function Related(props) {
   const { relatedProduct } = props;
   return (
-    <div className=" mb-[20px]">
-      <div>
-        <h3 className="text-center">Related Food</h3>
-        <div className="flex flex-row flex-wrap gap-y-[50px] mt-[15px] justify-between pl-[5%] pr-[5%]">
-          {relatedProduct &&
-            relatedProduct.length > 0 &&
-            relatedProduct.map((item) => {
-              return (
-                <RelatedProductCard
-                  key={item.id}
-                  productDetail={item}
-                ></RelatedProductCard>
-              );
-            })}
+    <div className=" mt-[20px] md:mb-[0px]">
+      {relatedProduct && (
+        <div>
+          <h3 className="text-center text-[22px] font-semibold md:mb-4">
+            Related Food
+          </h3>
+          <div className="p-[14px]">
+            <div className="flex flex-col w-full items-center">
+              {relatedProduct.length > 0 &&
+                relatedProduct.map((item) => {
+                  return (
+                    <ProductCard key={item.id} productItem={item}></ProductCard>
+                  );
+                })}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

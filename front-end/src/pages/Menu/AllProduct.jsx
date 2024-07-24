@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import "./AllProduct.scss";
 // fake data
 import { category } from "../../assets/FakeData/FakeData";
+import PageDirect from "../../components/PageDirect/PageDirect";
 export default function AllProduct() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,7 +16,8 @@ export default function AllProduct() {
     <>
       <div>
         {/* Page direction */}
-        <div className="relative bg-black">
+        <PageDirect pageName="Our Menu" bgImg={bannerImg}></PageDirect>
+        {/* <div className="relative bg-black">
           <div className="opacity-40 w-full h-[150px]">
             <img className="object-cover w-full h-full" src={bannerImg}></img>
           </div>
@@ -37,17 +39,18 @@ export default function AllProduct() {
             </span>
             <h3 className="text-white text-[28px] ">Our Menu</h3>
           </div>
-        </div>
-        <div className="p-[15px]">
+        </div> */}
+
+        <div className="p-[15px] lg:max-w-[1200px] lg:w-[1200px] lg:mr-auto lg:ml-auto  ">
           {category &&
             category.length > 0 &&
             category.map((category) => {
               return (
                 <div key={category.id}>
-                  <h3 className="capitalize text-[20px] font-semibold">
+                  <h3 className="capitalize text-[20px] font-semibold md:text-[28px] md:mb-[20px]">
                     {category.category_name}
                   </h3>
-                  <div className="flex flex-col items-center gap-4 mb-3">
+                  <div className="flex flex-col items-center gap-4 mb-3 md:flex-row md:items-center md:gap-1 md:flex-wrap md:justify-around md:w-[90%] md:ml-auto md:mr-auto">
                     {category.items &&
                       category.items.length > 0 &&
                       category.items.map((item) => {

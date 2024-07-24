@@ -30,7 +30,7 @@ export default function ProductDetail() {
     getProductDetail();
     switch (category) {
       case "bread":
-        getRelatedProduct("coffe");
+        getRelatedProduct("coffee");
         break;
       case "pastry":
         getRelatedProduct("blended");
@@ -56,6 +56,7 @@ export default function ProductDetail() {
     }
     window.scrollTo(0, 0);
   }, [productId]);
+
   const getProductDetail = () => {
     raw.map((categoryItem) => {
       if (categoryItem.category === category) {
@@ -77,7 +78,6 @@ export default function ProductDetail() {
   };
 
   const resetQuantity = () => {
-    console.log("reset quantity");
     setProductQuantity(1);
   };
 
@@ -92,21 +92,23 @@ export default function ProductDetail() {
       setProductQuantity(productQuantity - 1);
     } else return;
   };
-  console.log(relatedProduct);
+  console.log(">>> check render from product detail");
+
   return (
-    <div className="capitalize">
+    <div className="capitalize lg:max-w-[1200px] lg:ml-auto lg:mr-auto">
       {/* direct */}
-      <div className="sticky top-[58px] z-[1] backdrop-blur-md pt-[10px] pb-[10px] text-left">
-        <span className="text-[18px] pl-[20px] ">
+      <div className="sticky top-[58px] z-[1] backdrop-blur-md pt-[10px] pb-[10px] text-left lg:top-[64px] lg:mb-4">
+        <span className="text-[20px] pl-[20px] ">
           <NavLink className="capitalize font-bold" to={`/menus/${category}`}>
             {category}{" "}
           </NavLink>
           &gt; {productDetail.name}
         </span>
       </div>
+
       {/* product detail */}
-      <div className="pl-[25px] pr-[25px]">
-        <div className="w-full h-[250px] mt-[10px] mb-[10%] relative">
+      <div className="pl-[25px] pr-[25px] md:flex md:flex-row md:gap-10 md:max-w-[800px] md:mr-auto md:ml-auto lg:max-w-[1200px]">
+        <div className="w-full h-[250px] mt-[10px] mb-[10%] relative md:w-[70%] md:mb-[5%] lg:h-full lg:w-[110%]">
           <img
             draggable={false}
             className="rounded-lg w-[100%] h-[100%] object-cover"
@@ -122,50 +124,55 @@ export default function ProductDetail() {
             </span>
           )}
         </div>
-        {/* ingredient */}
-        <Ingredient ingredients={productDetail.ingredients}></Ingredient>
-        {/* nutrition */}
-        <Nutrition nutrition={productDetail.nutrition}></Nutrition>
-        <div className="mb-[6%]">
-          <span className="flex flex-row gap-1 mt-3 justify-center-center">
-            <h4 className="font-bold text-[16px] w-[70%] uppercase">
+        <div className="w-full">
+          <div className="mb-[6%] md:flex md:flex-col md:justify-between md:h-[86.5%] lg:flex lg:flex-col lg:justify-evenly">
+            <h4 className="font-bold text-[32px] uppercase w-full lg:text-[24px]">
               {productDetail.name}
             </h4>
-          </span>
-          <h4 className="uppercase mt-1 text-red-600 text-[20px]">
-            {(productDetail.price * 1000).toLocaleString()} vnd
-          </h4>
-          <div className="flex flex-row w-fit gap-3 items-center mt-3 justify-between">
-            <div className="flex flex-row gap-4  items-center justify-between w-full border-gray-300 border pt-[6px] pb-[6px] pl-[15px] pr-[15px]">
-              <FiMinus
-                className="cursor-pointer"
-                onClick={() => handleDecreaseQuantity()}
-              />
-              <p className="m-0 select-none text-[20px]">{productQuantity}</p>
-              <GoPlus
-                className="cursor-pointer"
-                onClick={() => handleIncreaseQuantity()}
-              />
+            <h3 className="text-[20px] text-gray-400 italic capitalize">
+              #{category}
+            </h3>
+            <h4 className="mt-1 text-red-600 text-[24px]">
+              {(productDetail.price * 1000).toLocaleString()}₫
+            </h4>
+            <div className="flex flex-row w-fit gap-3 items-center mt-3 justify-between">
+              <div className="flex flex-row gap-4  items-center justify-between w-full border-gray-300 border pt-[6px] pb-[6px] pl-[15px] pr-[15px]">
+                <FiMinus
+                  className="cursor-pointer"
+                  onClick={() => handleDecreaseQuantity()}
+                />
+                <p className="m-0 select-none text-[20px]">{productQuantity}</p>
+                <GoPlus
+                  className="cursor-pointer"
+                  onClick={() => handleIncreaseQuantity()}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center w-full">
+              <div className="flex flex-row gap-2 items-center mt-3 w-full ">
+                <AddToCartButton
+                  product={productDetail}
+                  productQuantity={productQuantity}
+                  resetQuantity={resetQuantity}
+                  styles={{ paddingTop: "10px", paddingBottom: "10px" }}
+                ></AddToCartButton>
+              </div>
+              <NavLink
+                className="italic text-[16px] navlink-hover mt-2"
+                to="/cart"
+                style={{ "--line-hover": "#ff6d00" }}
+              >
+                Go to cart
+              </NavLink>
             </div>
           </div>
-          <div className="flex flex-col items-center w-full">
-            <div className="flex flex-row gap-2 items-center mt-3 w-full ">
-              <AddToCartButton
-                product={productDetail}
-                productQuantity={productQuantity}
-                resetQuantity={resetQuantity}
-                fontSize="18px"
-                bgColor={"rgb(241, 218, 178)"}
-              ></AddToCartButton>
-            </div>
-            <NavLink
-              className="italic text-[14px] navlink-hover mt-2"
-              to="/cart"
-              style={{ "--line-hover": "rgb(241, 218, 178)" }}
-            >
-              Go to cart
-            </NavLink>
-          </div>
+        </div>
+        <hr></hr>
+        <h3 className="font-semibold text-[22px]">Product Detail </h3>
+        <div className="">
+          <Ingredient ingredients={productDetail.ingredients}></Ingredient>
+
+          <Nutrition nutrition={productDetail.nutrition}></Nutrition>
         </div>
       </div>
       {category &&

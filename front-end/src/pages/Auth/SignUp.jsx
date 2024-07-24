@@ -26,21 +26,14 @@ export default function SignUp() {
           className="w-full mb-3"
           size="small"
           id="outlined-basic"
-          label="First Name"
+          label="User Name"
           variant="outlined"
         />
         <TextField
           className="w-full mb-3"
           size="small"
           id="outlined-basic"
-          label="Last Name"
-          variant="outlined"
-        />
-        <TextField
-          className="w-full mb-3"
-          size="small"
-          id="outlined-basic"
-          label="Email Name"
+          label="Email"
           variant="outlined"
         />
         <span className="flex flex-row w-full relative">

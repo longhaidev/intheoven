@@ -7,7 +7,7 @@ const Banner = () => {
         <p className="overlay-banner"></p>
         <span className="w-full h-full flex flex-col justify-center font-[Alegreya] text-3xl text-center absolute text-white md:text-5xl lg:text-6xl">
           In The Oven
-          <p className="text-xl text-center uppercase mt-3 b">
+          <p className="text-xl text-center italic mt-3 b">
             Freshly baked, everyday
           </p>
         </span>

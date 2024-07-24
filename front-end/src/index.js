@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-//
+// styles
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import "react-toastify/dist/ReactToastify.css";
-// components
+// pages
 import Layout from "./Layout";
 import Home from "./pages/Home/Home";
 import Product from "./pages/Menu/Product";
@@ -20,10 +20,14 @@ import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
+import AboutUs from "./pages/Introduce/AboutUs";
+import Policy from "./pages/Policy/Policy";
+import Contact from "./pages/Contact/Contact";
 // redux
 import { persistor, store } from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
+
 // main
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // routes
@@ -68,6 +72,18 @@ const router = createBrowserRouter([
       {
         path: "/forgot",
         element: <ForgotPassword></ForgotPassword>,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/policy",
+        element: <Policy></Policy>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
     ],
   },

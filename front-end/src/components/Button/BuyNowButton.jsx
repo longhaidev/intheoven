@@ -1,13 +1,18 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+// styles
+import { styled } from "@mui/material/styles";
+import { Button } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 // redux
 import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
+import { Col } from "react-bootstrap";
 export default function BuyNowButton(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { bgColor, fontSize, product } = props;
+  const { product } = props;
   const handleBuyNow = () => {
     console.log(product);
     if (product) {
@@ -16,17 +21,32 @@ export default function BuyNowButton(props) {
       navigate("/cart");
     }
   };
+  let theme = createTheme({
+    palette: {
+      primary: {
+        main: "#ff6d00",
+      },
+      secondary: {
+        main: "#ff6d00",
+      },
+    },
+  });
+
+  const ColorButton = styled(Button)(() => ({
+    border: `1px solid ${theme.palette.primary.main}`,
+    color: "#Fff",
+    backgroundColor: theme.palette.secondary.main,
+    "&:hover": {
+      backgroundColor: "fff",
+      color: "#ff6d00",
+    },
+  }));
   return (
-    <div
-      className="p-2 w-full flex justify-center cursor-pointer z-[1] hover:scale-[1.045] transition-all"
-      style={{ backgroundColor: `${bgColor ?? "rgb(241, 218, 178)"}` }}
-      onClick={() => {
-        handleBuyNow();
-      }}
+    <ColorButton
+      className="w-full !capitalize !text-[16px]"
+      onClick={() => handleBuyNow()}
     >
-      <div>
-        <p className={`relative m-0 !text-[${fontSize ?? "18px"}]`}>Buy Now</p>
-      </div>
-    </div>
+      Buy now
+    </ColorButton>
   );
 }

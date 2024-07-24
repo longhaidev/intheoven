@@ -36,7 +36,9 @@ export default function Nutrition(props) {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          <h4 className="capitalize text-[18px] font-semibold">nutrition</h4>
+          <h4 className="capitalize text-[20px] font-semibold md:text-[20px]">
+            nutrition
+          </h4>
         </AccordionSummary>
         <AccordionDetails>
           <TableContainer className="!font-[Alegreya]">
@@ -55,7 +57,7 @@ export default function Nutrition(props) {
 
                     <TableCell
                       align="right"
-                      className="normal-case"
+                      className="normal-case text-[18px] md:text-[18px]"
                       style={{ textDecoration: "none" }}
                     >
                       {row.nutrition}{" "}

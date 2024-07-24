@@ -10,25 +10,23 @@ export default function OurStory(props) {
         <div className="md:w-[45%] lg:w-[60%]">
           <div className="text-center md:!text-left lg:!text-left">
             <h3 className="text-[32px] mb-6 md:text-4xl lg:text-4xl">
-              In the Oven -{" "}
-              <span className="text-xl lg:text-3xl">
-                <i>Our story</i>
-              </span>
+              In the Oven
             </h3>
           </div>
           <span className="text-[18px] md:text-[17px] lg:text-[18px]">
-            <p>Trải nghiệm ẩm thực bánh mì tuyệt vời tại BreadTalk Vietnam!</p>
+            <p>Experience great banh mi at In The Oven!</p>
             <p>
-              Hành trình 13 năm hoàn thiện và phát triển. Gần 30 cơ sở phục vụ.
+              13-year journey of perfection and development. Nearly 30 service
+              establishments.
             </p>
             <p>
-              “Chúng tôi tự tin dẫn đầu với uy tín và chất lượng, Chúng tôi am
-              hiểu ẩm thực bánh và khẩu vị người Việt, Chúng tôi không ngừng đổi
-              mới và sáng tạo”.
+              “We confidently lead with prestige and quality, We are
+              knowledgeable about Vietnamese cuisine and taste. We are
+              constantly innovating and creating.”
             </p>
             <p>
-              Trải nghiệm ẩm thực bánh tuyệt vời tại thương hiệu bánh mì đến từ
-              Singapore ngay hôm nay!
+              Experience amazing bakery cuisine at a bakery brand from VietNam
+              today!
             </p>
           </span>
         </div>

@@ -11,6 +11,9 @@ const Home = () => {
   const [bakeryGroup, setBakeryGroup] = useState([]);
   const [beverageGroup, setBeverageGroup] = useState([]);
 
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   const separateCategoryGroup = () => {
     let bakeryGroup = [];
     let beverageGroup = [];

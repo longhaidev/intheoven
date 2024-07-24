@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+// redux
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../redux/userSlice";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,10 +15,12 @@ export default function Login() {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = () => {
     console.log(">>> check email: ", email, " >>> check password: ", password);
-    // navigate("/");
+    dispatch(doLogin(email, password));
+    navigate("/");
   };
   return (
     <div

@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <>
       <Header></Header>
-      <div className="pt-[58px]">
+      <div className="pt-[58px] lg:pt-[65px]">
         <Outlet></Outlet>
       </div>
       <NewsLetter></NewsLetter>

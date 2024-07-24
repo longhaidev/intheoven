@@ -2,11 +2,11 @@
 
 .active {
     left: 0;
-    transition: linear .1s ;
+    transition: ease-out .45s ;
 }
 .unactive {
     left: -110%;
-    transition: linear .1s;
+    transition: ease-out .45s;
 }
 .onhover{
     @keyframes fadeIn {
