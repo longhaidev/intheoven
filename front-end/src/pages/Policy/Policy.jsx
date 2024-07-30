@@ -1,85 +1,44 @@
 import React, { useEffect } from "react";
-
+import PageDirect from "../../components/PageDirect/PageDirect";
 export default function Policy() {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-  const aboutusText =
-    "With a team of young and dynamic employees. With a passion for learning, always aiming for perfection. We always put customer satisfaction as the center for smoothness in the service process. With 10 years of experience in the field of Internet business marketing. Ads Agency is confident in bringing the best quality of service to customers because that is the success and joy of our Ads Agency.";
-
+  const policyData = [
+    {
+      title: "Disclaimers and Limitation of Liability",
+      descript: `The Website is provided "as is" and "as available" without any warranties, either expressed or implied. InTheOven shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages resulting from the use or inability to use the Website.`,
+    },
+    {
+      title: "Intellectual Property",
+      descript: `The Website and its original content, features, and functionality are owned by InTheOven and are protected by international copyright, trademark, and other intellectual property laws.`,
+    },
+    {
+      title: "Privacy Policy",
+      descript: `Your use of the Website is also governed by our Privacy Policy, which can be found [link to Privacy Policy]. By using the Website, you consent to the practices described in the Privacy Policy.`,
+    },
+    {
+      title: "Use of the Website",
+      descript: `You must be at least 18 years old to use this Website. By using the Website, you represent and warrant that you are at least 18 years old. You agree to use the Website for lawful purposes only and in a manner that does not infringe upon the rights of others.`,
+    },
+    {
+      title: "Acceptance of Terms",
+      descript: `By using this Website, you agree to comply with and be bound by these terms and conditions. If you do not agree to these terms, please do not use the Website.`,
+    },
+  ];
   return (
-    <div className=" text-[#fffd00]">
-      <div className="p-0 md:m-0">
-        <div className="title p-[15px] bg-[#50350a]">
-          <h1 className="uppercase text-[38px] pl-[20px] border-l border-[#fffd00] mb-3">
-            Privacy Policy
-          </h1>
-        </div>
-        <div className="about p-[15px] bg-[#50350a]">
-          <h4 className="text-[#fffd00] text-[32px] text-center">
-            In the Oven
-          </h4>
-          <span>
-            <strong>
-              <p className="text-[23px]">COLLECTION OF INFORMATION</p>
-              <p className="capitalize text-[20px]">
-                collect Information You Provide to Us We
-              </p>
-            </strong>
-            <p className="text-white text-[18px]">
-              Information you provide directly to us. For example, you share
-              information directly with us when you create an account, fill out
-              a form, submit or post content through our Services, make a
-              purchase, communicate with us via third-party platforms,
-              participate in a contest or promotion, request customer support,
-              or otherwise communicate with us. The types of personal
-              information we may collect include your name, email address,
-              postal address, phone number, credit card and other payment
-              information, and any other information you choose to provide.
-              Information We Collect Automatically When You Interact with Us
-            </p>
-          </span>
-          <span>
-            <strong>
-              <p className="text-[23px]">COLLECTION OF INFORMATION</p>
-              <p className="capitalize text-[20px]">
-                collect Information You Provide to Us We
-              </p>
-            </strong>
-            <p className="text-white text-[18px]">
-              Information you provide directly to us. For example, you share
-              information directly with us when you create an account, fill out
-              a form, submit or post content through our Services, make a
-              purchase, communicate with us via third-party platforms,
-              participate in a contest or promotion, request customer support,
-              or otherwise communicate with us. The types of personal
-              information we may collect include your name, email address,
-              postal address, phone number, credit card and other payment
-              information, and any other information you choose to provide.
-              Information We Collect Automatically When You Interact with Us
-            </p>
-          </span>
-          <span>
-            <strong>
-              <p className="text-[23px]">COLLECTION OF INFORMATION</p>
-              <p className="capitalize text-[20px]">
-                collect Information You Provide to Us We
-              </p>
-            </strong>
-            <p className="text-white text-[18px]">
-              Information you provide directly to us. For example, you share
-              information directly with us when you create an account, fill out
-              a form, submit or post content through our Services, make a
-              purchase, communicate with us via third-party platforms,
-              participate in a contest or promotion, request customer support,
-              or otherwise communicate with us. The types of personal
-              information we may collect include your name, email address,
-              postal address, phone number, credit card and other payment
-              information, and any other information you choose to provide.
-              Information We Collect Automatically When You Interact with Us
-            </p>
-          </span>
-        </div>
+    <div>
+      <PageDirect pageName="Policy"></PageDirect>
+      <div className="p-[20px]">
+        {policyData &&
+          policyData.map((section) => {
+            return (
+              <>
+                <h3 className="text-[24px]">{section.title}</h3>
+                <p className="text-[16px]">{section.descript}</p>
+              </>
+            );
+          })}
       </div>
     </div>
   );

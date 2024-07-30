@@ -5,7 +5,7 @@ const bgImg =
 export default function NewsLetter() {
   return (
     <div
-      className="flex flex-col gap-4 items-center border-none pt-[30px] pb-[30px] pl-[10px] pr-[10px] mt-[15px] h-[350px] justify-center"
+      className="flex flex-col gap-4 items-center border-none pt-[30px] pb-[30px] pl-[10px] pr-[10px] h-[350px] justify-center"
       style={{
         backgroundImage: `url('${bgImg}')`,
       }}

@@ -29,7 +29,7 @@ export default function Cart() {
     dispatch(removeFromCart(product));
   };
   const handleIncreaseQuantity = (product) => {
-    if (product) {
+    if (product && product.quantity < product.stock) {
       dispatch(increaseProductQuantity(product));
     }
   };

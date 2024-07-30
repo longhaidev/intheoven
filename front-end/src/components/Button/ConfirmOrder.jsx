@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 export default function ConfirmOrder(props) {
-  const { styles } = props;
+  const { styles, handlePlaceOrder } = props;
   let theme = createTheme({
     palette: {
       primary: {
@@ -25,7 +25,6 @@ export default function ConfirmOrder(props) {
     },
   }));
   const navigate = useNavigate();
-  const handlePlaceOrder = () => {};
   return (
     <>
       <ColorButton

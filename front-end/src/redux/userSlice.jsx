@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { reduce } from "lodash";
+import { toast } from "react-toastify";
 
 const INITIAL_STATE = {
   account: {
@@ -18,6 +19,7 @@ const userSlice = createSlice({
   reducers: {
     doLogin: (state, action) => {
       console.log(action.payload);
+      toast.success("Login Successfully");
       return {
         ...state,
         account: {
@@ -31,6 +33,7 @@ const userSlice = createSlice({
       };
     },
     doLogOut: (state, action) => {
+      toast.success("Logout sucessfully");
       return {
         ...state,
         account: {

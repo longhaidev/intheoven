@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import PageDirect from "../../components/PageDirect/PageDirect";
 import { useSelector } from "react-redux";
-// custome style
+import * as Yup from "yup";
+// components
+import PageDirect from "../../components/PageDirect/PageDirect";
+import ConfirmOrder from "../../components/Button/ConfirmOrder";
+// custom style
 import "./Checkout.scss";
 // UI & icon
 import {
@@ -13,26 +16,30 @@ import {
   Radio,
   FormControl,
 } from "@mui/material";
-import ConfirmOrder from "../../components/Button/ConfirmOrder";
-
+import { LuContact2 } from "react-icons/lu";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { MdExpandLess } from "react-icons/md";
+import { MdOutlineLocalShipping } from "react-icons/md";
+import { MdOutlinePayment } from "react-icons/md";
+//
 export default function Checkout() {
-  useEffect(() => {
-    window.scroll(0, 0);
-  });
-  // state
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
-  const [phone, setPhone] = useState("");
-  const [note, setNote] = useState("");
-  const [shipMethod, setShipMethod] = useState("cod");
-  const [payment, setPayment] = useState("cash");
-  const [product, setProduct] = useState([]);
   // redux
   const cartItem = useSelector((state) => state.cart.cart);
   const cartPrice = useSelector((state) => state.cart.totalPrice);
   const cartTotal = useSelector((state) => state.cart.totalQuantity);
+  // state
+  const [errorMsg, setErrorMsg] = useState({});
+  const [formCheckout, setFormCheckout] = useState({
+    name: "",
+    email: "",
+    city: "",
+    address: "",
+    note: "",
+    shipMethod: "cod",
+    payment: "cash",
+    product: cartItem ?? [],
+    totalPrice: cartPrice ?? 0,
+  });
   const citySelect = [
     {
       value: "HCM",
@@ -48,8 +55,32 @@ export default function Checkout() {
     },
   ];
 
-  const handlePlaceOrder = () => {
-    console.log("Ordered");
+  const handleOnChangeForm = async (event) => {
+    const { name, value } = event.target;
+    setFormCheckout({
+      ...formCheckout,
+      [name]: value,
+    });
+  };
+  const validateSchema = Yup.object({
+    name: Yup.string().required("Required"),
+    email: Yup.string().required("Required").email().required("Invalid Email"),
+    address: Yup.string().required("Required"),
+    phone: Yup.string()
+      .matches(/^\d{10}$/, "Phone number must be 10 digits")
+      .required("Required"),
+  });
+  const handlePlaceOrder = async () => {
+    try {
+      await validateSchema.validate(formCheckout, { abortEarly: false });
+      console.log("Submit Order: ", formCheckout);
+    } catch (err) {
+      const newError = {};
+      err.inner.forEach((error) => {
+        newError[error.path] = error.message;
+      });
+      setErrorMsg(newError);
+    }
   };
   console.log(">>> check render from checkout");
   return (
@@ -57,123 +88,181 @@ export default function Checkout() {
       <PageDirect pageName="checkout"></PageDirect>
       <div className="pl-[20px] pr-[20px] !mb-[30px] !mt-[30px] lg:max-w-[1200px] lg:w-[1200px] lg:mr-auto lg:ml-auto">
         <div className="mb-4">
-          <h4 className="mb-4 text-[20px] font-semibold md:text-[22px]">
+          <h4 className="text-[20px] font-semibold md:text-[22px]">
             Billing Details
           </h4>
           <div className="mb-2">
-            <h6 className="font-semibold mb-2 text-[18px] md:text-[20px]">
-              Delivery
-            </h6>
-            <TextField
-              size="small"
-              className="w-full mb-3"
-              id="outlined-basic"
-              label="Full name"
-              variant="outlined"
-              onChange={(event) => setName(event.target.value)}
-            />
-            <div className="md:flex md:flex-row md:justify-center md:items-center md:gap-4">
-              <TextField
-                size="small"
-                className="w-full mb-3"
-                id="outlined-basic"
-                label="Full address"
-                variant="outlined"
-                onChange={(event) => setAddress(event.target.value)}
-              />
-              <TextField
-                size="small"
-                className="w-full mb-3"
-                select
-                id="outlined-basic"
-                label="City"
-                variant="outlined"
-                defaultValue="HCM"
-                onChange={(event) => setCity(event.target.value)}
-              >
-                {citySelect.map((item) => (
-                  <MenuItem key={item.value} value={item.value}>
-                    {item.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </div>
-            <div className="md:flex md:flex-row md:justify-center md:items-center md:gap-4">
-              <TextField
-                size="small"
-                className="w-full mb-3"
-                id="outlined-basic"
-                label="Phone"
-                variant="outlined"
-                onChange={(event) => setPhone(event.target.value)}
-              />
-              <TextField
-                size="small"
-                className="w-full mb-3"
-                id="outlined-basic"
-                label="Email"
-                variant="outlined"
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </div>
+            {/* contact info */}
+            <Accordion
+              defaultExpanded
+              sx={{
+                marginBottom: "0px!important",
+                boxShadow: "none",
+                border: "0.5px gray",
+              }}
+            >
+              <AccordionSummary expandIcon={<MdExpandLess />}>
+                <h6 className="font-semibold mb-2 text-[18px] md:text-[20px]">
+                  <span className="flex flex-row items-center gap-2">
+                    <LuContact2 /> Contact Infomation
+                  </span>
+                </h6>
+              </AccordionSummary>
+              <AccordionDetails>
+                <TextField
+                  error={errorMsg.name ? true : false}
+                  size="small"
+                  className="w-full mb-3"
+                  label="Full name"
+                  id="outlined-basic"
+                  name="name"
+                  helperText={`${errorMsg.name ? errorMsg.name : ""}`}
+                  variant="outlined"
+                  onChange={handleOnChangeForm}
+                />
+                <div className="flex flex-row items-center gap-2">
+                  <TextField
+                    sx={{ marginBottom: "0px!important" }}
+                    error={errorMsg.phone ? true : false}
+                    size="small"
+                    className="w-full mb-3"
+                    id="outlined-basic"
+                    label="Phone"
+                    name="phone"
+                    variant="outlined"
+                    helperText={`${errorMsg.phone ? errorMsg.phone : ""}`}
+                    onChange={handleOnChangeForm}
+                  />
+                  <TextField
+                    sx={{ marginBottom: "0px!important" }}
+                    error={errorMsg.email ? true : false}
+                    size="small"
+                    className="w-full mb-3"
+                    id="outlined-basic"
+                    label="Email"
+                    name="email"
+                    variant="outlined"
+                    helperText={`${errorMsg.email ? errorMsg.email : ""}`}
+                    onChange={handleOnChangeForm}
+                  />
+                </div>
+              </AccordionDetails>
+            </Accordion>
+            {/* Shipping address */}
+            <Accordion defaultExpanded>
+              <AccordionSummary expandIcon={<MdExpandLess />}>
+                <h6 className="font-semibold mb-2 text-[18px] md:text-[20px]">
+                  <span className="flex flex-row items-center gap-2">
+                    <MdOutlineLocalShipping /> Shipping Address
+                  </span>
+                </h6>
+              </AccordionSummary>
+              <AccordionDetails>
+                <div className="md:flex md:flex-row md:justify-center md:items-center md:gap-4">
+                  <TextField
+                    error={errorMsg.address ? true : false}
+                    size="small"
+                    className="w-full mb-3"
+                    id="outlined-basic"
+                    label="Full address"
+                    name="address"
+                    variant="outlined"
+                    helperText={`${errorMsg.address ? errorMsg.address : ""}`}
+                    onChange={handleOnChangeForm}
+                  />
+                  <TextField
+                    size="small"
+                    className="w-full mb-3"
+                    select
+                    id="outlined-basic"
+                    label="City"
+                    name="city"
+                    variant="outlined"
+                    defaultValue="HCM"
+                    onChange={handleOnChangeForm}
+                  >
+                    {citySelect.map((item) => (
+                      <MenuItem key={item.value} value={item.value}>
+                        {item.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </div>
+                <div className="mt-1">
+                  <FormControl>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-radio-buttons-group-label"
+                      defaultValue="ship"
+                      name="shipMethod"
+                      onChange={handleOnChangeForm}
+                    >
+                      <FormControlLabel
+                        value="ship"
+                        control={<Radio size="small" />}
+                        label="Ship"
+                      />
+                      <FormControlLabel
+                        value="instore"
+                        control={<Radio size="small" />}
+                        label="Pickup in store"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </AccordionDetails>
+            </Accordion>
+          </div>
+          {/* payment method */}
+          <div>
+            <Accordion>
+              <AccordionSummary expandIcon={<MdExpandLess />}>
+                <span className="flex flex-row gap-2 justify-center items-center">
+                  <MdOutlinePayment></MdOutlinePayment>
+                  <h6 className="font-semibold text-[18px] m-0">
+                    Payment Method
+                  </h6>
+                </span>
+              </AccordionSummary>
+              <AccordionDetails>
+                <p className="text-[16px] text-gray-400 m-0 italic  ">
+                  All transactions are secure and encrypted.
+                </p>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="cash"
+                    name="payment"
+                    onChange={handleOnChangeForm}
+                  >
+                    <FormControlLabel
+                      value="cash"
+                      control={<Radio size="small" />}
+                      label="Cash on Delivery"
+                    />
+                    <FormControlLabel
+                      disabled
+                      value="online"
+                      control={<Radio size="small" />}
+                      label="MOMO"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </AccordionDetails>
+            </Accordion>
+          </div>
+          <div className="mt-[20px]">
             <TextField
               size="small"
               className="w-full"
               id="outlined-multiline-static"
               label="Note"
+              name="note"
               multiline
               rows={4}
-              onChange={(event) => setNote(event.target.value)}
+              onChange={handleOnChangeForm}
             />
-            <div className="mt-1">
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="ship"
-                  name="row-adio-buttons-group"
-                  onChange={(event) => setShipMethod(event.target.value)}
-                >
-                  <FormControlLabel
-                    value="ship"
-                    control={<Radio size="small" />}
-                    label="Ship"
-                  />
-                  <FormControlLabel
-                    value="instore"
-                    control={<Radio size="small" />}
-                    label="Pickup in store"
-                  />
-                </RadioGroup>
-              </FormControl>
-            </div>
-          </div>
-          <div>
-            <h6 className="font-semibold text-[18px]">Payment Method</h6>
-            <p className="text-[16px] text-gray-400 m-0 italic  ">
-              All transactions are secure and encrypted.
-            </p>
-            <FormControl>
-              <RadioGroup
-                row
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="cash"
-                name="row-adio-buttons-group"
-                onChange={(event) => setPayment(event.target.value)}
-              >
-                <FormControlLabel
-                  value="cash"
-                  control={<Radio size="small" />}
-                  label="Cash on Delivery"
-                />
-                <FormControlLabel
-                  disabled
-                  value="online"
-                  control={<Radio size="small" />}
-                  label="MOMO"
-                />
-              </RadioGroup>
-            </FormControl>
           </div>
         </div>
 
@@ -266,19 +355,13 @@ export default function Checkout() {
             </h3>
           </div>
         </div>
-        {/* <div
-          onClick={() => handlePlaceOrder()}
-          className="w-full p-[15px] text-center text-black text-xl rounded-md cursor-pointer mb-2 mt-4"
-          style={{ backgroundColor: "rgb(250 174 41)" }}
-        >
-          <button className=" text-[18px] capitalize">Place Checkout</button>
-        </div> */}
         <ConfirmOrder
           styles={{
             paddingTop: "15px",
             paddingBottom: "15px",
             borderRadius: "70px",
           }}
+          handlePlaceOrder={handlePlaceOrder}
         ></ConfirmOrder>
         <div className="w-full text-center mt-[8px] mb-3">
           <NavLink
