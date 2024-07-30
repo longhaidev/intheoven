@@ -8,6 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-multi-carousel/lib/styles.css";
 import "react-toastify/dist/ReactToastify.css";
+// redux
+import { persistor, store } from "./redux/store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/es/integration/react";
 // pages
 import Layout from "./Layout";
 import Home from "./pages/Home/Home";
@@ -20,13 +24,16 @@ import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
-import AboutUs from "./pages/Introduce/AboutUs";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import Policy from "./pages/Policy/Policy";
 import Contact from "./pages/Contact/Contact";
-// redux
-import { persistor, store } from "./redux/store";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/es/integration/react";
+import ProtectedRoutes from "./untils/ProtectedRoutes";
+import UserProfile from "./pages/Auth/User/UserProfile";
+import UserOrdered from "./pages/Auth/User/UserOrdered";
+import UserLayout from "./pages/Auth/User/UserLayout";
+import UserFavorite from "./pages/Auth/User/UserFavorite";
+import ChangePassword from "./pages/Auth/User/ChangePassword";
+import UserAddress from "./pages/Auth/User/UserAddress";
 
 // main
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -84,6 +91,38 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact></Contact>,
+      },
+      {
+        path: "/",
+        element: <ProtectedRoutes></ProtectedRoutes>,
+        children: [
+          {
+            path: "/user/",
+            element: <UserLayout></UserLayout>,
+            children: [
+              {
+                path: "/user/account/profile",
+                element: <UserProfile></UserProfile>,
+              },
+              {
+                path: "/user/account/favorite",
+                element: <UserFavorite></UserFavorite>,
+              },
+              {
+                path: "/user/account/change-password",
+                element: <ChangePassword></ChangePassword>,
+              },
+              {
+                path: "/user/account/address",
+                element: <UserAddress></UserAddress>,
+              },
+              {
+                path: "/user/order/:status",
+                element: <UserOrdered></UserOrdered>,
+              },
+            ],
+          },
+        ],
       },
     ],
   },

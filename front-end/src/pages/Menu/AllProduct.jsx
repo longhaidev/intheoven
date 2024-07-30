@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
 // img
 import bannerImg from "../../assets/Pictures/Banner3.jpg";
@@ -8,46 +8,33 @@ import "./AllProduct.scss";
 // fake data
 import { category } from "../../assets/FakeData/FakeData";
 import PageDirect from "../../components/PageDirect/PageDirect";
+import products from "../../assets/FakeData/products.json";
+import ProductCard from "../../components/ProductCard/ProductCard";
 export default function AllProduct() {
+  const [allProduct, setAllProduct] = useState([]);
   useEffect(() => {
     window.scrollTo(0, 0);
+    getAllProduct();
   }, []);
+  const getAllProduct = () => {
+    const productArray = [];
+    products.map((product) => {
+      productArray.push(product);
+    });
+    setAllProduct(productArray);
+  };
   return (
     <>
       <div>
         {/* Page direction */}
         <PageDirect pageName="Our Menu" bgImg={bannerImg}></PageDirect>
-        {/* <div className="relative bg-black">
-          <div className="opacity-40 w-full h-[150px]">
-            <img className="object-cover w-full h-full" src={bannerImg}></img>
-          </div>
-          <div className="absolute flex flex-col items-center top-0 h-full w-full justify-center">
-            <span className=" text-white text-[26px] flex flex-row gap-2 ">
-              <NavLink
-                to="/"
-                className="text-white text-[26px] no-underline mb-2"
-              >
-                Home
-              </NavLink>
-              &gt;
-              <NavLink
-                to="/menus/all"
-                className="text-white text-[26px] no-underline"
-              >
-                Menu
-              </NavLink>
-            </span>
-            <h3 className="text-white text-[28px] ">Our Menu</h3>
-          </div>
-        </div> */}
-
         <div className="p-[15px] lg:max-w-[1200px] lg:w-[1200px] lg:mr-auto lg:ml-auto  ">
           {category &&
             category.length > 0 &&
             category.map((category) => {
               return (
                 <div key={category.id}>
-                  <h3 className="capitalize text-[20px] font-semibold md:text-[28px] md:mb-[20px]">
+                  <h3 className="capitalize text-[24px] font-semibold">
                     {category.category_name}
                   </h3>
                   <div className="flex flex-col items-center gap-4 mb-3 md:flex-row md:items-center md:gap-1 md:flex-wrap md:justify-around md:w-[90%] md:ml-auto md:mr-auto">
@@ -82,6 +69,23 @@ export default function AllProduct() {
                 </div>
               );
             })}
+          <h3 className="text-[24px] font-semibold">All Products</h3>
+          {allProduct.map((item) => {
+            return (
+              <div className="w-full flex flex-col items-center">
+                {item.products.map((product) => {
+                  return (
+                    <div key={product.id}>
+                      <ProductCard
+                        category={item.category}
+                        productItem={product}
+                      ></ProductCard>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

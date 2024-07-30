@@ -1,29 +1,140 @@
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-// components
-import Language from "./Language";
 // UI & Icon
 import { FaRegUserCircle } from "react-icons/fa";
-import { HiOutlineXMark } from "react-icons/hi2";
+import { CiUser } from "react-icons/ci";
+import { PiBreadLight } from "react-icons/pi";
+import { CiSettings } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
 // style
 import "./Navbar.scss";
 // redux
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { doLogOut } from "../../redux/userSlice";
+// components
+import Language from "./Language";
+
 const Navbar = (props) => {
-  const { show, setShow } = props;
   const navItemStyle =
     "font-[Alegreya] text-[20px] text-black no-underline capitalize mt-[5px] mb-[5px] w-full border-b-2 border-gray-300 leading-9 lg:border-0 lg:w-fit";
-
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const user = useSelector((state) => state.user.account);
-  console.log(isAuthenticated);
+  // redux
+  const { show, setShow } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const user = useSelector((state) => state.user.account);
+  // state
+  const userOptions = [
+    {
+      id: 1,
+      name: "profile",
+      icon: <CiUser></CiUser>,
+      link: "/user/account/profile",
+    },
+    {
+      id: 2,
+      name: "my orders",
+      icon: <PiBreadLight></PiBreadLight>,
+      link: "/user/order",
+    },
+    {
+      id: 3,
+      name: "setting",
+      icon: <CiSettings></CiSettings>,
+      link: "/user/setting",
+    },
+  ];
+  const navBarItems = [
+    {
+      id: 1,
+      navItem: "Home",
+      link: "/",
+      subNav: [],
+    },
+    {
+      id: 2,
+      navItem: "Menu",
+      link: "/menus/all",
+      subNav: [],
+    },
+    {
+      id: 3,
+      navItem: "Bakery",
+      link: "/",
+      subNav: [
+        {
+          id: 1,
+          name: "Bread",
+          sublink: "menus/bread",
+        },
+
+        {
+          id: 2,
+          name: "pastry",
+          sublink: "menus/pastry",
+        },
+
+        {
+          id: 3,
+          name: "cake",
+          sublink: "menus/cake",
+        },
+
+        {
+          id: 4,
+          name: "sandwich",
+          sublink: "menus/sandwich",
+        },
+      ],
+    },
+    {
+      id: 4,
+      navItem: "Beverages",
+      link: "/",
+      subNav: [
+        {
+          id: 1,
+          name: "Tea",
+          sublink: "menus/tea",
+        },
+
+        {
+          id: 2,
+          name: "coffee",
+          sublink: "menus/coffee",
+        },
+
+        {
+          id: 3,
+          name: "blended",
+          sublink: "menus/blended",
+        },
+      ],
+    },
+    {
+      id: 5,
+      navItem: "About us",
+      link: "/about-us",
+      subNav: [],
+    },
+    {
+      id: 6,
+      navItem: "Contact",
+      link: "/contact",
+      subNav: [],
+    },
+    {
+      id: 7,
+      navItem: "Policy",
+      link: "/policy",
+      subNav: [],
+    },
+  ];
   const handleClickLogOut = () => {
     dispatch(doLogOut());
+    setShow(false);
     navigate("/");
   };
   return (
@@ -33,70 +144,84 @@ const Navbar = (props) => {
       } lg:relative lg:top-0 lg:!left-[0%]  lg:flex-row lg:mb-0 lg:justify-between `}
     >
       <div className=" flex flex-col p-[5px] lg:flex-row lg:gap-[40px] lg:text-[20px] lg:justify-end cap">
-        <NavLink
-          to="/"
-          className={` ${navItemStyle} lg:pt-0 `}
-          onClick={() => setShow(false)}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/menus/all"
-          className={navItemStyle}
-          onClick={() => setShow(false)}
-        >
-          menu
-        </NavLink>
-        <NavDropdown title="Bakery" className={navItemStyle}>
-          <NavDropdown.Item href="/menus/bread">Bread</NavDropdown.Item>
-          <NavDropdown.Item href="/menus/pastry">Pastry</NavDropdown.Item>
-          <NavDropdown.Item href="/menus/cake">Cake</NavDropdown.Item>
-          <NavDropdown.Item href="/menus/sandwich">sandwich</NavDropdown.Item>
-        </NavDropdown>
-        <NavDropdown title="Beverages" className={navItemStyle}>
-          <NavDropdown.Item href="/menus/tea">Tea</NavDropdown.Item>
-          <NavDropdown.Item href="/menus/coffee">Cofee</NavDropdown.Item>
-          <NavDropdown.Item href="/menus/blended">Blended</NavDropdown.Item>
-        </NavDropdown>
-        <NavLink
-          to="/about-us"
-          className={navItemStyle}
-          onClick={() => setShow(false)}
-        >
-          about us
-        </NavLink>
-        <NavLink
-          to="/contact"
-          className={navItemStyle}
-          onClick={() => setShow(false)}
-        >
-          contact
-        </NavLink>
-        <NavLink
-          to="/policy"
-          className={navItemStyle}
-          onClick={() => setShow(false)}
-        >
-          Policy
-        </NavLink>
+        {navBarItems &&
+          navBarItems.map((item) => {
+            return (
+              <>
+                {item.subNav.length <= 0 && (
+                  <NavLink
+                    key={item.id}
+                    to={item.link}
+                    onClick={() => setShow(false)}
+                    className={navItemStyle}
+                  >
+                    {item.navItem}
+                  </NavLink>
+                )}
+                {item.subNav.length > 0 && (
+                  <NavDropdown
+                    key={item.id}
+                    title={item.navItem}
+                    className={navItemStyle}
+                  >
+                    {item.subNav &&
+                      item.subNav.length &&
+                      item.subNav.map((dropdownItem) => {
+                        return (
+                          <NavLink
+                            key={dropdownItem.id}
+                            to={dropdownItem.sublink}
+                            onClick={() => {
+                              setShow(false);
+                            }}
+                            className="block pl-[14px] pb-[5px] text-[16px] hover:!text-[#ff6d00]"
+                          >
+                            {dropdownItem.name}
+                          </NavLink>
+                        );
+                      })}
+                  </NavDropdown>
+                )}
+              </>
+            );
+          })}
       </div>
       {/* user */}
       <div className="flex flex-col-reverse lg:flex lg:flex-row lg:items-center lg:gap-4">
         <div className="mt-[20px] flex flex-row gap-2 items-center lg:mt-0 ">
           <FaRegUserCircle className="text-3xl lg:text-xl" />
-          <span className="uppercase font-bold text-lg flex flex-row items-center lg:text-[12px]">
+          <span className="font-bold text-lg flex flex-row items-center lg:text-[12px]">
             {isAuthenticated ? (
               <>
                 <NavDropdown
-                  className="font-[Alegreya] m-0 text-sm"
+                  className=" capitalize font-[Alegreya] m-0 text-sm w-fit"
                   title={`Hello ${
                     user && user.username ? user.username : "User"
                   }`}
                 >
-                  <NavDropdown.Item>Ordered</NavDropdown.Item>
-                  <NavDropdown.Item>Setting</NavDropdown.Item>
+                  {userOptions &&
+                    userOptions.map((option) => {
+                      return (
+                        <NavDropdown.Item key={option.id}>
+                          <NavLink
+                            to={option.link}
+                            className="flex flex-row gap-2 cap-2 items-center capitalize  hover:!text-[#ff6d00]"
+                            onClick={() => setShow(false)}
+                          >
+                            {option.icon}
+                            <p className="m-0">{option.name}</p>
+                          </NavLink>
+                        </NavDropdown.Item>
+                      );
+                    })}
                   <NavDropdown.Item onClick={() => handleClickLogOut()}>
-                    Logout
+                    <NavLink
+                      className="flex flex-row gap-2 cap-2 items-center capitalize  hover:!text-[#ff6d00]"
+                      onClick={() => setShow(false)}
+                    >
+                      <CiLogout></CiLogout>
+                      <p className="m-0">Logout</p>
+                    </NavLink>
                   </NavDropdown.Item>
                 </NavDropdown>
               </>
