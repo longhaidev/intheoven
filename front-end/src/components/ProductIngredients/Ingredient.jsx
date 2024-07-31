@@ -7,7 +7,7 @@ export default function Ingredient(props) {
     <>
       {ingredients ? (
         <div>
-          <Accordion>
+          <Accordion defaultExpanded>
             <AccordionSummary
               expandIcon={<MdExpandMore />}
               aria-controls="panel1-content"

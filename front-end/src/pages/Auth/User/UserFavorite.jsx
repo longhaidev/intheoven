@@ -1,9 +1,10 @@
 import React from "react";
-import ProductCard from "../../../components/ProductCard/ProductCard";
+import ProductCard from "components/ProductCard/ProductCard";
 export default function UserFavorite() {
   const fakeData = {
     id: "212a0315-e836-4bd3-aff4-017e0c1f6066",
     name: "Salt & Butter Roll",
+    product_category: "bread",
     nutrition: {
       calories: 290,
       total_fat: 9,
@@ -26,12 +27,14 @@ export default function UserFavorite() {
         <h3>My Favorite</h3>
       </div>
       <hr></hr>
-      <div className="flex flex-col gap-1">
-        <ProductCard productItem={fakeData}></ProductCard>
-        <ProductCard productItem={fakeData}></ProductCard>
-        <ProductCard productItem={fakeData}></ProductCard>
-        <ProductCard productItem={fakeData}></ProductCard>
-        <ProductCard productItem={fakeData}></ProductCard>
+      <div className="mx-2">
+        <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:justify-between">
+          <ProductCard productItem={fakeData}></ProductCard>
+          <ProductCard productItem={fakeData}></ProductCard>
+          <ProductCard productItem={fakeData}></ProductCard>
+          <ProductCard productItem={fakeData}></ProductCard>
+          <ProductCard productItem={fakeData}></ProductCard>
+        </div>
       </div>
     </div>
   );

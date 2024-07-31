@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../../components/Header/Header";
-import NewsLetter from "../../components/NewsLetter/NewsLetter";
-import Footer from "../../shared/Footer/Footer";
+import Header from "components/Header/Header";
+import NewsLetter from "components/NewsLetter/NewsLetter";
+import Footer from "shared/Footer/Footer";
 import { NavLink } from "react-router-dom";
 
 export default function ErrorRoute() {

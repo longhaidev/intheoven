@@ -108,7 +108,7 @@ export default function Product() {
 
       <div
         style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        className="sticky top-[55px] pt-[8px] pb-[6px] z-[1] md:pt-[20px] md:pb-[18px]"
+        className="sticky top-[55px] pt-[8px] pb-[6px] z-[1] "
       >
         <Carousel
           responsive={responsiveCarousel}
@@ -136,7 +136,7 @@ export default function Product() {
                   key={categoryItem.id}
                   to={categoryItem.link}
                 >
-                  <div className="w-[25px] pt-[5px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px] md:w-[40px]">
+                  <div className="w-[25px] pt-[5px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px] md:w-[30px]">
                     <img
                       className="w-full h-full object-cover"
                       src={categoryItem.icon}
@@ -151,21 +151,25 @@ export default function Product() {
       </div>
 
       {/* Products */}
-      <div className="mt-[20px] mb-[20px] flex flex-col items-center relative z-[0]  md:flex-row md:flex-wrap md:gap-1 md:w-max-[900px] md:w-[750px] md:mr-auto md:ml-auto md:justify-around md:mb-0 lg:gap-14 lg:w-max-[1200px] lg:ml-auto lg:mr-auto lg:w-[1200px] lg:justify-normal lg:pl-[20px]">
+      <div className="mt-[20px] mb-[20px] flex flex-col items-center relative z-[0]">
         <h2 className="text-left w-full pl-[9%] pr-[9%] capitalize text-[24px] font-semibold">
           {category}
         </h2>
-        {products &&
-          products.length > 0 &&
-          products.map((productItem) => {
-            return (
-              <ProductCard
-                key={productItem.id}
-                category={category}
-                productItem={productItem}
-              ></ProductCard>
-            );
-          })}
+        <div className="md:pl-[45px] md:pr-[45px]">
+          <div className="flex flex-col items-center justify-center md:flex-row md:flex-wrap md:justify-between md:gap-1 ">
+            {products &&
+              products.length > 0 &&
+              products.map((productItem) => {
+                return (
+                  <ProductCard
+                    key={productItem.id}
+                    category={category}
+                    productItem={productItem}
+                  ></ProductCard>
+                );
+              })}
+          </div>
+        </div>
       </div>
     </div>
   );

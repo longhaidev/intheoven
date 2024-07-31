@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
-import abImg from "../../assets/Pictures/aboutus-img1.jpg";
-import abImg2 from "../../assets/Pictures/aboutus-img2.jpg";
-import abImg3 from "../../assets/Pictures/aboutus-img3.jpg";
-import abImg4 from "../../assets/Pictures/aboutus-img4.jpg";
-import abPd1 from "../../assets/Pictures/bread-img1.jpg";
-import abPd2 from "../../assets/Pictures/pastry1.jpg";
-import abPd3 from "../../assets/Pictures/coffee1.jpg";
-import abPd4 from "../../assets/Pictures/cakes1.jpeg";
-import abPd5 from "../../assets/Pictures/sandwich1.jpg";
-import abPd6 from "../../assets/Pictures/blended1.jpg";
-import abKc from "../../assets/Pictures/kittchen-ab-img.jpg";
-import PageDirect from "../../components/PageDirect/PageDirect";
+// UI & Image
+import abImg from "assets/Pictures/aboutus-img1.jpg";
+import abImg2 from "assets/Pictures/aboutus-img2.jpg";
+import abImg3 from "assets/Pictures/aboutus-img3.jpg";
+import abPd1 from "assets/Pictures/bread-img1.jpg";
+import abPd2 from "assets/Pictures/pastry1.jpg";
+import abPd3 from "assets/Pictures/coffee1.jpg";
+import abPd4 from "assets/Pictures/cakes1.jpeg";
+import abPd5 from "assets/Pictures/sandwich1.jpg";
+import abPd6 from "assets/Pictures/blended1.jpg";
+import abKc from "assets/Pictures/kittchen-ab-img.jpg";
+// components
+import PageDirect from "components/PageDirect/PageDirect";
 export default function AboutUs() {
   useEffect(() => {
     window.scroll(0, 0);

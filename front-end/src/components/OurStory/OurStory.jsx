@@ -14,7 +14,9 @@ export default function OurStory(props) {
             </h3>
           </div>
           <span className="text-[18px] md:text-[17px] lg:text-[18px]">
-            <p>Experience great banh mi at In The Oven!</p>
+            <p className="text-color">
+              Experience great banh mi at In The Oven!
+            </p>
             <p>
               13-year journey of perfection and development. Nearly 30 service
               establishments.

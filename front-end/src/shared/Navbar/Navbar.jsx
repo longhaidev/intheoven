@@ -37,13 +37,7 @@ const Navbar = (props) => {
       id: 2,
       name: "my orders",
       icon: <PiBreadLight></PiBreadLight>,
-      link: "/user/order",
-    },
-    {
-      id: 3,
-      name: "setting",
-      icon: <CiSettings></CiSettings>,
-      link: "/user/setting",
+      link: "/user/order/all",
     },
   ];
   const navBarItems = [

@@ -107,67 +107,80 @@ export default function ProductDetail() {
       </div>
 
       {/* product detail */}
-      <div className="pl-[25px] pr-[25px] md:flex md:flex-row md:gap-10 md:max-w-[800px] md:mr-auto md:ml-auto lg:max-w-[1200px]">
-        <div className="w-full h-[250px] mt-[10px] mb-[10%] relative md:w-[70%] md:mb-[5%] lg:h-full lg:w-[110%]">
-          <img
-            draggable={false}
-            className="rounded-lg w-[100%] h-[100%] object-cover"
-            src={productDetail.img}
-          ></img>
-          {/* isAdd? */}
-          {cartItem.find((item) => item.id === productDetail.id) && (
-            <span className="absolute right-0 top-0 flex flex-col items-center justify-center">
-              <FaBookmark color="red" size={40} className="relative" />
-              <p className="absolute top-[10px] m-0 text-white text-[11px] italic">
-                Added
-              </p>
-            </span>
-          )}
-        </div>
-        <div className="w-full">
-          <div className="mb-[6%] md:flex md:flex-col md:justify-between md:h-[86.5%] lg:flex lg:flex-col lg:justify-evenly">
-            <h4 className="font-bold text-[32px] uppercase w-full lg:text-[24px]">
-              {productDetail.name}
-            </h4>
-            <h3 className="text-[20px] text-gray-400 italic capitalize">
-              #{category}
-            </h3>
-            <h4 className="mt-1 text-red-600 text-[24px]">
-              {(productDetail.price * 1000).toLocaleString()}₫
-            </h4>
-            <div className="flex flex-row w-fit gap-3 items-center mt-3 justify-between">
-              <div className="flex flex-row gap-4  items-center justify-between w-full border-gray-300 border pt-[6px] pb-[6px] pl-[15px] pr-[15px]">
-                <FiMinus
-                  className="cursor-pointer"
-                  onClick={() => handleDecreaseQuantity()}
-                />
-                <p className="m-0 select-none text-[20px]">{productQuantity}</p>
-                <GoPlus
-                  className="cursor-pointer"
-                  onClick={() => handleIncreaseQuantity()}
-                />
+      <div className="pl-[25px] pr-[25px] md:mb-[50px]">
+        <div className="md:flex md:flex-row md:gap-[50px] md:mx-5 md:mt-4 md:mb-4">
+          <div className="w-full h-[250px] mt-[10px] mb-[10%] relative md:mt-0 md:mb-0">
+            <img
+              draggable={false}
+              className="rounded-lg w-[100%] h-[100%] object-cover"
+              src={productDetail.img}
+            ></img>
+            {/* isAdd? */}
+            {cartItem.find((item) => item.id === productDetail.id) && (
+              <span className="absolute right-0 top-0 flex flex-col items-center justify-center">
+                <FaBookmark color="red" size={40} className="relative" />
+                <p className="absolute top-[10px] m-0 text-white text-[11px] italic">
+                  Added
+                </p>
+              </span>
+            )}
+          </div>
+          <div className="w-full">
+            <div className="mb-[6%] h-full flex flex-col">
+              <div>
+                <h4 className="font-bold text-[32px] uppercase w-full md:text-[22px]">
+                  {productDetail.name}
+                </h4>
+                <h3 className="text-[20px] text-gray-400 italic capitalize md:text-[16px]">
+                  #{category}
+                </h3>
+                <h4 className="mt-1 text-red-600 text-[20px] md:text-[40px]">
+                  {(productDetail.price * 1000).toLocaleString()}₫
+                </h4>
+              </div>
+              <div className="md:flex md:flex-row gap-3">
+                <div className="flex flex-row w-fit gap-3 items-center mt-3 justify-between md:w-full">
+                  <div className="flex flex-row gap-4  items-center justify-between w-full border-gray-300 border pt-[6px] pb-[6px] pl-[15px] pr-[15px]">
+                    <FiMinus
+                      className="cursor-pointer"
+                      onClick={() => handleDecreaseQuantity()}
+                    />
+                    <p className="m-0 select-none text-[20px]">
+                      {productQuantity}
+                    </p>
+                    <GoPlus
+                      className="cursor-pointer"
+                      onClick={() => handleIncreaseQuantity()}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col items-center w-full">
+                  <div className="flex flex-row gap-2 items-center mt-3 w-full ">
+                    <AddToCartButton
+                      product={productDetail}
+                      productQuantity={productQuantity}
+                      resetQuantity={resetQuantity}
+                      styles={{ paddingTop: "10px", paddingBottom: "10px" }}
+                    ></AddToCartButton>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col items-center w-full">
-              <div className="flex flex-row gap-2 items-center mt-3 w-full ">
-                <AddToCartButton
-                  product={productDetail}
-                  productQuantity={productQuantity}
-                  resetQuantity={resetQuantity}
-                  styles={{ paddingTop: "10px", paddingBottom: "10px" }}
-                ></AddToCartButton>
-              </div>
+            <div className="w-full text-center">
               <NavLink
-                className="italic text-[16px] navlink-hover mt-2"
-                to="/cart"
+                to={`/menus/${category}`}
+                className="navlink-hover  text-[14px] italic md:text-[16px]"
                 style={{ "--line-hover": "#ff6d00" }}
               >
-                Go to cart
+                Continue browsing?
               </NavLink>
             </div>
           </div>
         </div>
-        <hr></hr>
+      </div>
+
+      <div className=" mt-[20px] md:mx-10">
+        <hr className="md:hidden"></hr>
         <h3 className="font-semibold text-[22px]">Product Detail </h3>
         <div className="">
           <Ingredient ingredients={productDetail.ingredients}></Ingredient>

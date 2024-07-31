@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/userSlice";
 // validate
 import * as Yup from "yup";
+import DefaultButton from "components/Button/DefaultButton";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -58,9 +59,9 @@ export default function Login() {
   return (
     <div
       style={{ backgroundColor: "rgba(158, 81, 59, 0.05)" }}
-      className="p-[25px] pb-[16%] pt-[16%]"
+      className="relative w-full h-[80vh] flex flex-col items-center justify-center"
     >
-      <div className="p-[20px] flex flex-col items-center gap-3 bg-white shadow-md rounded-xl">
+      <div className="absolute w-[80%] md:w-[60%] h-auto p-[20px] flex flex-col items-center gap-3 bg-white shadow-md rounded-xl">
         <h5 className="uppercase">Login</h5>
         <TextField
           className="w-full mb-3"
@@ -94,19 +95,26 @@ export default function Login() {
             )}
           </div>
         </span>
-        <div
-          onClick={() => handleLogin()}
-          className="w-full pl-[20px] pr-[20px] pt-[10px] pb-[10px] text-center border border-gray-300 rounded-xl"
-          style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        >
-          <button className="uppercase font-semibold">Login</button>
-        </div>
+
+        <DefaultButton
+          content="Login"
+          textColor="white"
+          textColorOnHover="#ff6d00"
+          primaryColor="#ff6d00"
+          secondaryColor="#fff"
+          styles={{
+            border: "solid 1px #ff6d00",
+            textTransform: "none",
+          }}
+          handleClick={handleLogin}
+        ></DefaultButton>
+
         <div className="w-[80%] italic text-[16px] mt-2">
           <span className="flex flex-row justify-between">
             <NavLink
               className="navlink-hover m-0"
               to="/sign-up"
-              style={{ "--line-hover": "rgb(241, 218, 178)" }}
+              style={{ "--line-hover": "var(--line-hover-primary)" }}
             >
               Create account
             </NavLink>
@@ -114,7 +122,7 @@ export default function Login() {
             <NavLink
               className="navlink-hover m-0"
               to="/forgot"
-              style={{ "--line-hover": "rgb(241, 218, 178)" }}
+              style={{ "--line-hover": "var(--line-hover-primary)" }}
             >
               Forgot password
             </NavLink>

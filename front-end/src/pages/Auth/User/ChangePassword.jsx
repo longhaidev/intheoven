@@ -1,11 +1,17 @@
-import { TextField } from "@mui/material";
 import React, { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+// UI
+import { TextField } from "@mui/material";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 // components
 import DefaultButton from "../../../components/Button/DefaultButton";
 export default function ChangePassword() {
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    current_password: false,
+    new_password: false,
+    confirm_password: false,
+  });
   return (
     <div>
       {" "}
@@ -24,13 +30,24 @@ export default function ChangePassword() {
               label="Current password"
               name="currentPassword"
               variant="outlined"
-              type={showPassword ? "text" : "password"}
+              type={showPassword.current_password ? "text" : "password"}
             />
             <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
-              {!showPassword ? (
-                <FaEye onClick={() => setShowPassword(true)} />
+              {!showPassword.current_password ? (
+                <FaEye
+                  onClick={() =>
+                    setShowPassword({ ...showPassword, current_password: true })
+                  }
+                />
               ) : (
-                <FaEyeSlash onClick={() => setShowPassword(false)} />
+                <FaEyeSlash
+                  onClick={() =>
+                    setShowPassword({
+                      ...showPassword,
+                      current_password: false,
+                    })
+                  }
+                />
               )}
             </div>
           </span>
@@ -38,7 +55,7 @@ export default function ChangePassword() {
             <span className="flex flex-col items-end w-full">
               <NavLink
                 className="navlink-hover m-0"
-                to="/sign-up"
+                to="/forgot"
                 style={{ "--line-hover": "rgb(241, 218, 178)" }}
               >
                 Forgot your password?
@@ -55,13 +72,21 @@ export default function ChangePassword() {
               label="New password"
               name="newPassword"
               variant="outlined"
-              type={showPassword ? "text" : "password"}
+              type={showPassword.new_password ? "text" : "password"}
             />
             <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
-              {!showPassword ? (
-                <FaEye onClick={() => setShowPassword(true)} />
+              {!showPassword.new_password ? (
+                <FaEye
+                  onClick={() =>
+                    setShowPassword({ ...showPassword, new_password: true })
+                  }
+                />
               ) : (
-                <FaEyeSlash onClick={() => setShowPassword(false)} />
+                <FaEyeSlash
+                  onClick={() =>
+                    setShowPassword({ ...showPassword, new_password: false })
+                  }
+                />
               )}
             </div>
           </span>
@@ -73,13 +98,24 @@ export default function ChangePassword() {
               label="Confirm password"
               name="confirmPassword"
               variant="outlined"
-              type={showPassword ? "text" : "password"}
+              type={showPassword.confirm_password ? "text" : "password"}
             />
             <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
-              {!showPassword ? (
-                <FaEye onClick={() => setShowPassword(true)} />
+              {!showPassword.confirm_password ? (
+                <FaEye
+                  onClick={() =>
+                    setShowPassword({ ...showPassword, confirm_password: true })
+                  }
+                />
               ) : (
-                <FaEyeSlash onClick={() => setShowPassword(false)} />
+                <FaEyeSlash
+                  onClick={() =>
+                    setShowPassword({
+                      ...showPassword,
+                      confirm_password: false,
+                    })
+                  }
+                />
               )}
             </div>
           </span>

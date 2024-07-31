@@ -61,7 +61,7 @@ export default function UserMenu() {
     },
     {
       id: 2,
-      name: "Favorite",
+      name: "Pending",
       link: "/user/order/pending",
     },
     {

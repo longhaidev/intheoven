@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import DefaultButton from "components/Button/DefaultButton";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -17,15 +18,24 @@ export default function ForgotPassword() {
           label="Email"
           variant="outlined"
         />
-        <div
-          className="w-full pl-[20px] pr-[20px] pt-[10px] pb-[10px] text-center border border-gray-300 rounded-md"
-          style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        >
-          <button className="uppercase font-semibold">submit</button>
-        </div>
-        <div className="w-[80%] uppercase text-[12px] mt-2 text-center">
-          <NavLink className="navlink-hover m-0" to="/login">
-            back to login
+        <DefaultButton
+          content="Submit"
+          textColor="white"
+          textColorOnHover="#ff6d00"
+          primaryColor="#ff6d00"
+          secondaryColor="#fff"
+          styles={{
+            border: "solid 1px #ff6d00",
+            textTransform: "none",
+          }}
+        ></DefaultButton>
+        <div className="w-[80%] italic text-[14px] mt-2 text-center">
+          <NavLink
+            className="navlink-hover m-0"
+            to="/login"
+            style={{ "--line-hover": "var(--line-hover-primary)" }}
+          >
+            Back to login
           </NavLink>
         </div>
       </div>

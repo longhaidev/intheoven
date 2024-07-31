@@ -52,7 +52,7 @@ const Home = () => {
         subtitle={
           "We’ve got you covered for any holiday, special occasion, or cause for celebration."
         }
-        bgColor={"#f1dab2"}
+        bgColor={"var(--bg-color-secondary)"}
       ></FoodSection>
       <OurStory
         storyImg={

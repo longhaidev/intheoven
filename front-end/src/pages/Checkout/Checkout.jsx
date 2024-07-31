@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 // components
-import PageDirect from "../../components/PageDirect/PageDirect";
-import ConfirmOrder from "../../components/Button/ConfirmOrder";
+import PageDirect from "components/PageDirect/PageDirect";
+import ConfirmOrder from "components/Button/ConfirmOrder";
 // custom style
 import "./Checkout.scss";
 // UI & icon
@@ -23,6 +23,17 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import { MdOutlinePayment } from "react-icons/md";
 //
 export default function Checkout() {
+  // fake data
+  const userAddress = [
+    {
+      id: "",
+      user_id: "",
+      user_name: "",
+      user_phone: "",
+      user_address: "",
+      is_default: "",
+    },
+  ];
   // redux
   const cartItem = useSelector((state) => state.cart.cart);
   const cartPrice = useSelector((state) => state.cart.totalPrice);
@@ -215,7 +226,7 @@ export default function Checkout() {
           </div>
           {/* payment method */}
           <div>
-            <Accordion>
+            <Accordion defaultExpanded>
               <AccordionSummary expandIcon={<MdExpandLess />}>
                 <span className="flex flex-row gap-2 justify-center items-center">
                   <MdOutlinePayment></MdOutlinePayment>
@@ -225,7 +236,7 @@ export default function Checkout() {
                 </span>
               </AccordionSummary>
               <AccordionDetails>
-                <p className="text-[16px] text-gray-400 m-0 italic  ">
+                <p className="text-[16px] text-color-sub m-0 italic  ">
                   All transactions are secure and encrypted.
                 </p>
                 <FormControl>
@@ -281,7 +292,11 @@ export default function Checkout() {
                 </p>
               )}
             </span>
-            <div className="p-[25px] border border-gray-300 rounded-sm mb-3 overflow-scroll h-full md:h-[400px] ">
+            <div
+              className={`p-[25px] border border-gray-300 rounded-sm mb-3 overflow-scroll h-full ${
+                cartItem.length <= 0 ? "" : "md:h-[400px]"
+              }`}
+            >
               {cartItem && cartItem.length > 0 ? (
                 cartItem.map((productItem) => {
                   return (
@@ -304,7 +319,7 @@ export default function Checkout() {
                           <p className="md:text-[18px]">{productItem.name}</p>
                           <span className="flex flex-row gap-2 justify-end md:text-[18px]">
                             {productItem.quantity} x{" "}
-                            <p className="text-red-700 font-semibold">
+                            <p className="text-color-high-light font-semibold">
                               {(productItem.price * 1000).toLocaleString()}₫
                             </p>
                           </span>
@@ -314,7 +329,7 @@ export default function Checkout() {
                   );
                 })
               ) : (
-                <div className="text-gray-300 font-[14px] italic">
+                <div className="text-color-sub font-[14px] italic">
                   Empty Cart
                 </div>
               )}
@@ -323,20 +338,20 @@ export default function Checkout() {
           <div>
             <div className="flex flex-col w-full text-[18px]">
               <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
-                <p className="text-gray-500">Subtotal</p>
-                <p className="text-red-700 font-semibold">
+                <p className="text-color-sub">Subtotal</p>
+                <p className="text-color-high-light font-semibold">
                   {(cartPrice * 1000).toLocaleString()}₫
                 </p>
               </span>
               <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
-                <p className="text-gray-500">Shipping estimate</p>
-                <p className="text-red-700 font-semibold">
+                <p className="text-color-sub">Shipping estimate</p>
+                <p className="text-color-high-light font-semibold">
                   {(cartPrice * 0.008 * 1000).toLocaleString()}₫
                 </p>
               </span>
               <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
-                <p className="text-gray-500">Tax estimate</p>
-                <p className="text-red-700 font-semibold">
+                <p className="text-color-sub">Tax estimate</p>
+                <p className="text-color-high-light font-semibold">
                   {(cartPrice * 0.05 * 1000).toLocaleString()}₫
                 </p>
               </span>
@@ -344,7 +359,7 @@ export default function Checkout() {
             <h3 className="text-[20px]  w-full  font-semibold mt-[1rem]">
               <span className="flex flex-row justify-between">
                 <p>Order total</p>
-                <p className="text-red-700">
+                <p className="text-color-high-light">
                   {(
                     (cartPrice + cartPrice * 0.05 + cartPrice * 0.1) *
                     1000

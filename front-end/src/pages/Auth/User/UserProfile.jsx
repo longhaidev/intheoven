@@ -1,10 +1,10 @@
 import React from "react";
 // UI & image
-import blankImg from "../../../assets/Pictures/blank-img-user1.png";
+import blankImg from "assets/Pictures/blank-img-user1.png";
 import { TextField, Menu, MenuItem } from "@mui/material";
 // components
-import DefaultButton from "../../../components/Button/DefaultButton";
-import UserMenu from "../../../components/UserMenu/UserMenu";
+import DefaultButton from "components/Button/DefaultButton";
+import UserMenu from "components/UserMenu/UserMenu";
 export default function UserProfile() {
   return (
     <div className="">

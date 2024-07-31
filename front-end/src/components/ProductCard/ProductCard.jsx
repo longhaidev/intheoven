@@ -1,26 +1,31 @@
 import React from "react";
-import { FaBookmark } from "react-icons/fa6";
-import BuyNowButton from "../Button/BuyNowButton";
-import AddToCartButton from "../Button/AddToCartButton";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+// redux
+import { useSelector } from "react-redux";
+// UI
+import { FaBookmark } from "react-icons/fa6";
+// components
+import BuyNowButton from "components/Button/BuyNowButton";
+import AddToCartButton from "components/Button/AddToCartButton";
 export default function ProductCard(props) {
-  const { category, productItem } = props;
+  const { productItem } = props;
   const navigate = useNavigate();
   const cartItem = useSelector((state) => state.cart.cart);
   return (
     <div
-      className={`w-[90%] h-full m-[12px] p-[6px] border border-gray-300 rounded-md shadow-sm hover:scale-[1.03] transition ease-in-out hover:!border-gray-400 ${
+      className={`w-[90%] h-full m-[12px] p-[6px] border border-gray-300 rounded-md shadow-sm hover:scale-[1.03] transition ease-in-out hover:!border-gray-400  md:!w-[45%] md:h-[410px] ${
         productItem.stock <= 0 ? "grayscale pointer-events-none" : ""
-      } `}
+      }`}
     >
-      <div className="product-hover flex flex-col relative">
+      <div className="product-hover flex flex-col relative h-full">
         {/* productt img */}
         <div
           className=" w-full h-full relative p-[6px] flex flex-col items-center"
-          onClick={() => navigate(`/menus/${category}/${productItem.id}`)}
+          onClick={() =>
+            navigate(`/menus/${productItem.product_category}/${productItem.id}`)
+          }
         >
-          <div className=" w-full h-[full] relative">
+          <div className=" w-[full] h-[211px] relative">
             <img
               draggable={false}
               className=" rounded-md w-full h-full object-cover"
@@ -31,29 +36,32 @@ export default function ProductCard(props) {
                 <p>Sold out</p>
               </div>
             )}
+            {cartItem.find((item) => item.id === productItem.id) && (
+              <span className="absolute right-[-4.5px] top-[0px] flex flex-col items-center justify-center">
+                <FaBookmark color="red" size={40} className="relative" />
+                <p className="absolute top-[10px] m-0 text-white text-[11px] italic">
+                  Added
+                </p>
+              </span>
+            )}
           </div>
-          {cartItem.find((item) => item.id === productItem.id) && (
-            <span className="absolute right-0 top-[6px] flex flex-col items-center justify-center">
-              <FaBookmark color="red" size={40} className="relative" />
-              <p className="absolute top-[10px] m-0 text-white text-[11px] italic">
-                Added
-              </p>
-            </span>
-          )}
         </div>
         {/* product info */}
         <div className="p-[6px] w-full h-full flex flex-col items-start">
-          <span className="flex flex-col gap-[6px] w-full">
+          <span className="flex flex-col gap-[6px] w-full h-full">
             <p className="m-0 text-[20px] font-[600] w-full">
               {productItem.name}
             </p>
             <p className="m-0 text-[18px] w-full text-gray-500 capitalize">
-              {category && `#${category}`}
+              {productItem.product_category &&
+                `#${productItem.product_category}`}
             </p>
-            <p className="m-0 text-[22px] text-red-700 w-full">
+            <p className="m-0 text-[22px] text-color-high-light w-full">
               {(productItem.price * 1000).toLocaleString()}₫
             </p>
-            <span className="flex flex-row gap-2 w-full items-center">
+          </span>
+          <div className="h-full w-full flex items-end">
+            <span className="flex flex-row gap-2 w-full ">
               <div className="w-[70%]">
                 <BuyNowButton
                   product={productItem}
@@ -65,7 +73,7 @@ export default function ProductCard(props) {
                 productQuantity={1}
               ></AddToCartButton>
             </span>
-          </span>
+          </div>
         </div>
       </div>
     </div>

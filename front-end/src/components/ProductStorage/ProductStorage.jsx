@@ -1,7 +1,7 @@
 import React from "react";
 export default function ProductStorage() {
   return (
-    <div className="normal-case mt-[15px]">
+    <div className="normal-case mt-[15px] md:mx-4 md:mt-[6%]">
       <div className="pl-[25px] pr-[25px] lg:p-0">
         <h4 className="font-semibold text-[22px]">Storage</h4>
         <p className="text-[18px] italic text-balance md:text-[18px]">

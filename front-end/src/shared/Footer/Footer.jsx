@@ -98,7 +98,7 @@ export default function Footer() {
                           key={item.id}
                           to={item.direction}
                           className="text-[18px] mb-1 no-underline text-black capitalize cursor-pointer navlink-hover w-fit"
-                          style={{ "--line-hover": "black" }}
+                          style={{ "--line-hover": "var(--line-hover-black)" }}
                         >
                           {item.name}
                         </NavLink>

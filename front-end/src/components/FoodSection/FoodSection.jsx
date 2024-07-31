@@ -25,16 +25,19 @@ const FoodSection = (props) => {
   return (
     <div
       className="pt-[70px] pb-[70px]"
-      style={{ backgroundColor: `${bgColor ? bgColor : "white"}` }}
+      style={{
+        backgroundColor: `${bgColor ? bgColor : "var(--bg-color-primary)"}`,
+      }}
     >
-      <div className="flex flex-col text-center pl-2 pr-2 font-[Alegreya] items-center">
-        <h3 className="text-[32px] mb-[20px] md:text-4xl lg:text-5xl">
-          {title ? title : ""}
-        </h3>
-        <span className="text-[18px] text-center md:text-[17px] lg:text-[18px]">
+      <div className="flex flex-col text-center pl-2 pr-2 items-center">
+        <h3 className="font-section-heading mb-[20px]">{title ? title : ""}</h3>
+        <span className="font-text-primary text-center">
           {subtitle ? subtitle : ""}
         </span>
-        <button className=" text-[18px] mt-[15px] font-bold uppercase  pb-[5px] border-b-[1px] border-black w-fit ">
+        <button
+          className=" font-text-primary mt-[15px] font-bold uppercase pb-[5px] w-fit navlink-hover "
+          style={{ "--line-hover": "var(--line-hover-black)" }}
+        >
           View more
         </button>
       </div>
