@@ -17,6 +17,7 @@ export default function CheckOutButton(props) {
   });
 
   const ColorButton = styled(Button)(() => ({
+    fontFamily: "Alegreya",
     border: `1px solid ${theme.palette.primary.main}`,
     color: "#ff6d00",
     "&:hover": {

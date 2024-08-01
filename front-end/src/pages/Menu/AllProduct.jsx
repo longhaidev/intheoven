@@ -75,15 +75,17 @@ export default function AllProduct() {
           {allProduct.map((item, index) => {
             return (
               <div key={index} className="mx-2">
-                <div className="md:flex md:flex-row md:flex-wrap md:justify-between">
-                  {item.products.map((product) => {
-                    return (
-                      <ProductCard
-                        category={item.category}
-                        productItem={product}
-                      ></ProductCard>
-                    );
-                  })}
+                <div className="flex flex-col items-center justify-center gap-[45px] lg:mx-5">
+                  <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px] w-full md:gap-1 lg:w-full ">
+                    {item.products.map((product) => {
+                      return (
+                        <ProductCard
+                          category={item.category}
+                          productItem={product}
+                        ></ProductCard>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             );

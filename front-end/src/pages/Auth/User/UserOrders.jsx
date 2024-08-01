@@ -81,7 +81,7 @@ export default function UserOrders() {
     },
   ];
   return (
-    <div>
+    <div className="lg:w-[90%] bg-white shadow-md rounded-xl p-[14px] pb-[40px] lg:pb-0">
       <div className="flex flex-row justify-between items-center">
         <h3>My Orders</h3>
         <div>
@@ -109,12 +109,14 @@ export default function UserOrders() {
       </div>
       <hr></hr>
       <div className="mx-2">
-        <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:justify-between">
-          <ProductCard productItem={fakeData}></ProductCard>
-          <ProductCard productItem={fakeData}></ProductCard>
-          <ProductCard productItem={fakeData}></ProductCard>
-          <ProductCard productItem={fakeData}></ProductCard>
-          <ProductCard productItem={fakeData}></ProductCard>
+        <div className="lg:flex lg:flex-col lg:items-center lg:justify-center">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px] md:gap-1 lg:w-full lg:gap-0 ">
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+          </div>
         </div>
       </div>
     </div>

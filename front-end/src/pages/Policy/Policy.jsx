@@ -29,13 +29,13 @@ export default function Policy() {
   return (
     <div>
       <PageDirect pageName="Policy"></PageDirect>
-      <div className="p-[20px]">
+      <div className="p-[20px] lg:mx-24 lg:mt-[20px]">
         {policyData &&
           policyData.map((section) => {
             return (
               <>
                 <h3 className="text-[24px]">{section.title}</h3>
-                <p className="text-[16px]">{section.descript}</p>
+                <p className="text-[18px]">{section.descript}</p>
               </>
             );
           })}

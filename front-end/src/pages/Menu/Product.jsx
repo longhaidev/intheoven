@@ -15,6 +15,7 @@ import raw from "../../assets/FakeData/products.json";
 // redux
 import { useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import PageDirect from "components/PageDirect/PageDirect";
 export default function Product() {
   const responsiveCarousel = {
     desktop: {
@@ -61,54 +62,10 @@ export default function Product() {
 
   return (
     <div>
-      <div className=" bg-black relative">
-        <div className="opacity-40 h-[170px]">
-          <img
-            draggable={false}
-            className="h-full w-full object-cover select-none"
-            src={bannerCategory}
-          ></img>
-        </div>
-        <div className="flex flex-col absolute w-full h-full justify-center items-center top-0">
-          <div className="flex flex-col items-center">
-            <h3
-              className="text-white text-[24px] capitalize font-semibold"
-              draggable={false}
-            >
-              {category}
-            </h3>
-            <span className=" text-white text-[20px] flex flex-row gap-2 ">
-              <NavLink
-                draggable={false}
-                to="/"
-                className="text-white  no-underline capitalize mb-2"
-              >
-                Home
-              </NavLink>
-              &gt;
-              <NavLink
-                draggable={false}
-                to="/menus/all"
-                className="text-white  no-underline capitalize"
-              >
-                Menu
-              </NavLink>
-              &gt;
-              <NavLink
-                draggable={false}
-                to="/menus/all"
-                className="text-white  no-underline capitalize"
-              >
-                {category}
-              </NavLink>
-            </span>
-          </div>
-        </div>
-      </div>
-
+      <PageDirect bgImg={bannerCategory} pageName={category}></PageDirect>
       <div
         style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        className="sticky top-[55px] pt-[8px] pb-[6px] z-[1] "
+        className="sticky top-[55px] lg:top-[65px] pt-[8px] pb-[6px] z-[1] lg:pt-[10px] lg:pb-[8px] "
       >
         <Carousel
           responsive={responsiveCarousel}
@@ -136,7 +93,7 @@ export default function Product() {
                   key={categoryItem.id}
                   to={categoryItem.link}
                 >
-                  <div className="w-[25px] pt-[5px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px] md:w-[30px]">
+                  <div className="w-[25px] pt-[5px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px] md:w-[30px] lg:w-[35px] lg:text-[16px]">
                     <img
                       className="w-full h-full object-cover"
                       src={categoryItem.icon}
@@ -151,12 +108,12 @@ export default function Product() {
       </div>
 
       {/* Products */}
-      <div className="mt-[20px] mb-[20px] flex flex-col items-center relative z-[0]">
+      <div className="mt-[20px] mb-[20px] flex flex-col items-center relative z-[0] lg:mt-[6%]">
         <h2 className="text-left w-full pl-[9%] pr-[9%] capitalize text-[24px] font-semibold">
           {category}
         </h2>
-        <div className="md:pl-[45px] md:pr-[45px]">
-          <div className="flex flex-col items-center justify-center md:flex-row md:flex-wrap md:justify-between md:gap-1 ">
+        <div className="md:mx-14 lg:flex lg:flex-col lg:items-center lg:justify-center md:w-full lg:mx-16 lg:w-[90%]">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px] mx-4 md:gap-1 lg:w-full lg:gap-0 lg:mx-0">
             {products &&
               products.length > 0 &&
               products.map((productItem) => {

@@ -13,8 +13,7 @@ export default function ChangePassword() {
     confirm_password: false,
   });
   return (
-    <div>
-      {" "}
+    <div className="lg:w-[40%] bg-white shadow-md rounded-xl p-[14px] w-full">
       <div>
         <h3>Change Password</h3>
       </div>

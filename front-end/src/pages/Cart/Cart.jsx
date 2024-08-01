@@ -45,7 +45,7 @@ export default function Cart() {
     dispatch(clearCart(cartItem));
   };
   return (
-    <div className="min-h-[80vh] mb-[5%] mx-4 mt-3">
+    <div className="mb-[5%] mt-3 md:mx-5 lg:mx-24 pl-[18px] pr-[18px]">
       <h2 className="text-[30px] font-semibold text-left">Shopping cart</h2>
       <div className="w-full text-left pl-[5px] pr-[5px] pb-[10px] ">
         <span
@@ -57,14 +57,14 @@ export default function Cart() {
           Clear cart
         </span>
       </div>
-      <div className="md:flex md:flex-row md:gap-10">
-        <div className="md:w-full md:pr-[10px] md:border-r md:border-r-gray-300">
+      <div className="md:flex md:flex-row md:gap-8">
+        <div className="md:w-full md:pr-[20px] md:border-r md:border-r-gray-300">
           {cartItem && cartItem.length > 0 && cartPrice != 0 ? (
             <>
               {/* cart product */}
               <div className="mt-[2%] mb-[20px]">
                 <div className="mt-[10px] ">
-                  <div className="">
+                  <div className="lg:mx-4">
                     {cartItem.map((productItem) => {
                       return (
                         <div
@@ -86,10 +86,10 @@ export default function Cart() {
                               className="flex flex-row justify-between items-center w-full "
                             >
                               <div className="flex flex-col w-full h-full">
-                                <h3 className="text-[16px] text-wrap m-0 font-semibold">
+                                <h3 className="text-[16px] text-wrap m-0 font-semibold lg:text-[18px]">
                                   {productItem.name}
                                 </h3>
-                                <p className="text-[16px] mt-[8px] mb-0 text-color-high-light">
+                                <p className="text-[16px] mt-[8px] mb-0 text-color-high-light lg:text-[18px]">
                                   {(productItem.price * 1000).toLocaleString()}₫
                                 </p>
                                 <p className="text-[16px] mt-[8px] mb-0 ">
@@ -149,9 +149,9 @@ export default function Cart() {
         </div>
         <div
           id="order_summary"
-          className="md:w-[70%] md:h-full md:sticky md:top-[90px]"
+          className="md:w-[70%] md:h-full md:sticky md:top-[90px] lg:w-[40%]"
         >
-          <h3 className="text-[20px] font-semibold">Order Summary</h3>
+          <h3 className="text-[20px] font-semibold">Order summary</h3>
           <div className="flex flex-col w-full text-[18px]">
             <span className="flex flex-row justify-between border-b border-b-gray-300 mt-[1rem]">
               <p className="text-color-sub">Subtotal</p>
@@ -186,10 +186,11 @@ export default function Cart() {
           </h3>
           <CheckOutButton
             styles={{
-              paddingTop: "15px",
-              paddingBottom: "15px",
+              paddingTop: "5px",
+              paddingBottom: "5px",
               borderRadius: "70px",
-              fontSize: "16px",
+              fontSize: "18px",
+              textTransform: "none",
             }}
           ></CheckOutButton>
           <div className="text-center w-full mt-2">

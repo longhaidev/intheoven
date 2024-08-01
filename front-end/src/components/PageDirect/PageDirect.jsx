@@ -5,7 +5,7 @@ export default function PageDirect(props) {
   const { pageName, direction, bgImg } = props;
   return (
     <div className=" bg-black relative">
-      <div className="opacity-40 h-[150px] ">
+      <div className="opacity-40 w-full h-[150px] md:h-[200px] lg:h-[300px] ">
         <img
           draggable={false}
           className="h-full w-full object-cover select-none"
@@ -21,7 +21,7 @@ export default function PageDirect(props) {
             {pageName}
           </h3>
 
-          <span className="text-white text-[20px] capitalize flex flex-row gap-2 ">
+          <span className="text-white text-[22px] capitalize flex flex-row gap-2 ">
             <NavLink draggable={false} to="/" className="mb-2 text-white">
               Home
             </NavLink>

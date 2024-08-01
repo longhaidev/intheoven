@@ -7,7 +7,7 @@ import DefaultButton from "components/Button/DefaultButton";
 import UserMenu from "components/UserMenu/UserMenu";
 export default function UserProfile() {
   return (
-    <div className="">
+    <div className="lg:w-[40%] bg-white shadow-md rounded-xl p-[14px]">
       <div>
         <h3>My profile</h3>
         <p>Manage your profile infomation to protect your account</p>

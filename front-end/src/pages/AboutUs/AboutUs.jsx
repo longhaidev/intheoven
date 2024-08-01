@@ -23,7 +23,7 @@ export default function AboutUs() {
   return (
     <div>
       <PageDirect pageName="About Us"></PageDirect>
-      <div className="mr-[1.25rem] ml-[1.25rem] mt-[10px]">
+      <div className="mr-[1.25rem] ml-[1.25rem] mt-[10px] lg:mx-24 lg:mt-[20px]">
         <h2 className="text-[30px] text-left">About Us</h2>
         <p className="text-[18px] text-balance">{aboutusText}</p>
         <div className="img-containter flex flex-row items-center gap-3 mb-3">
@@ -36,7 +36,7 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-      <div className="product bg-white p-[15px]">
+      <div className="product bg-white p-[15px] lg:mx-24">
         <h4 className="text-black text-center text-[32px]">Our Product</h4>
         <p className="text-black mb-4 text-center  text-[18px]">{storyText}</p>
         <div className="w-full h-[300px] relative">
@@ -78,14 +78,14 @@ export default function AboutUs() {
           </div>
         </div>
       </div>
-      <div className="product bg-white p-[15px]">
+      <div className="product bg-white p-[15px] lg:mx-24">
         <h4 className="text-black text-center text-[32px]">Our Kittchen</h4>
         <p className="text-black mb-4 text-justify text-[18px] p-[14px]">
           {storyText}
         </p>
       </div>
-      <div>
-        <img src={abKc}></img>
+      <div className="lg:h-[350px]">
+        <img className="w-full h-full object-cover" src={abKc}></img>
       </div>
     </div>
   );

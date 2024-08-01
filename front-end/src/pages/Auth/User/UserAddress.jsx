@@ -9,7 +9,7 @@ export default function UserAddress() {
     setShowModal(true);
   };
   return (
-    <div>
+    <div className="lg:w-[60%] bg-white shadow-md rounded-xl p-[14px]">
       <div className="flex flex-row justify-between items-center">
         <h3>My Address</h3>
         <span onClick={handleShowModal}>

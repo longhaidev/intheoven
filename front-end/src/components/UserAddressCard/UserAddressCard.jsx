@@ -16,7 +16,7 @@ export default function UserAddressCard(props) {
           </p>
         )}
         <h2 className="text-[16px]">0123456789</h2>
-        <p className="text-[14px]">
+        <p className="text-[14px] lg:text-[16px]">
           1600 Amphitheatre Parkway Apartment 1, 2323, 12323, Mountain View,
           United States
         </p>
@@ -35,7 +35,7 @@ export default function UserAddressCard(props) {
                   border: "none",
                   textTransform: "none",
                   padding: "5px",
-                  fontSize: "14px",
+                  fontSize: "16px",
                 }}
                 primaryColor="#fff"
                 textColor="#006fee"
@@ -56,7 +56,7 @@ export default function UserAddressCard(props) {
                   border: "none",
                   textTransform: "none",
                   padding: "5px",
-                  fontSize: "14px",
+                  fontSize: "16px",
                 }}
                 primaryColor="#fff"
                 textColor="#b91c1c"
@@ -75,6 +75,7 @@ export default function UserAddressCard(props) {
               styles={{
                 border: "solid 1px #ff6d00",
                 textTransform: "none",
+                fontSize: "16px",
               }}
             ></DefaultButton>
           </div>

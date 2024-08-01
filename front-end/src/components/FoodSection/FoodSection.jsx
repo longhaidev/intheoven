@@ -30,7 +30,9 @@ const FoodSection = (props) => {
       }}
     >
       <div className="flex flex-col text-center pl-2 pr-2 items-center">
-        <h3 className="font-section-heading mb-[20px]">{title ? title : ""}</h3>
+        <h3 className="text-[32px] md:text-[36px] mb-[20px]">
+          {title ? title : ""}
+        </h3>
         <span className="font-text-primary text-center">
           {subtitle ? subtitle : ""}
         </span>
@@ -73,7 +75,7 @@ const FoodSection = (props) => {
                         src={item.img}
                       ></img>
                     </div>
-                    <span className="mt-[5px] font-[Alegreya] text-xl md:text-2xl lg:text-2xl capitalize">
+                    <span className="mt-[5px] font-[Alegreya] text-[18px] md:text-[20px] capitalize">
                       {item.name}
                     </span>
                   </NavLink>

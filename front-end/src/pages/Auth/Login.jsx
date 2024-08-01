@@ -61,8 +61,8 @@ export default function Login() {
       style={{ backgroundColor: "rgba(158, 81, 59, 0.05)" }}
       className="relative w-full h-[80vh] flex flex-col items-center justify-center"
     >
-      <div className="absolute w-[80%] md:w-[60%] h-auto p-[20px] flex flex-col items-center gap-3 bg-white shadow-md rounded-xl">
-        <h5 className="uppercase">Login</h5>
+      <div className="absolute w-[80%] md:w-[60%] h-auto p-[20px] flex flex-col items-center gap-3 bg-white shadow-md rounded-xl lg:w-[40%]">
+        <h5 className="capitalize">Login</h5>
         <TextField
           className="w-full mb-3"
           size="small"

@@ -33,6 +33,7 @@ export default function BuyNowButton(props) {
   });
 
   const ColorButton = styled(Button)(() => ({
+    fontFamily: "Alegreya",
     border: `1px solid ${theme.palette.primary.main}`,
     color: "#Fff",
     backgroundColor: theme.palette.secondary.main,

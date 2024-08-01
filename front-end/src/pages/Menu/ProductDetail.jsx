@@ -109,7 +109,7 @@ export default function ProductDetail() {
       {/* product detail */}
       <div className="pl-[25px] pr-[25px] md:mb-[50px]">
         <div className="md:flex md:flex-row md:gap-[50px] md:mx-5 md:mt-4 md:mb-4">
-          <div className="w-full h-[250px] mt-[10px] mb-[10%] relative md:mt-0 md:mb-0">
+          <div className="w-full h-[250px] mt-[10px] mb-[10%] relative md:mt-0 md:mb-0 lg:h-[400px]">
             <img
               draggable={false}
               className="rounded-lg w-[100%] h-[100%] object-cover"
@@ -131,15 +131,15 @@ export default function ProductDetail() {
                 <h4 className="font-bold text-[32px] uppercase w-full md:text-[22px]">
                   {productDetail.name}
                 </h4>
-                <h3 className="text-[20px] text-gray-400 italic capitalize md:text-[16px]">
+                <h3 className="text-[20px] text-gray-400 italic capitalize md:text-[24px]">
                   #{category}
                 </h3>
                 <h4 className="mt-1 text-red-600 text-[20px] md:text-[40px]">
                   {(productDetail.price * 1000).toLocaleString()}₫
                 </h4>
               </div>
-              <div className="md:flex md:flex-row gap-3">
-                <div className="flex flex-row w-fit gap-3 items-center mt-3 justify-between md:w-full">
+              <div className="md:flex md:flex-row gap-3 lg:gap-0">
+                <div className="flex flex-row w-fit gap-3 items-center mt-3 justify-between md:w-full lg:w-[50%]">
                   <div className="flex flex-row gap-4  items-center justify-between w-full border-gray-300 border pt-[6px] pb-[6px] pl-[15px] pr-[15px]">
                     <FiMinus
                       className="cursor-pointer"
@@ -179,9 +179,9 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      <div className=" mt-[20px] md:mx-10">
+      <div className=" mt-[20px] md:mx-10 sm:mx-2 mx-4 lg:mx-5">
         <hr className="md:hidden"></hr>
-        <h3 className="font-semibold text-[22px]">Product Detail </h3>
+        <h3 className=" font-semibold text-[22px] ">Product Detail </h3>
         <div className="">
           <Ingredient ingredients={productDetail.ingredients}></Ingredient>
 

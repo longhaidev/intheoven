@@ -32,7 +32,7 @@ export default function ModalAddAddress(props) {
         <div
           className={`${
             show ? "show-box" : "hide-box"
-          } w-full bg-white rounded-lg shadow-md p-3 md:w-[70%] md:h-fit`}
+          } w-full bg-white rounded-lg shadow-md p-3 md:w-[70%] md:h-fit lg:w-[50%]`}
         >
           <div>
             <h3 className="text-[22px] mb-3">Create new address</h3>
