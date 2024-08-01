@@ -9,6 +9,7 @@ import { CiUser } from "react-icons/ci";
 import { PiBreadLight } from "react-icons/pi";
 import { CiSettings } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
+import { RiArrowDropDownLine } from "react-icons/ri";
 // style
 import "./Navbar.scss";
 // redux
@@ -21,7 +22,7 @@ import Language from "./Language";
 const Navbar = (props) => {
   const navItemStyle = {
     fontFamily: "Alegreya",
-    fontSize: "16px",
+    fontSize: "18px",
     color: "#000",
     textTransform: "capitalize",
     marginTop: "5px",
@@ -30,6 +31,12 @@ const Navbar = (props) => {
     display: "block",
     textAlign: "left",
     width: "100%",
+    "@media (min-width:1024px)": {
+      padding: "0px",
+      textAlign: "center",
+      marginTop: "0px",
+      marginBottom: "0px",
+    },
   };
   // redux
   const { show, setShow } = props;
@@ -169,8 +176,12 @@ const Navbar = (props) => {
                     aria-expanded={open ? "true" : undefined}
                     onClick={(event) => handleClick(event, item.id)}
                     sx={navItemStyle}
+                    className="lg:!pl-[8px] lg:text-center"
                   >
-                    {item.navItem}
+                    <span className="flex flex-row gap-2 items-center">
+                      {item.navItem}
+                      <RiArrowDropDownLine></RiArrowDropDownLine>
+                    </span>
                   </Button>
                   <Menu
                     id={`menu-${item.id}`}

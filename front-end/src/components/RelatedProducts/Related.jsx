@@ -11,13 +11,13 @@ export default function Related(props) {
     <div className=" mt-[20px] md:mb-[0px]">
       {relatedProduct && (
         <div>
-          <h3 className="text-center text-[22px] font-semibold md:mb-4">
+          <h3 className="text-center text-[22px] font-semibold mb-6">
             Related Food
           </h3>
-          <div className="p-[14px]">
+          <div className="">
             <div className="mx-2">
               <div className="flex flex-col items-center justify-center">
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] w-[85%] gap-[45px] w-full md:gap-0 lg:!w-full lg:gap-0 ">
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] w-full gap-[45px]">
                   {relatedProduct.length > 0 &&
                     relatedProduct.map((item) => {
                       return (

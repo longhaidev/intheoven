@@ -10,7 +10,7 @@ export default function Layout() {
   return (
     <>
       <Header></Header>
-      <div className="pt-[58px] lg:pt-[65px] relative">
+      <div className="space-layout-from-header relative">
         <Outlet></Outlet>
         <ScrollTop></ScrollTop>
       </div>

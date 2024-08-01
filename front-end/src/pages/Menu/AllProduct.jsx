@@ -28,24 +28,24 @@ export default function AllProduct() {
       <div>
         {/* Page direction */}
         <PageDirect pageName="Our Menu" bgImg={bannerImg}></PageDirect>
-        <div className="p-[15px] lg:max-w-[1200px] lg:w-[1200px] lg:mr-auto lg:ml-auto  ">
+        <div className="mt-8 mb-8 flex flex-col items-center  z-[0] lg:mt-12">
           {category &&
             category.length > 0 &&
             category.map((category) => {
               return (
-                <div key={category.id}>
-                  <h3 className="capitalize text-[24px] font-semibold">
+                <div key={category.id} className="w-[81%] mb-4">
+                  <h2 className="mx-1 mb-2 text-left capitalize font-big-heading font-semibold">
                     {category.category_name}
-                  </h3>
-                  <div className="md:mx-12">
-                    <div className="flex flex-col items-center gap-4 mb-3 md:flex-row md:flex-wrap md:justify-between">
+                  </h2>
+                  <div className="flex flex-col items-center lg:mt-6">
+                    <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-11 w-full lg:gap-x-20">
                       {category.items &&
                         category.items.length > 0 &&
                         category.items.map((item) => {
                           return (
                             <div
                               key={item.id}
-                              className="flex flex-col items-center gap-[5px] mt-[15px] category-item w-fit"
+                              className="w-full flex flex-col items-center gap-[5px] mt-[15px] category-item lg:items-baseline"
                             >
                               <NavLink
                                 to={item.item_link}
@@ -53,12 +53,12 @@ export default function AllProduct() {
                               >
                                 <div className="w-[300px] h-[200px] mb-2">
                                   <img
-                                    className="object-cover rounded-[20px] h-full w-full "
+                                    className="object-cover rounded-md h-full w-full "
                                     src={item.item_img}
                                   ></img>
                                 </div>
                                 <div>
-                                  <span className="text-[18px]">
+                                  <span className="font-text-primary">
                                     {item.item_name}
                                   </span>
                                 </div>
@@ -71,25 +71,35 @@ export default function AllProduct() {
                 </div>
               );
             })}
-          <h3 className="text-[24px] font-semibold md:mb-5">All Products</h3>
-          {allProduct.map((item, index) => {
-            return (
-              <div key={index} className="mx-2">
-                <div className="flex flex-col items-center justify-center gap-[45px] lg:mx-5">
-                  <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px] w-full md:gap-1 lg:w-full ">
-                    {item.products.map((product) => {
-                      return (
-                        <ProductCard
-                          category={item.category}
-                          productItem={product}
-                        ></ProductCard>
-                      );
-                    })}
+          {/* All Product */}
+          <div id="all_product_wrapper" className="w-[81%] mt-6">
+            <h2 className="mx-1 mb-2 text-center capitalize font-big-heading font-semibold">
+              All Product
+            </h2>
+            <div className="w-full">
+              {allProduct.map((item, index) => {
+                return (
+                  <div key={index} className="mb-11">
+                    <h2 className="mx-1 mb-2 text-left capitalize font-big-heading font-semibold">
+                      {item.category}
+                    </h2>
+                    <div className="flex flex-col items-center justify-center gap-[45px] mt-6 ">
+                      <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px] w-full lg:w-full lg:gap-7 ">
+                        {item.products.map((product) => {
+                          return (
+                            <ProductCard
+                              category={item.category}
+                              productItem={product}
+                            ></ProductCard>
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </>

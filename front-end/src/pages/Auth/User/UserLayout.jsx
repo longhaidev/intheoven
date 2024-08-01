@@ -8,7 +8,7 @@ export default function UserLayout() {
       <div className="w-full flex flex-row justify-end mb-[10px] sticky top-[58px] z-[1] backdrop-blur-[5px] lg:top-[65px]">
         <UserMenu></UserMenu>
       </div>
-      <div className="w-full flex flex-col items-center justify-center ">
+      <div className="w-full flex flex-col items-center justify-center">
         <Outlet></Outlet>
       </div>
     </div>

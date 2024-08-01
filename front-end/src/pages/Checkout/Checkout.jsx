@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
 // components
-import PageDirect from "components/PageDirect/PageDirect";
 import ConfirmOrder from "components/Button/ConfirmOrder";
 // custom style
-import "./Checkout.scss";
+// import "./Checkout.scss";
 // UI & icon
 import {
   FormControlLabel,
@@ -21,19 +20,7 @@ import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { MdExpandLess } from "react-icons/md";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { MdOutlinePayment } from "react-icons/md";
-//
 export default function Checkout() {
-  // fake data
-  const userAddress = [
-    {
-      id: "",
-      user_id: "",
-      user_name: "",
-      user_phone: "",
-      user_address: "",
-      is_default: "",
-    },
-  ];
   // redux
   const cartItem = useSelector((state) => state.cart.cart);
   const cartPrice = useSelector((state) => state.cart.totalPrice);
@@ -51,6 +38,7 @@ export default function Checkout() {
     product: cartItem ?? [],
     totalPrice: cartPrice ?? 0,
   });
+  // cityOptions
   const citySelect = [
     {
       value: "HCM",
@@ -65,7 +53,15 @@ export default function Checkout() {
       label: "Da Nang City",
     },
   ];
-
+  // form input style
+  const formInputStyle = {
+    marginBottom: "0px!important",
+    boxShadow: "none",
+    border: "0.5px gray",
+    "&::before": {
+      height: "0px",
+    },
+  };
   const handleOnChangeForm = async (event) => {
     const { name, value } = event.target;
     setFormCheckout({
@@ -93,24 +89,19 @@ export default function Checkout() {
       setErrorMsg(newError);
     }
   };
-  console.log(">>> check render from checkout");
   return (
-    <div>
-      {/* <PageDirect pageName="checkout"></PageDirect> */}
-      <div className="pl-[20px] pr-[20px] !mb-[30px] !mt-[30px] md:mx-5 lg:mx-24">
-        <h2 className="text-[30px] font-semibold text-left">Check out</h2>
-        <div className="md:mt-[2%] md:flex md:flex-row md:justify-between md:gap-7">
-          <div className="mb-4 md:pr-[28px] md:border-r md:border-r-gray-300 lg:w-full">
+    <div id="checkout_wrapper" className="!mb-8 !mt-8">
+      <div className="mx-4 md:mx-5 lg:mx-24">
+        {/* Title */}
+        <h2 className="font-section-heading font-semibold text-left md:mb-6">
+          Check out
+        </h2>
+        {/* Content */}
+        <div className="md:flex md:flex-row md:justify-between md:gap-7">
+          <div className="w-full mb-4 md:pr-7 md:border-r md:border-r-gray-300">
             <div className="mb-2">
-              {/* contact info */}
-              <Accordion
-                defaultExpanded
-                sx={{
-                  marginBottom: "0px!important",
-                  boxShadow: "none",
-                  border: "0.5px gray",
-                }}
-              >
+              {/* Contact info */}
+              <Accordion defaultExpanded sx={formInputStyle}>
                 <AccordionSummary expandIcon={<MdExpandLess />}>
                   <h6 className="font-semibold mb-2 text-[18px] md:text-[20px]">
                     <span className="flex flex-row items-center gap-2">
@@ -132,7 +123,7 @@ export default function Checkout() {
                   />
                   <div className="flex flex-row items-center gap-2">
                     <TextField
-                      sx={{ marginBottom: "0px!important" }}
+                      sx={formInputStyle}
                       error={errorMsg.phone ? true : false}
                       size="small"
                       className="w-full mb-3"
@@ -144,7 +135,7 @@ export default function Checkout() {
                       onChange={handleOnChangeForm}
                     />
                     <TextField
-                      sx={{ marginBottom: "0px!important" }}
+                      sx={formInputStyle}
                       error={errorMsg.email ? true : false}
                       size="small"
                       className="w-full mb-3"
@@ -158,8 +149,9 @@ export default function Checkout() {
                   </div>
                 </AccordionDetails>
               </Accordion>
+              <hr></hr>
               {/* Shipping address */}
-              <Accordion defaultExpanded>
+              <Accordion defaultExpanded sx={formInputStyle}>
                 <AccordionSummary expandIcon={<MdExpandLess />}>
                   <h6 className="font-semibold mb-2 text-[18px] md:text-[20px]">
                     <span className="flex flex-row items-center gap-2">
@@ -223,45 +215,45 @@ export default function Checkout() {
                 </AccordionDetails>
               </Accordion>
             </div>
-            {/* payment method */}
-            <div>
-              <Accordion defaultExpanded>
-                <AccordionSummary expandIcon={<MdExpandLess />}>
-                  <span className="flex flex-row gap-2 justify-center items-center">
-                    <MdOutlinePayment></MdOutlinePayment>
-                    <h6 className="font-semibold text-[18px] m-0">
-                      Payment Method
-                    </h6>
-                  </span>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <p className="text-[16px] text-color-sub m-0 italic  ">
-                    All transactions are secure and encrypted.
-                  </p>
-                  <FormControl>
-                    <RadioGroup
-                      row
-                      aria-labelledby="demo-radio-buttons-group-label"
-                      defaultValue="cash"
-                      name="payment"
-                      onChange={handleOnChangeForm}
-                    >
-                      <FormControlLabel
-                        value="cash"
-                        control={<Radio size="small" />}
-                        label="Cash on Delivery"
-                      />
-                      <FormControlLabel
-                        disabled
-                        value="online"
-                        control={<Radio size="small" />}
-                        label="MOMO"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </AccordionDetails>
-              </Accordion>
-            </div>
+            <hr></hr>
+            {/* Payment method */}
+            <Accordion defaultExpanded sx={formInputStyle}>
+              <AccordionSummary expandIcon={<MdExpandLess />}>
+                <span className="flex flex-row gap-2 justify-center items-center">
+                  <MdOutlinePayment></MdOutlinePayment>
+                  <h6 className="font-semibold text-[18px] m-0">
+                    Payment Method
+                  </h6>
+                </span>
+              </AccordionSummary>
+              <AccordionDetails>
+                <p className="text-[16px] text-color-sub m-0 italic  ">
+                  All transactions are secure and encrypted.
+                </p>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="cash"
+                    name="payment"
+                    onChange={handleOnChangeForm}
+                  >
+                    <FormControlLabel
+                      value="cash"
+                      control={<Radio size="small" />}
+                      label="Cash on Delivery"
+                    />
+                    <FormControlLabel
+                      disabled
+                      value="online"
+                      control={<Radio size="small" />}
+                      label="MOMO"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </AccordionDetails>
+            </Accordion>
+
             <div className="mt-[20px]">
               <TextField
                 size="small"
@@ -279,8 +271,10 @@ export default function Checkout() {
           <div className="md:w-[60%]">
             <div>
               <div
-                className={`p-[25px] rounded-sm mb-3 overflow-scroll h-full md:p-0 ${
-                  cartItem.length <= 0 ? "" : "md:h-full"
+                className={` ${
+                  cartItem.length <= 0
+                    ? ""
+                    : "p-[25px] rounded-sm mb-3 overflow-scroll h-full md:p-0 md:h-full"
                 }`}
               >
                 {cartItem && cartItem.length > 0 ? (
@@ -315,7 +309,7 @@ export default function Checkout() {
                     );
                   })
                 ) : (
-                  <div className="text-color-sub font-[14px] italic">
+                  <div className="text-color-sub font-text-secondary italic p-3 border border-gray-300 rounded-md md:hidden">
                     Empty Cart
                   </div>
                 )}
@@ -368,7 +362,7 @@ export default function Checkout() {
             <div className="w-full text-center mt-[8px] mb-3">
               <NavLink
                 to="/cart"
-                className="navlink-hover  text-[14px] italic md:text-[16px]"
+                className="navlink-hover  font-text-secondary italic"
                 style={{ "--line-hover": "#ff6d00" }}
               >
                 Back to cart ?
