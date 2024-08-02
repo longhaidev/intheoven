@@ -33,12 +33,12 @@ export default function AllProduct() {
             category.length > 0 &&
             category.map((category) => {
               return (
-                <div key={category.id} className="w-[81%] mb-4">
+                <div key={category.id} className="w-[81%] md:w-[93%] mb-4">
                   <h2 className="mx-1 mb-2 text-left capitalize font-big-heading font-semibold">
                     {category.category_name}
                   </h2>
                   <div className="flex flex-col items-center lg:mt-6">
-                    <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-11 w-full lg:gap-x-20">
+                    <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-11 w-full md:gap-x-[1rem] lg:gap-x-[8px]">
                       {category.items &&
                         category.items.length > 0 &&
                         category.items.map((item) => {
@@ -51,7 +51,7 @@ export default function AllProduct() {
                                 to={item.item_link}
                                 className="no-underline text-center text-black capitalize text-xl"
                               >
-                                <div className="w-[300px] h-[200px] mb-2">
+                                <div className="w-[300px] h-[200px] mb-2 md:w-[270px]">
                                   <img
                                     className="object-cover rounded-md h-full w-full "
                                     src={item.item_img}
@@ -72,7 +72,7 @@ export default function AllProduct() {
               );
             })}
           {/* All Product */}
-          <div id="all_product_wrapper" className="w-[81%] mt-6">
+          <div id="all_product_wrapper" className="w-[81%] md:w-[93%] mt-6">
             <h2 className="mx-1 mb-2 text-center capitalize font-big-heading font-semibold">
               All Product
             </h2>

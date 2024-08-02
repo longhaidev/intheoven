@@ -16,14 +16,13 @@ const Header = () => {
     window.scroll(0, 0);
     setShowNav(false);
   }, []);
-  console.log(">>> check render from home");
   return (
     <>
-      <div className="shadow-sm flex flex-row items-center justify-between border-[1px] fixed z-2 bg-[#fff] w-full pr-[20px] pl-[20px] pb-[5px] pt-[5px] border-none lg:gap-[20px]">
+      <div className="shadow-sm flex flex-row items-center justify-between fixed z-2 bg-[#fff] w-full px-4 py-1 border-none lg:gap-[20px]">
         <div className="menu">
           {!showNav ? (
             <BiMenuAltLeft
-              className="lg:hidden cursor-pointer transition ease-in-out delay-150"
+              className="cursor-pointer transition ease-in-out delay-150 lg:hidden "
               size={30}
               onClick={() => {
                 setShowNav(true);
@@ -31,7 +30,7 @@ const Header = () => {
             />
           ) : (
             <HiOutlineXMark
-              className="lg:hidden cursor-pointer transition ease-in-out delay-150"
+              className=" cursor-pointer transition ease-in-out delay-150 lg:hidden"
               size={30}
               onClick={() => {
                 setShowNav(false);

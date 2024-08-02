@@ -22,14 +22,26 @@ export default function UserFavorite() {
     quantity: 0,
   };
   return (
-    <div className="lg:w-[90%] bg-white shadow-md rounded-xl p-[14px] pb-[40px] md:pb-[14px]">
+    <div className="w-full p-[14px] pb-[40px] border border-gray-300 rounded-md md:pb-[14px]">
       <div>
-        <h3>My Favorite</h3>
+        <h3 className="font-section-sub-heading">My Favorite</h3>
       </div>
       <hr></hr>
       <div className="mx-2">
         <div className="lg:flex lg:flex-col lg:items-center lg:justify-center">
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px]  md:gap-1 lg:w-full lg:gap-0 ">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px]  md:gap-x-4 md:gap-y-4 lg:w-full">
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
+            <ProductCard productItem={fakeData}></ProductCard>
             <ProductCard productItem={fakeData}></ProductCard>
             <ProductCard productItem={fakeData}></ProductCard>
             <ProductCard productItem={fakeData}></ProductCard>

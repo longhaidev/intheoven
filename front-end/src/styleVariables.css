@@ -1,4 +1,7 @@
 :root {
+  --sticky-element-mobile: 56px;
+  --sticky-element-tablet: 56px;
+  --sticky-element-pc: 63.5px;
   /* line color on hover */
   --line-hover-primary: #ff6d00;
   --line-hover-secondary: #f1dab2;

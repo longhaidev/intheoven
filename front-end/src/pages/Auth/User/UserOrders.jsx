@@ -81,9 +81,9 @@ export default function UserOrders() {
     },
   ];
   return (
-    <div className="lg:w-[90%] bg-white shadow-md rounded-xl p-[14px] pb-[40px] lg:pb-0">
+    <div className="w-full border border-gray-300 rounded-md p-[14px] pb-[40px]">
       <div className="flex flex-row justify-between items-center">
-        <h3>My Orders</h3>
+        <h3 className="font-section-sub-heading">My Orders</h3>
         <div>
           <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
             <InputLabel id="demo-select-small-label">Status</InputLabel>
@@ -110,7 +110,7 @@ export default function UserOrders() {
       <hr></hr>
       <div className="mx-2">
         <div className="lg:flex lg:flex-col lg:items-center lg:justify-center">
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px] md:gap-1 lg:w-full lg:gap-0 ">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-[45px]  md:gap-x-4 md:gap-y-4 lg:w-full">
             <ProductCard productItem={fakeData}></ProductCard>
             <ProductCard productItem={fakeData}></ProductCard>
             <ProductCard productItem={fakeData}></ProductCard>

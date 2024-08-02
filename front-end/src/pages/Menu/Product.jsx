@@ -64,7 +64,7 @@ export default function Product() {
   return (
     <div>
       <PageDirect bgImg={bannerCategory} pageName={category}></PageDirect>
-      <div className="bg-color-secondary sticky top-[58.3px] pt-2 pb-[6px] z-[1] lg:pt-[10px] lg:pb-2 lg:top-[64.3px]">
+      <div className="bg-color-secondary sticky sticky-element-from-header pt-2 pb-[6px] z-[1] ">
         <Carousel
           responsive={responsiveCarousel}
           swipeable={true}
@@ -112,7 +112,7 @@ export default function Product() {
         id="product_wrapper"
         className="mt-8 mb-8 flex flex-col items-center relative z-[0] lg:mt-12"
       >
-        <div id="product_container" className="w-[81%]">
+        <div id="product_container" className="w-[81%] md:w-[93%]">
           {/* Title */}
           <h2 className="text-left capitalize font-big-heading font-semibold">
             {category}

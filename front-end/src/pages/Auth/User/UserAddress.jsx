@@ -9,9 +9,9 @@ export default function UserAddress() {
     setShowModal(true);
   };
   return (
-    <div className="lg:w-[60%] bg-white shadow-md rounded-xl p-[14px]">
+    <div className="border border-gray-300 rounded-md w-full p-[14px]">
       <div className="flex flex-row justify-between items-center">
-        <h3>My Address</h3>
+        <h3 className="font-section-sub-heading">My Address</h3>
         <span onClick={handleShowModal}>
           <DefaultButton
             content="+"
@@ -21,9 +21,19 @@ export default function UserAddress() {
         </span>
       </div>
       <hr></hr>
-      <div>
+      <div className="md:h-[410px] md:overflow-scroll">
         <UserAddressCard isDefault={false}></UserAddressCard>
         <UserAddressCard isDefault={true}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
+        <UserAddressCard isDefault={false}></UserAddressCard>
         <UserAddressCard isDefault={false}></UserAddressCard>
       </div>
       <ModalAddAddress

@@ -13,7 +13,7 @@ export default function ProductCard(props) {
   const cartItem = useSelector((state) => state.cart.cart);
   return (
     <div
-      className={`h-full p-[6px] border border-gray-300 rounded-md shadow-sm hover:scale-[1.03] transition ease-in-out hover:!border-gray-400  md:h-[410px]  ${
+      className={`h-full p-[6px] border border-[#e5e7eb] rounded-md shadow-sm hover:scale-[1.03] transition ease-in-out hover:!border-gray-400  md:h-[410px]  ${
         productItem.stock <= 0 ? "grayscale pointer-events-none" : ""
       }`}
     >

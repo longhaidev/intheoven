@@ -217,9 +217,9 @@ const Navbar = (props) => {
         })}
       </div>
       {/* user */}
-      <div className="flex flex-col-reverse lg:flex lg:flex-row lg:items-center lg:gap-4">
+      <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:gap-4">
         <div className="mt-[20px] flex flex-row gap-2 items-center lg:mt-0 ">
-          <FaRegUserCircle className="text-3xl lg:text-xl" />
+          <FaRegUserCircle size={20} className="text-[18px]" />
           <span className="font-bold text-lg flex flex-row items-center lg:text-[12px]">
             {isAuthenticated ? (
               <>
@@ -246,7 +246,7 @@ const Navbar = (props) => {
                     })}
                   <NavDropdown.Item onClick={() => handleClickLogOut()}>
                     <NavLink
-                      className="flex flex-row gap-2 cap-2 items-center capitalize  hover:!text-[#ff6d00]"
+                      className="flex flex-row gap-2 cap-2 items-center capitalize hover:!text-[#ff6d00]"
                       onClick={() => setShow(false)}
                     >
                       <CiLogout></CiLogout>
@@ -256,30 +256,29 @@ const Navbar = (props) => {
                 </NavDropdown>
               </>
             ) : (
-              <>
-                <p className="  font-[Alegreya] m-0 border-r-2 border-gray-200 pr-1 text-sm">
-                  <NavLink
-                    className="text-[18px] lg:text-[16px]"
-                    to="/login"
-                    onClick={() => setShow(false)}
-                  >
-                    Login
-                  </NavLink>
-                </p>
-                <p className="  font-[Alegreya] m-0 pl-1 text-sm">
-                  <NavLink
-                    className="text-[18px] lg:text-[16px]"
-                    to="/sign-up"
-                    onClick={() => setShow(false)}
-                  >
-                    Sign up
-                  </NavLink>
-                </p>
-              </>
+              <span className="flex flex-row text-[18px]">
+                <NavLink
+                  className="navlink-hover border-r border-r-gray-300 pr-1"
+                  to="/login"
+                  style={{ "--line-hover": "var(--line-hover-black)" }}
+                  onClick={() => setShow(false)}
+                >
+                  Login
+                </NavLink>
+
+                <NavLink
+                  className="navlink-hover pl-1"
+                  to="/sign-up"
+                  style={{ "--line-hover": "var(--line-hover-black)" }}
+                  onClick={() => setShow(false)}
+                >
+                  Sign up
+                </NavLink>
+              </span>
             )}
           </span>
         </div>
-        <Language></Language>
+        {/* <Language></Language> */}
       </div>
     </div>
   );

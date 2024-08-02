@@ -46,7 +46,7 @@ export default function Cart() {
   };
   return (
     <div className="mb-[5%] mt-3 flex flex-col items-center">
-      <div className="mx-7 w-[81%] md:mx-0 lg:mx-0">
+      <div className="mx-7 w-[81%] md:w-[93%] md:mx-0 lg:mx-0">
         <h2 className="text-[30px] font-semibold text-left">Shopping cart</h2>
         <div className="w-full text-left pl-[5px] pr-[5px] pb-[10px] ">
           <span

@@ -216,5 +216,15 @@ body {
     padding-top: 64.3px;
   }
   @media (min-width: 768px) {
+    padding-top: 56.3px;
+  }
+}
+.sticky-element-from-header {
+  top: var(--sticky-element-mobile);
+  @media (min-width: 1024px) {
+    top: var(--sticky-element-pc);
+  }
+  @media (min-width: 768px) {
+    top: var(--sticky-element-tablet) !important;
   }
 }
