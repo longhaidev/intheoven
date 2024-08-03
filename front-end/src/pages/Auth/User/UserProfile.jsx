@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 // UI & image
 import blankImg from "assets/Pictures/blank-img-user1.png";
 import { TextField, Menu, MenuItem } from "@mui/material";
 // components
 import DefaultButton from "components/Button/DefaultButton";
-import UserMenu from "components/UserMenu/UserMenu";
 export default function UserProfile() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  // fetch user profile...
+
   return (
     <div className="p-[14px] border border-gray-300 rounded-md">
       <div>
@@ -33,6 +37,15 @@ export default function UserProfile() {
         <div id="form_wrap">
           <div className="p-[14px] lg:p-0">
             <TextField
+              disabled
+              className="w-full mb-3"
+              size="small"
+              id="outlined-basic"
+              name="email"
+              value="Current User email"
+              variant="outlined"
+            />
+            <TextField
               className="w-full mb-3"
               size="small"
               id="outlined-basic"
@@ -40,14 +53,7 @@ export default function UserProfile() {
               name="name"
               variant="outlined"
             />
-            <TextField
-              className="w-full mb-3"
-              size="small"
-              id="outlined-basic"
-              label="Email"
-              name="email"
-              variant="outlined"
-            />
+
             <TextField
               className="w-full mb-3"
               size="small"

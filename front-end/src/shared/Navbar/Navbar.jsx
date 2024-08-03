@@ -38,36 +38,6 @@ const Navbar = (props) => {
       marginBottom: "0px",
     },
   };
-  // redux
-  const { show, setShow } = props;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const user = useSelector((state) => state.user.account);
-  // state
-  const [anchorEls, setAnchorEls] = useState({});
-  const handleClick = (event, id) => {
-    setAnchorEls((prev) => ({ ...prev, [id]: event.currentTarget }));
-  };
-  const handleClose = (id) => {
-    setAnchorEls((prev) => ({ ...prev, [id]: null }));
-    setShow(false);
-  };
-
-  const userOptions = [
-    {
-      id: 1,
-      name: "profile",
-      icon: <CiUser></CiUser>,
-      link: "/user/account/profile",
-    },
-    {
-      id: 2,
-      name: "my orders",
-      icon: <PiBreadLight></PiBreadLight>,
-      link: "/user/order/all",
-    },
-  ];
   const navBarItems = [
     {
       id: 1,
@@ -148,9 +118,35 @@ const Navbar = (props) => {
       subNav: [],
     },
   ];
+  const USER_PROFILE_LINK = "/user/account/profile";
+  const USER_ORDER_LINK = "/user/order/all";
+  // redux
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const user = useSelector((state) => state.user.account);
+  // state
+  const { show, setShow } = props;
+  const [anchorEls, setAnchorEls] = useState({});
+  // event handle
+  const handleClickNavMenu = (event, id) => {
+    setAnchorEls((prev) => ({ ...prev, [id]: event.currentTarget }));
+  };
+  const handleCloseNavMenu = (id) => {
+    setAnchorEls((prev) => ({ ...prev, [id]: null }));
+    setShow(false);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClickUserMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setShow(false);
+    setAnchorEl(null);
+  };
   const handleClickLogOut = () => {
     dispatch(doLogOut());
-
     navigate("/");
   };
   return (
@@ -174,7 +170,7 @@ const Navbar = (props) => {
                     aria-controls={open ? `menu-${item.id}` : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
-                    onClick={(event) => handleClick(event, item.id)}
+                    onClick={(event) => handleClickNavMenu(event, item.id)}
                     sx={navItemStyle}
                     className="lg:!pl-[8px] lg:text-center"
                   >
@@ -187,7 +183,7 @@ const Navbar = (props) => {
                     id={`menu-${item.id}`}
                     anchorEl={anchorEls[item.id]}
                     open={open}
-                    onClose={() => handleClose(item.id)}
+                    onClose={() => handleCloseNavMenu(item.id)}
                     MenuListProps={{
                       "aria-labelledby": `button-${item.id}`,
                     }}
@@ -196,7 +192,7 @@ const Navbar = (props) => {
                     {item.subNav.map((subItem) => (
                       <MenuItem
                         key={subItem.id}
-                        onClick={() => handleClose(item.id)}
+                        onClick={() => handleCloseNavMenu(item.id)}
                         sx={{
                           fontSize: "16px!important",
                           textTransform: "capitalize",
@@ -223,7 +219,55 @@ const Navbar = (props) => {
           <span className="font-bold text-lg flex flex-row items-center lg:text-[12px]">
             {isAuthenticated ? (
               <>
-                <NavDropdown
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClickUserMenu}
+                  className="text-black !normal-case font-primary !text-[18px]"
+                >
+                  <span className="flex flex-row gap-2 items-center">
+                    {`Hello ${user && user.username ? user.username : "User"}`}
+                    <RiArrowDropDownLine></RiArrowDropDownLine>
+                  </span>
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleCloseUserMenu}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <NavLink
+                      to={USER_PROFILE_LINK}
+                      className="flex flex-row gap-2 items-center"
+                    >
+                      <CiSettings></CiSettings>
+                      Account
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <NavLink
+                      to={USER_ORDER_LINK}
+                      className="flex flex-row gap-2 items-center"
+                    >
+                      <PiBreadLight></PiBreadLight>My order
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClickLogOut();
+                    }}
+                    className="flex flex-row gap-2 items-center"
+                  >
+                    <CiLogout></CiLogout>Logout
+                  </MenuItem>
+                </Menu>
+                {/* <NavDropdown
                   className=" capitalize font-[Alegreya] m-0 text-sm w-fit"
                   title={`Hello ${
                     user && user.username ? user.username : "User"
@@ -253,7 +297,7 @@ const Navbar = (props) => {
                       <p className="m-0">Logout</p>
                     </NavLink>
                   </NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
               </>
             ) : (
               <span className="flex flex-row text-[18px]">

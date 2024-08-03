@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 // styles
 import "./UserMenu.scss";
@@ -19,23 +19,11 @@ import {
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { CiMenuBurger } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
-import { PiBreadBold } from "react-icons/pi";
+import { PiBreadLight } from "react-icons/pi";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { MdOutlineManageAccounts } from "react-icons/md";
 
 export default function UserMenu(props) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    window.scroll(0, 0);
-    setAnchorEl(null);
-  };
-  // props
-  const { currentPage } = props;
-  let tmp = currentPage;
-  tmp = tmp.charAt(0).toUpperCase() + currentPage.slice(1);
   const accountOptions = [
     {
       id: 1,
@@ -120,6 +108,33 @@ export default function UserMenu(props) {
     marginTop: "10px",
     padding: "0px",
   };
+  // props
+  const { currentPage } = props;
+  // state
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [pageSelected, setPageSelected] = useState("");
+  const open = Boolean(anchorEl);
+  // didMount
+  useEffect(() => {
+    getPageSelected();
+  }, [currentPage]);
+  // handle event
+  const getPageSelected = () => {
+    let tmp = currentPage;
+    tmp = tmp?.charAt(0).toUpperCase() + currentPage.slice(1);
+    if (tmp === "Change-password") {
+      setPageSelected("Change password");
+    } else {
+      setPageSelected(tmp);
+    }
+  };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    window.scroll(0, 0);
+    setAnchorEl(null);
+  };
   return (
     <>
       <div className="md:hidden">
@@ -159,8 +174,10 @@ export default function UserMenu(props) {
                       onClick={handleClose}
                     >
                       <p
-                        className={`pl-[25px] pr-[14px] pb-[5px] m-0 hover:!text-[#ff6d00] ${
-                          option.name == currentPage ? "text-red" : "text-black"
+                        className={`font-text-primary pl-[25px] pr-[14px] pb-[5px] m-0 hover:!text-[#ff6d00] ${
+                          option.name == pageSelected
+                            ? "text-color-hover"
+                            : "text-color-primary"
                         }`}
                       >
                         {option.name}
@@ -173,7 +190,7 @@ export default function UserMenu(props) {
           <Accordion sx={muiArrcordionStyles}>
             <AccordionSummary>
               <MenuItem className="w-full flex flex-row gap-2 justify-center items-center">
-                <PiBreadBold></PiBreadBold>
+                <PiBreadLight></PiBreadLight>
                 <p className="m-0 font-text-primary">My Orders</p>
               </MenuItem>
             </AccordionSummary>
@@ -186,7 +203,13 @@ export default function UserMenu(props) {
                       to={option.link}
                       onClick={handleClose}
                     >
-                      <p className="pl-[25px] pr-[14px] pb-[5px] m-0 hover:!text-[#ff6d00]">
+                      <p
+                        className={`font-text-primary pl-[25px] pr-[14px] pb-[5px] m-0 hover:!text-[#ff6d00] ${
+                          option.name == pageSelected
+                            ? "text-color-hover"
+                            : "text-color-primary"
+                        }`}
+                      >
                         {option.name}
                       </p>
                     </NavLink>
@@ -196,6 +219,7 @@ export default function UserMenu(props) {
           </Accordion>
         </Menu>
       </div>
+      {/* Tablet & PC */}
       <div className="hidden md:flex md:flex-col md:items-start md:gap-5 md:sticky top-[73px]">
         <h2 className=" w-[90%] md:w-[95%] font-section-sub-heading font-semibold text-left md:mb-4">
           User Account
@@ -207,7 +231,7 @@ export default function UserMenu(props) {
             expandIcon={<RiArrowDropDownLine size={25}></RiArrowDropDownLine>}
           >
             <span className="w-full flex flex-row gap-2 justify-end items-center">
-              <PiBreadBold></PiBreadBold>
+              <MdOutlineManageAccounts></MdOutlineManageAccounts>
               <p className="m-0 font-small-heading">My Profile</p>
             </span>
           </AccordionSummary>
@@ -221,8 +245,10 @@ export default function UserMenu(props) {
                     onClick={handleClose}
                   >
                     <p
-                      className={`pl-[25px] pr-[14px] pb-[5px] m-0 hover:!text-[#ff6d00] ${
-                        option.name == tmp ? "text-[#ff6d00]" : "text-black"
+                      className={`font-text-primary pr-[14px] pb-[5px] m-0 hover:!text-[#ff6d00] ${
+                        option.name == pageSelected
+                          ? "text-color-hover"
+                          : "text-color-primary"
                       }`}
                     >
                       {option.name}
@@ -238,7 +264,7 @@ export default function UserMenu(props) {
             sx={muiArrcordionSummaryStyles}
           >
             <span className="w-full flex flex-row gap-2 justify-end items-center">
-              <PiBreadBold></PiBreadBold>
+              <PiBreadLight></PiBreadLight>
               <p className="m-0 font-small-heading">My Orders</p>
             </span>
           </AccordionSummary>
@@ -251,7 +277,13 @@ export default function UserMenu(props) {
                     to={option.link}
                     onClick={handleClose}
                   >
-                    <p className="m-0 font-text-primary mb-1 hover:!text-[#ff6d00]">
+                    <p
+                      className={`m-0 font-text-primary mb-1 hover:!text-[#ff6d00] ${
+                        option.name == pageSelected
+                          ? "text-color-hover"
+                          : "text-color-primary"
+                      }`}
+                    >
                       {option.name}
                     </p>
                   </NavLink>
