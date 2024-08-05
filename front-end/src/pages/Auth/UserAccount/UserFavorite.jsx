@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "components/ProductCard/ProductCard";
+import ProductCard from "components/Product/ProductCard";
 export default function UserFavorite() {
   const fakeData = {
     id: "212a0315-e836-4bd3-aff4-017e0c1f6066",

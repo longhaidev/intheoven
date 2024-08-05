@@ -5,16 +5,16 @@ import { NavLink } from "react-router-dom";
 import { FiMinus } from "react-icons/fi";
 import { GoPlus } from "react-icons/go";
 // cpns
-import Ingredient from "../../components/ProductIngredients/Ingredient";
-import Nutrition from "../../components/ProductNutrition/Nutrition";
+import Ingredient from "components/Product/Ingredient";
+import Nutrition from "components/Product/Nutrition";
 // fake data
-import raw from "../../assets/FakeData/products.json";
-import AddToCartButton from "../../components/Button/AddToCartButton";
+import raw from "assets/FakeData/products.json";
+import AddToCartButton from "components/Button/AddToCartButton";
 // redux
 import { useSelector } from "react-redux";
 import { FaBookmark } from "react-icons/fa6";
-import ProductStorage from "../../components/ProductStorage/ProductStorage";
-import Related from "../../components/RelatedProducts/Related";
+import ProductStorage from "components/Product/ProductStorage";
+import Related from "components/Product/Related";
 // main
 export default function ProductDetail() {
   const cartItem = useSelector((state) => state.cart.cart);

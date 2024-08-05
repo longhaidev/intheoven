@@ -7,7 +7,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 // redux
 import { useDispatch } from "react-redux";
-import { doLogin } from "../../redux/userSlice";
+import { doLogin } from "../../../redux/userSlice";
 // validate
 import * as Yup from "yup";
 import DefaultButton from "components/Button/DefaultButton";

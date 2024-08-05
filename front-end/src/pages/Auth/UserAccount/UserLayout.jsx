@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import UserMenu from "components/UserMenu/UserMenu";
+import UserMenu from "components/User/UserMenu";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 export default function UserLayout() {

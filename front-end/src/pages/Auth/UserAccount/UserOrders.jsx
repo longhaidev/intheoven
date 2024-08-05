@@ -3,7 +3,7 @@ import { NavLink, useParams } from "react-router-dom";
 // UI
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 // components
-import ProductCard from "components/ProductCard/ProductCard";
+import ProductCard from "components/Product/ProductCard";
 export default function UserOrders() {
   const fakeData = {
     id: "212a0315-e836-4bd3-aff4-017e0c1f6066",

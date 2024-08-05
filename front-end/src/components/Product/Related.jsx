@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./Related.scss";
 // components
 
-import ProductCard from "../ProductCard/ProductCard";
+import ProductCard from "../Product/ProductCard";
 export default function Related(props) {
   const { relatedProduct } = props;
   return (
