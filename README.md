@@ -3,4 +3,4 @@
 <p></p>front end admin is pending<p/> 
 <p></p>back end is pending<p/>
 <p>Front-end is currently deploy in </p>
-<p>deploy-demo-red.vercel.app</p>
+<p>https://deploy-demo-red.vercel.app</p>
