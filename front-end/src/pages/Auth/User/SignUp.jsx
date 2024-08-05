@@ -6,7 +6,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 // validation
 import * as Yup from "yup";
+import { useForm } from "react-hook-form";
 import DefaultButton from "components/Button/DefaultButton";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { userSignUpSchema } from "utils/Validators/validateSchema";
+import CustomButton from "components/Button/CustomButton";
 export default function SignUp() {
   const navigate = useNavigate();
   // state
@@ -14,42 +18,16 @@ export default function SignUp() {
     password: false,
     confirm_password: false,
   });
-  const [errMsg, setErrMsg] = useState({});
-  const [userRegisterForm, setUserRegisterForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(userSignUpSchema),
   });
-  const registerSchema = Yup.object({
-    name: Yup.string().required("Required"),
-    email: Yup.string().required("Required").email("Invalid email"),
-    password: Yup.string()
-      .required("Required")
-      .min(8, "Password must at least 8 characters"),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password")],
-      "Confirm password must match"
-    ),
-  });
-  const handleOnChangeForm = (event) => {
-    const { name, value } = event.target;
-    setUserRegisterForm({
-      ...userRegisterForm,
-      [name]: value,
-    });
-  };
-  const handleSignUp = async () => {
-    try {
-      await registerSchema.validate(userRegisterForm, { abortEarly: false });
-      navigate("/login");
-    } catch (error) {
-      const newErr = {};
-      error.inner.forEach((err) => {
-        newErr[err.path] = err.message;
-      });
-      setErrMsg(newErr);
-    }
+  const handleSignUp = (signUpForm) => {
+    console.log(signUpForm);
+    navigate("/login");
   };
   return (
     <div
@@ -59,39 +37,39 @@ export default function SignUp() {
       <div className="absolute w-[80%] md:w-[60%] h-auto p-[20px] flex flex-col items-center gap-3 bg-white shadow-md rounded-xl lg:w-[40%]">
         <h5 className="capitalize">Sign Up</h5>
         <TextField
-          error={errMsg.name ? true : false}
-          helperText={`${errMsg.name ? errMsg.name : ""}`}
           className="w-full mb-3"
           size="small"
           id="outlined-basic"
           label="User Name"
           variant="outlined"
           name="name"
-          onChange={handleOnChangeForm}
+          error={!!errors.name}
+          helperText={errors.name ? errors.name?.message : ""}
+          {...register("name")}
         />
         <TextField
-          error={errMsg.email ? true : false}
-          helperText={`${errMsg.email ? errMsg.email : ""}`}
           className="w-full mb-3"
           size="small"
           id="outlined-basic"
           label="Email"
           variant="outlined"
           name="email"
-          onChange={handleOnChangeForm}
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email ? errors.email?.message : ""}
         />
         <span className="flex flex-row w-full relative">
           <TextField
-            error={errMsg.password ? true : false}
-            helperText={`${errMsg.password ? errMsg.password : ""}`}
             className="w-full mb-3"
             id="outlined-basic"
             size="small"
             label="Password"
             variant="outlined"
             name="password"
+            {...register("password")}
+            error={!!errors.password}
+            helperText={errors.password ? errors.password?.message : ""}
             type={showPassword.password ? "text" : "password"}
-            onChange={handleOnChangeForm}
           />
           <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
             {!showPassword.password ? (
@@ -111,18 +89,18 @@ export default function SignUp() {
         </span>
         <span className="flex flex-row w-full relative">
           <TextField
-            error={errMsg.confirmPassword ? true : false}
-            helperText={`${
-              errMsg.confirmPassword ? errMsg.confirmPassword : ""
-            }`}
             className="w-full mb-3"
             id="outlined-basic"
             size="small"
             label="Confirm Password"
             variant="outlined"
             name="confirmPassword"
+            error={!!errors.confirmPassword}
+            helperText={
+              errors.confirmPassword ? errors.confirmPassword?.message : ""
+            }
+            {...register("confirmPassword")}
             type={showPassword.confirm_password ? "text" : "password"}
-            onChange={handleOnChangeForm}
           />
           <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
             {!showPassword.confirm_password ? (
@@ -140,7 +118,13 @@ export default function SignUp() {
             )}
           </div>
         </span>
-        <DefaultButton
+        <CustomButton
+          type={"primary"}
+          content={"Sign up"}
+          handleClick={handleSubmit(handleSignUp)}
+          sx={{ width: "100%" }}
+        ></CustomButton>
+        {/* <DefaultButton
           content="Sign up"
           textColor="white"
           textColorOnHover="#ff6d00"
@@ -151,7 +135,7 @@ export default function SignUp() {
             textTransform: "none",
           }}
           handleClick={handleSignUp}
-        ></DefaultButton>
+        ></DefaultButton> */}
         <div className="w-[80%] mt-2 text-center">
           <NavLink
             className="navlink-hover m-0 italic text-[16px]"
