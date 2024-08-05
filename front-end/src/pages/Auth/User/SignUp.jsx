@@ -6,11 +6,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 // validation
 import * as Yup from "yup";
+import DefaultButton from "components/Button/DefaultButton";
 export default function SignUp() {
   const navigate = useNavigate();
   // state
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirm_password: false,
+  });
   const [errMsg, setErrMsg] = useState({});
   const [userRegisterForm, setUserRegisterForm] = useState({
     name: "",
@@ -51,10 +54,10 @@ export default function SignUp() {
   return (
     <div
       style={{ backgroundColor: "rgba(158, 81, 59, 0.05)" }}
-      className="p-[25px] pb-[16%] pt-[10%]"
+      className="relative w-full h-[90vh] flex flex-col items-center justify-center"
     >
-      <div className="p-[20px] flex flex-col items-center gap-3 bg-white shadow-md  rounded-xl">
-        <h5 className="uppercase">Sign Up</h5>
+      <div className="absolute w-[80%] md:w-[60%] h-auto p-[20px] flex flex-col items-center gap-3 bg-white shadow-md rounded-xl lg:w-[40%]">
+        <h5 className="capitalize">Sign Up</h5>
         <TextField
           error={errMsg.name ? true : false}
           helperText={`${errMsg.name ? errMsg.name : ""}`}
@@ -87,14 +90,22 @@ export default function SignUp() {
             label="Password"
             variant="outlined"
             name="password"
-            type={showPassword ? "text" : "password"}
+            type={showPassword.password ? "text" : "password"}
             onChange={handleOnChangeForm}
           />
           <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
-            {!showPassword ? (
-              <FaEye onClick={() => setShowPassword(true)} />
+            {!showPassword.password ? (
+              <FaEye
+                onClick={() =>
+                  setShowPassword({ ...showPassword, password: true })
+                }
+              />
             ) : (
-              <FaEyeSlash onClick={() => setShowPassword(false)} />
+              <FaEyeSlash
+                onClick={() =>
+                  setShowPassword({ ...showPassword, password: false })
+                }
+              />
             )}
           </div>
         </span>
@@ -110,29 +121,42 @@ export default function SignUp() {
             label="Confirm Password"
             variant="outlined"
             name="confirmPassword"
-            type={showConfirmPassword ? "text" : "password"}
+            type={showPassword.confirm_password ? "text" : "password"}
             onChange={handleOnChangeForm}
           />
           <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
-            {!showConfirmPassword ? (
-              <FaEye onClick={() => setShowConfirmPassword(true)} />
+            {!showPassword.confirm_password ? (
+              <FaEye
+                onClick={() =>
+                  setShowPassword({ ...showPassword, confirm_password: true })
+                }
+              />
             ) : (
-              <FaEyeSlash onClick={() => setShowConfirmPassword(false)} />
+              <FaEyeSlash
+                onClick={() =>
+                  setShowPassword({ ...showPassword, confirn_password: false })
+                }
+              />
             )}
           </div>
         </span>
-        <div
-          onClick={() => handleSignUp()}
-          className="w-full pl-[20px] pr-[20px] pt-[10px] pb-[10px] text-center border border-gray-300 rounded-xl"
-          style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        >
-          <button className="uppercase font-semibold">Create</button>
-        </div>
+        <DefaultButton
+          content="Sign up"
+          textColor="white"
+          textColorOnHover="#ff6d00"
+          primaryColor="#ff6d00"
+          secondaryColor="#fff"
+          styles={{
+            border: "solid 1px #ff6d00",
+            textTransform: "none",
+          }}
+          handleClick={handleSignUp}
+        ></DefaultButton>
         <div className="w-[80%] mt-2 text-center">
           <NavLink
             className="navlink-hover m-0 italic text-[16px]"
             to="/login"
-            style={{ "--line-hover": "rgb(241, 218, 178)" }}
+            style={{ "--line-hover": "var(--line-hover-primary)" }}
           >
             Have an account ?
           </NavLink>

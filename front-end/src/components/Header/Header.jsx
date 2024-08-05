@@ -1,9 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 // components
-import Navbar from "../../shared/Navbar/Navbar";
-// styles
-import "./Header.scss";
+import Navbar from "shared/Navbar/Navbar";
 // UI & icon
 import Logo from "../../assets/Pictures/Logo2.png";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -18,14 +16,13 @@ const Header = () => {
     window.scroll(0, 0);
     setShowNav(false);
   }, []);
-  console.log(">>> check render from home");
   return (
     <>
-      <div className="header flex flex-row items-center justify-between border-[1px] fixed z-2 bg-[#fff] w-full pr-[20px] pl-[20px] pb-[5px] pt-[5px] border-none">
+      <div className="shadow-sm flex flex-row items-center justify-between fixed z-2 bg-[#fff] w-full px-4 py-1 border-none lg:gap-[20px]">
         <div className="menu">
           {!showNav ? (
             <BiMenuAltLeft
-              className="lg:hidden cursor-pointer transition ease-in-out delay-150"
+              className="cursor-pointer transition ease-in-out delay-150 lg:hidden "
               size={30}
               onClick={() => {
                 setShowNav(true);
@@ -33,7 +30,7 @@ const Header = () => {
             />
           ) : (
             <HiOutlineXMark
-              className="lg:hidden cursor-pointer transition ease-in-out delay-150"
+              className=" cursor-pointer transition ease-in-out delay-150 lg:hidden"
               size={30}
               onClick={() => {
                 setShowNav(false);
@@ -49,11 +46,7 @@ const Header = () => {
             ></img>
           </NavLink>
         </div>
-        <Navbar
-          className="!backdrop-blur-0 bg-white"
-          show={showNav}
-          setShow={setShowNav}
-        ></Navbar>
+        <Navbar show={showNav} setShow={setShowNav}></Navbar>
         <div className="flex flex-row gap-[25px] justify-start items-center text-[25px]">
           <span className="relative ">
             <p

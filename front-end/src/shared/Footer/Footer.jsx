@@ -74,7 +74,7 @@ export default function Footer() {
   ];
   return (
     <div className="h-full" style={{ backgroundColor: "rgb(241, 218, 178)" }}>
-      <div className="top-8 left-8 flex flex-col  gap-9 pt-3 pb-3 pl-5 pr-5">
+      <div className="top-8 left-8 flex flex-col  gap-9 pt-3 pb-3 pl-5 pr-5 lg:mx-16">
         <div className="flex flex-col items-center justify-between max-w-[350px] w-[250px] h-[150px] translate-x-[-20px] md:ml-0 md:mr-0">
           <img className="w-full h-full object-scale-down" src={Logo}></img>
           <p className="text-[18px] text-center italic ">
@@ -98,7 +98,7 @@ export default function Footer() {
                           key={item.id}
                           to={item.direction}
                           className="text-[18px] mb-1 no-underline text-black capitalize cursor-pointer navlink-hover w-fit"
-                          style={{ "--line-hover": "black" }}
+                          style={{ "--line-hover": "var(--line-hover-black)" }}
                         >
                           {item.name}
                         </NavLink>

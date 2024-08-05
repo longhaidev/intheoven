@@ -25,6 +25,7 @@ export default function DefaultButton(props) {
   });
 
   const ColorButton = styled(Button)(() => ({
+    fontFamily: "Alegreya",
     border: `1px solid ${theme.palette.primary.main}`,
     color: textColor ?? "#ff6d00",
     backgroundColor: theme.palette.primary.main,

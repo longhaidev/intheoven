@@ -14,7 +14,8 @@ import categoryData from "../../assets/FakeData/categories.json";
 import raw from "../../assets/FakeData/products.json";
 // redux
 import { useSelector } from "react-redux";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductCard from "../../components/Product/ProductCard";
+import PageDirect from "components/PageDirect/PageDirect";
 export default function Product() {
   const responsiveCarousel = {
     desktop: {
@@ -46,6 +47,7 @@ export default function Product() {
     window.scrollTo(0, 0);
   }, [category]);
 
+  // call api later
   const getProductList = () => {
     raw.map((productItem) => {
       if (productItem.category === category) {
@@ -61,55 +63,8 @@ export default function Product() {
 
   return (
     <div>
-      <div className=" bg-black relative">
-        <div className="opacity-40 h-[170px]">
-          <img
-            draggable={false}
-            className="h-full w-full object-cover select-none"
-            src={bannerCategory}
-          ></img>
-        </div>
-        <div className="flex flex-col absolute w-full h-full justify-center items-center top-0">
-          <div className="flex flex-col items-center">
-            <h3
-              className="text-white text-[24px] capitalize font-semibold"
-              draggable={false}
-            >
-              {category}
-            </h3>
-            <span className=" text-white text-[20px] flex flex-row gap-2 ">
-              <NavLink
-                draggable={false}
-                to="/"
-                className="text-white  no-underline capitalize mb-2"
-              >
-                Home
-              </NavLink>
-              &gt;
-              <NavLink
-                draggable={false}
-                to="/menus/all"
-                className="text-white  no-underline capitalize"
-              >
-                Menu
-              </NavLink>
-              &gt;
-              <NavLink
-                draggable={false}
-                to="/menus/all"
-                className="text-white  no-underline capitalize"
-              >
-                {category}
-              </NavLink>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div
-        style={{ backgroundColor: "rgb(241, 218, 178)" }}
-        className="sticky top-[55px] pt-[8px] pb-[6px] z-[1] md:pt-[20px] md:pb-[18px]"
-      >
+      <PageDirect bgImg={bannerCategory} pageName={category}></PageDirect>
+      <div className="bg-color-secondary sticky sticky-element-from-header pt-2 pb-[6px] z-[1] ">
         <Carousel
           responsive={responsiveCarousel}
           swipeable={true}
@@ -135,37 +90,49 @@ export default function Product() {
                   draggable={false}
                   key={categoryItem.id}
                   to={categoryItem.link}
+                  className="flex flex-col items-center"
                 >
-                  <div className="w-[25px] pt-[5px] ml-auto mr-auto flex flex-col items-center select-none capitalize text-[14px] md:w-[40px]">
+                  <div className="w-[25px] flex flex-col items-center select-none capitalize md:w-[30px] lg:w-[35px]">
                     <img
                       className="w-full h-full object-cover"
                       src={categoryItem.icon}
                       draggable={false}
                     ></img>
-                    {categoryItem.name}
+                    <p className="font-text-secondary m-0">
+                      {categoryItem.name}
+                    </p>
                   </div>
                 </NavLink>
               );
             })}
         </Carousel>
       </div>
-
       {/* Products */}
-      <div className="mt-[20px] mb-[20px] flex flex-col items-center relative z-[0]  md:flex-row md:flex-wrap md:gap-1 md:w-max-[900px] md:w-[750px] md:mr-auto md:ml-auto md:justify-around md:mb-0 lg:gap-14 lg:w-max-[1200px] lg:ml-auto lg:mr-auto lg:w-[1200px] lg:justify-normal lg:pl-[20px]">
-        <h2 className="text-left w-full pl-[9%] pr-[9%] capitalize text-[24px] font-semibold">
-          {category}
-        </h2>
-        {products &&
-          products.length > 0 &&
-          products.map((productItem) => {
-            return (
-              <ProductCard
-                key={productItem.id}
-                category={category}
-                productItem={productItem}
-              ></ProductCard>
-            );
-          })}
+      <div
+        id="product_wrapper"
+        className="mt-8 mb-8 flex flex-col items-center relative z-[0] lg:mt-12"
+      >
+        <div id="product_container" className="w-[81%] md:w-[93%]">
+          {/* Title */}
+          <h2 className="text-left capitalize font-big-heading font-semibold">
+            {category}
+          </h2>
+          {/* Product list */}
+          <div id="product_list" className="mt-6">
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-11 ">
+              {products &&
+                products.length > 0 &&
+                products.map((productItem) => {
+                  return (
+                    <ProductCard
+                      category={category}
+                      productItem={productItem}
+                    ></ProductCard>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

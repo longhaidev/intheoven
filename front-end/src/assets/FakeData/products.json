@@ -6,6 +6,7 @@
             {
                 "id": "212a0315-e836-4bd3-aff4-017e0c1f6060",
                 "name": "Baguette",
+                "product_category":"bread",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -26,6 +27,7 @@
             {
                 "id": "212a0315-e836-4bd3-adf4-017e0c1f6060",
                 "name": "Chocolate Dipped Belgium Waffle",
+                "product_category":"bread",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -47,6 +49,7 @@
             {
                 "id": "212a0315-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Salt & Butter Roll",
+                "product_category":"bread",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -68,6 +71,7 @@
             {
                 "id": "212a0315-e836-4bd3-aff4-017e0c1f6040",
                 "name": "Raisin Bread",
+                "product_category":"bread",
                 "nutrition": 
                     {
                         "calories": 280,
@@ -89,6 +93,7 @@
             {
                 "id": "212a0315-e836-4bd3-aff4-517e0c1f6060",
                 "name": "Croque Monsieur",
+                "product_category":"bread",
                 "nutrition": 
                     {
                         "calories": 680,
@@ -110,6 +115,7 @@
             {
                 "id": "212a0315-e836-4bd3-aff4-017e0c1f8060",
                 "name": "Milk Cream Bread",
+                "product_category":"bread",
                 "nutrition": 
                     {
                         "calories": 180,
@@ -137,6 +143,7 @@
             {
                 "id": "212a0315-t436-4bd3-aff4-017e0c1f6060",
                 "name": "Caramel Apple Pie",
+                "product_category":"pastry",
                 "nutrition": 
                     {
                         "calories": 250,
@@ -158,6 +165,7 @@
             {
                 "id": "252b0315-e836-4bd3-adf4-017e0c1f6060",
                 "name": "Almond Croissant",
+                "product_category":"pastry",
                 "nutrition": 
                     {
                         "calories": 610,
@@ -179,6 +187,7 @@
             {
                 "id": "218a0315-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Fruit Pastry",
+                "product_category":"pastry",
                 "nutrition": 
                     {
                         "calories": 410,
@@ -200,6 +209,7 @@
             {
                 "id": "312a0315-e836-4bd3-aff4-017e0c1f6040",
                 "name": "Chocolate Croissant",
+                "product_category":"pastry",
                 "nutrition": 
                     {
                         "calories": 480,
@@ -221,6 +231,7 @@
             {
                 "id": "412a0315-e836-4bd3-aff4-517e0c1f6060",
                 "name": "Spinach Fate Danish",
+                "product_category":"pastry",
                 "nutrition": 
                     {
                         "calories": 320,
@@ -240,6 +251,7 @@
             {
                 "id": "612a0315-e836-4bd3-aff4-017e0c1f8060",
                 "name": "Yuzu Pie",
+                "product_category":"pastry",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -267,6 +279,7 @@
             {
                 "id": "215a0315-t436-4bd3-aff4-017e0c1f6060",
                 "name": "Peach Cream Piece",
+                "product_category":"cake",
                 "nutrition": 
                     {
                         "calories": 260,
@@ -288,6 +301,7 @@
             {
                 "id": "252b0315-e836-5ed3-adf4-017e0c1f6060",
                 "name": "Cloud Piece Cake",
+                "product_category":"cake",
                 "nutrition": 
                     {
                         "calories": 340,
@@ -309,6 +323,8 @@
             {
                 "id": "218a0365-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Chocolate Cloud Piece Cake",
+
+                "product_category":"cake",
                 "nutrition": 
                     {
                         "calories": 340,
@@ -336,6 +352,7 @@
             {
                 "id": "215a0315-t436-4yd3-aff4-017e0c1f6060",
                 "name": "Caprese Sandwich",
+                "product_category":"sandwich",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -357,6 +374,7 @@
             {
                 "id": "252b0315-e836-5ed3-ady7-017e0c1f6060",
                 "name": "Turkey & Cheese",
+                "product_category":"sandwich",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -378,6 +396,7 @@
             {
                 "id": "218a0390-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Tuna Salad Sandwich",
+                "product_category":"sandwich",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -405,6 +424,7 @@
             {
                 "id": "215h0315-t436-4yd3-aff4-017e0c1f6060",
                 "name": "Ice Lavender Latte",
+                "product_category":"coffee",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -426,6 +446,7 @@
             {
                 "id": "252b0615-e836-5ed3-ady7-017e0c1f6060",
                 "name": "Ice Cafe Latte",
+                "product_category":"coffee",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -447,6 +468,7 @@
             {
                 "id": "245a0390-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Cappuccino",
+                "product_category":"coffee",
                 "nutrition": 
                     {
                         "calories": 290,
@@ -474,6 +496,7 @@
             {
                 "id": "215h0365-t436-4yd3-aff4-017e0c1f6060",
                 "name": "Matcha Latte",
+                "product_category":"tea",
                 "nutrition": 
                     {
                         "calories": 220,
@@ -495,6 +518,7 @@
             {
                 "id": "252b0615-t736-5ed3-ady7-017e0c1f6060",
                 "name": "Iced Green Tea",
+                "product_category":"tea",
                 "nutrition": 
                     {
                         "calories": 60,
@@ -516,6 +540,7 @@
             {
                 "id": "245a4390-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Chamomile Tea",
+                "product_category":"tea",
                 "nutrition": 
                     {
                         "calories": 60,
@@ -543,6 +568,7 @@
             {
                 "id": "215h0388-t436-4yd3-aff4-017e0c1f6060",
                 "name": "Mango Smoothie",
+                "product_category":"blended",
                 "nutrition": 
                     {
                         "calories": 250,
@@ -564,6 +590,7 @@
             {
                 "id": "772b0615-e836-5ed3-ady7-017e0c1f6060",
                 "name": "Strawberry Smoothie",
+                "product_category":"blended",
                 "nutrition": 
                     {
                         "calories": 230,
@@ -585,6 +612,7 @@
             {
                 "id": "945a0390-e836-4bd3-aff4-017e0c1f6066",
                 "name": "Mocha Frappe",
+                "product_category":"blended",
                 "nutrition": 
                     {
                         "calories": 330,

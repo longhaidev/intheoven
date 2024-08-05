@@ -10,11 +10,11 @@ export default function NewsLetter() {
         backgroundImage: `url('${bgImg}')`,
       }}
     >
-      <div className="text-[32px] text-center pl-[5px] pr-[5px] uppercase md:text-5xl">
+      <div className="text-[32px] text-center pl-[5px] pr-[5px] uppercase md:text-[36px]">
         join our new setter
       </div>
       <div className="md:w-[60%]">
-        <p className="text-[18px] pl-[30px] pr-[30px] md:text-[20px]">
+        <p className="text-[18px] pl-[30px] pr-[30px] md:text-[18px]">
           Get the freshest Magnolia Bakery updates and offers right to your
           inbox! Plus, enjoy 10% off on your birthday when you share the date
           with us!

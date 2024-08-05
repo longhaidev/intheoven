@@ -27,18 +27,22 @@ export default function Policy() {
     },
   ];
   return (
-    <div>
-      <PageDirect pageName="Policy"></PageDirect>
-      <div className="p-[20px]">
-        {policyData &&
-          policyData.map((section) => {
-            return (
-              <>
-                <h3 className="text-[24px]">{section.title}</h3>
-                <p className="text-[16px]">{section.descript}</p>
-              </>
-            );
-          })}
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full">
+        <PageDirect pageName="Policy"></PageDirect>
+      </div>
+      <div className="w-[81%] mt-[6%] mb-[3%]">
+        <div className="">
+          {policyData &&
+            policyData.map((section) => {
+              return (
+                <>
+                  <h3 className="text-[24px]">{section.title}</h3>
+                  <p className="text-[18px]">{section.descript}</p>
+                </>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

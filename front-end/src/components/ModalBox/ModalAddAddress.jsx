@@ -26,13 +26,13 @@ export default function ModalAddAddress(props) {
     <div
       className={`fixed ${
         show ? "show-overlay" : "hide-overlay"
-      } top-0 left-0 h-full z-[99] bg-[linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))] p-4`}
+      } top-0 left-0 h-full z-[99] bg-[linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))] p-4 md:w-full`}
     >
-      <div className="w-full h-full flex flex-col justify-center">
+      <div className="w-full h-full flex flex-col justify-center md:flex-row md:items-center">
         <div
           className={`${
             show ? "show-box" : "hide-box"
-          } w-full bg-white rounded-lg shadow-md p-3`}
+          } w-full bg-white rounded-lg shadow-md p-3 md:w-[70%] md:h-fit lg:w-[50%]`}
         >
           <div>
             <h3 className="text-[22px] mb-3">Create new address</h3>

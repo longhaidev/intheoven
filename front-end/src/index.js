@@ -14,27 +14,26 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 // pages
 import Layout from "./Layout";
-import Home from "./pages/Home/Home";
-import Product from "./pages/Menu/Product";
-import AllProduct from "./pages/Menu/AllProduct";
-import ErrorRoute from "./pages/PageNotFound/ErrorRoute";
-import ProductDetail from "./pages/Menu/ProductDetail";
-import Cart from "./pages/Cart/Cart";
-import Checkout from "./pages/Checkout/Checkout";
-import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/SignUp";
-import ForgotPassword from "./pages/Auth/ForgotPassword";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import Policy from "./pages/Policy/Policy";
-import Contact from "./pages/Contact/Contact";
-import ProtectedRoutes from "./untils/ProtectedRoutes";
-import UserProfile from "./pages/Auth/User/UserProfile";
-import UserOrdered from "./pages/Auth/User/UserOrdered";
-import UserLayout from "./pages/Auth/User/UserLayout";
-import UserFavorite from "./pages/Auth/User/UserFavorite";
-import ChangePassword from "./pages/Auth/User/ChangePassword";
-import UserAddress from "./pages/Auth/User/UserAddress";
-
+import Home from "pages/Home/Home";
+import Product from "pages/Menu/Product";
+import AllProduct from "pages/Menu/AllProduct";
+import ErrorRoute from "pages/PageNotFound/ErrorRoute";
+import ProductDetail from "pages/Order/ProductDetail";
+import Cart from "pages/Cart/Cart";
+import Checkout from "pages/Checkout/Checkout";
+import Login from "pages/Auth/User/Login";
+import SignUp from "pages/Auth/User/SignUp";
+import ForgotPassword from "pages/Auth/User/ForgotPassword";
+import AboutUs from "pages/AboutUs/AboutUs";
+import Policy from "pages/Policy/Policy";
+import Contact from "pages/Contact/Contact";
+import ProtectedRoutes from "untils/ProtectedRoutes";
+import UserProfile from "pages/Auth/UserAccount/UserProfile";
+import UserOrders from "pages/Auth/UserAccount/UserOrders";
+import UserLayout from "pages/Auth/UserAccount/UserLayout";
+import UserFavorite from "pages/Auth/UserAccount/UserFavorite";
+import ChangePassword from "pages/Auth/UserAccount/ChangePassword";
+import UserAddress from "pages/Auth/UserAccount/UserAddress";
 // main
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // routes
@@ -118,7 +117,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/user/order/:status",
-                element: <UserOrdered></UserOrdered>,
+                element: <UserOrders></UserOrders>,
               },
             ],
           },

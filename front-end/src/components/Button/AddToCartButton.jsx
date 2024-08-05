@@ -38,6 +38,7 @@ export default function AddToCartButton(props) {
   });
 
   const ColorButton = styled(LoadingButton)(() => ({
+    fontFamily: "Alegreya",
     border: `1px solid ${theme.palette.primary.main}`,
     color: "#ff6d00",
     "&:hover": {

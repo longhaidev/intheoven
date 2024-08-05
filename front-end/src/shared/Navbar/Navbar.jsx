@@ -1,12 +1,15 @@
+import { useState } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { Button, Menu, MenuItem } from "@mui/material";
 // UI & Icon
 import { FaRegUserCircle } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 import { PiBreadLight } from "react-icons/pi";
 import { CiSettings } from "react-icons/ci";
 import { CiLogout } from "react-icons/ci";
+import { RiArrowDropDownLine } from "react-icons/ri";
 // style
 import "./Navbar.scss";
 // redux
@@ -17,35 +20,24 @@ import { doLogOut } from "../../redux/userSlice";
 import Language from "./Language";
 
 const Navbar = (props) => {
-  const navItemStyle =
-    "font-[Alegreya] text-[20px] text-black no-underline capitalize mt-[5px] mb-[5px] w-full border-b-2 border-gray-300 leading-9 lg:border-0 lg:w-fit";
-  // redux
-  const { show, setShow } = props;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const user = useSelector((state) => state.user.account);
-  // state
-  const userOptions = [
-    {
-      id: 1,
-      name: "profile",
-      icon: <CiUser></CiUser>,
-      link: "/user/account/profile",
+  const navItemStyle = {
+    fontFamily: "Alegreya",
+    fontSize: "18px",
+    color: "#000",
+    textTransform: "capitalize",
+    marginTop: "5px",
+    marginBottom: "5px",
+    paddingLeft: "0px",
+    display: "block",
+    textAlign: "left",
+    width: "100%",
+    "@media (min-width:1024px)": {
+      padding: "0px",
+      textAlign: "center",
+      marginTop: "0px",
+      marginBottom: "0px",
     },
-    {
-      id: 2,
-      name: "my orders",
-      icon: <PiBreadLight></PiBreadLight>,
-      link: "/user/order",
-    },
-    {
-      id: 3,
-      name: "setting",
-      icon: <CiSettings></CiSettings>,
-      link: "/user/setting",
-    },
-  ];
+  };
   const navBarItems = [
     {
       id: 1,
@@ -121,79 +113,161 @@ const Navbar = (props) => {
     },
     {
       id: 6,
-      navItem: "Contact",
-      link: "/contact",
-      subNav: [],
-    },
-    {
-      id: 7,
       navItem: "Policy",
       link: "/policy",
       subNav: [],
     },
   ];
+  const USER_PROFILE_LINK = "/user/account/profile";
+  const USER_ORDER_LINK = "/user/order/all";
+  // redux
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const user = useSelector((state) => state.user.account);
+  // state
+  const { show, setShow } = props;
+  const [anchorEls, setAnchorEls] = useState({});
+  // event handle
+  const handleClickNavMenu = (event, id) => {
+    setAnchorEls((prev) => ({ ...prev, [id]: event.currentTarget }));
+  };
+  const handleCloseNavMenu = (id) => {
+    setAnchorEls((prev) => ({ ...prev, [id]: null }));
+    setShow(false);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClickUserMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setShow(false);
+    setAnchorEl(null);
+  };
   const handleClickLogOut = () => {
     dispatch(doLogOut());
-    setShow(false);
     navigate("/");
   };
   return (
     <div
-      className={` flex flex-col justify-between fixed top-[3.49rem] z-0 bg-white border-0 border-none w-full h-[calc(100%-3.49rem)] p-[16px] ${
+      className={` flex flex-col justify-between fixed top-[3.49rem] z-0 bg-white border-0 border-none w-full h-[calc(100%-3.49rem)] p-[16px] cap ${
         show ? "active" : "unactive"
-      } lg:relative lg:top-0 lg:!left-[0%]  lg:flex-row lg:mb-0 lg:justify-between `}
+      } lg:relative lg:top-0 lg:!left-[0%]  lg:flex-row lg:mb-0 lg:justify-end lg:p-0 lg:gap-[5%]`}
     >
-      <div className=" flex flex-col p-[5px] lg:flex-row lg:gap-[40px] lg:text-[20px] lg:justify-end cap">
-        {navBarItems &&
-          navBarItems.map((item) => {
-            return (
-              <>
-                {item.subNav.length <= 0 && (
-                  <NavLink
-                    key={item.id}
-                    to={item.link}
-                    onClick={() => setShow(false)}
-                    className={navItemStyle}
+      <div className=" flex flex-col p-[5px] lg:flex-row lg:gap-[40px] lg:text-[16px] lg:justify-end cap">
+        {navBarItems.map((item) => {
+          const open = Boolean(anchorEls[item.id]);
+          return (
+            <div
+              key={item.id}
+              className="border-b border-b-gray-300 lg:border-none lg:text-center"
+            >
+              {item.subNav.length > 0 ? (
+                <>
+                  <Button
+                    id={`button-${item.id}`}
+                    aria-controls={open ? `menu-${item.id}` : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={(event) => handleClickNavMenu(event, item.id)}
+                    sx={navItemStyle}
+                    className="lg:!pl-[8px] lg:text-center"
                   >
-                    {item.navItem}
-                  </NavLink>
-                )}
-                {item.subNav.length > 0 && (
-                  <NavDropdown
-                    key={item.id}
-                    title={item.navItem}
-                    className={navItemStyle}
+                    <span className="flex flex-row gap-2 items-center">
+                      {item.navItem}
+                      <RiArrowDropDownLine></RiArrowDropDownLine>
+                    </span>
+                  </Button>
+                  <Menu
+                    id={`menu-${item.id}`}
+                    anchorEl={anchorEls[item.id]}
+                    open={open}
+                    onClose={() => handleCloseNavMenu(item.id)}
+                    MenuListProps={{
+                      "aria-labelledby": `button-${item.id}`,
+                    }}
+                    sx={{ display: "block", paddingLeft: "0px", width: "100%" }}
                   >
-                    {item.subNav &&
-                      item.subNav.length &&
-                      item.subNav.map((dropdownItem) => {
-                        return (
-                          <NavLink
-                            key={dropdownItem.id}
-                            to={dropdownItem.sublink}
-                            onClick={() => {
-                              setShow(false);
-                            }}
-                            className="block pl-[14px] pb-[5px] text-[16px] hover:!text-[#ff6d00]"
-                          >
-                            {dropdownItem.name}
-                          </NavLink>
-                        );
-                      })}
-                  </NavDropdown>
-                )}
-              </>
-            );
-          })}
+                    {item.subNav.map((subItem) => (
+                      <MenuItem
+                        key={subItem.id}
+                        onClick={() => handleCloseNavMenu(item.id)}
+                        sx={{
+                          fontSize: "16px!important",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        <NavLink to={subItem.sublink}>{subItem.name}</NavLink>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </>
+              ) : (
+                <Button sx={navItemStyle} onClick={() => setShow(false)}>
+                  <NavLink to={item.link}>{item.navItem}</NavLink>
+                </Button>
+              )}
+            </div>
+          );
+        })}
       </div>
       {/* user */}
-      <div className="flex flex-col-reverse lg:flex lg:flex-row lg:items-center lg:gap-4">
+      <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:gap-4">
         <div className="mt-[20px] flex flex-row gap-2 items-center lg:mt-0 ">
-          <FaRegUserCircle className="text-3xl lg:text-xl" />
+          <FaRegUserCircle size={20} className="text-[18px]" />
           <span className="font-bold text-lg flex flex-row items-center lg:text-[12px]">
             {isAuthenticated ? (
               <>
-                <NavDropdown
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClickUserMenu}
+                  className="text-black !normal-case font-primary !text-[18px]"
+                >
+                  <span className="flex flex-row gap-2 items-center">
+                    {`Hello ${user && user.username ? user.username : "User"}`}
+                    <RiArrowDropDownLine></RiArrowDropDownLine>
+                  </span>
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleCloseUserMenu}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <NavLink
+                      to={USER_PROFILE_LINK}
+                      className="flex flex-row gap-2 items-center"
+                    >
+                      <CiSettings></CiSettings>
+                      Account
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <NavLink
+                      to={USER_ORDER_LINK}
+                      className="flex flex-row gap-2 items-center"
+                    >
+                      <PiBreadLight></PiBreadLight>My order
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClickLogOut();
+                    }}
+                    className="flex flex-row gap-2 items-center"
+                  >
+                    <CiLogout></CiLogout>Logout
+                  </MenuItem>
+                </Menu>
+                {/* <NavDropdown
                   className=" capitalize font-[Alegreya] m-0 text-sm w-fit"
                   title={`Hello ${
                     user && user.username ? user.username : "User"
@@ -216,40 +290,39 @@ const Navbar = (props) => {
                     })}
                   <NavDropdown.Item onClick={() => handleClickLogOut()}>
                     <NavLink
-                      className="flex flex-row gap-2 cap-2 items-center capitalize  hover:!text-[#ff6d00]"
+                      className="flex flex-row gap-2 cap-2 items-center capitalize hover:!text-[#ff6d00]"
                       onClick={() => setShow(false)}
                     >
                       <CiLogout></CiLogout>
                       <p className="m-0">Logout</p>
                     </NavLink>
                   </NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
               </>
             ) : (
-              <>
-                <p className="  font-[Alegreya] m-0 border-r-2 border-gray-200 pr-1 text-sm">
-                  <NavLink
-                    className="text-[18px] lg:text-[16px]"
-                    to="/login"
-                    onClick={() => setShow(false)}
-                  >
-                    Login
-                  </NavLink>
-                </p>
-                <p className="  font-[Alegreya] m-0 pl-1 text-sm">
-                  <NavLink
-                    className="text-[18px] lg:text-[16px]"
-                    to="/sign-up"
-                    onClick={() => setShow(false)}
-                  >
-                    Sign up
-                  </NavLink>
-                </p>
-              </>
+              <span className="flex flex-row text-[18px]">
+                <NavLink
+                  className="navlink-hover border-r border-r-gray-300 pr-1"
+                  to="/login"
+                  style={{ "--line-hover": "var(--line-hover-black)" }}
+                  onClick={() => setShow(false)}
+                >
+                  Login
+                </NavLink>
+
+                <NavLink
+                  className="navlink-hover pl-1"
+                  to="/sign-up"
+                  style={{ "--line-hover": "var(--line-hover-black)" }}
+                  onClick={() => setShow(false)}
+                >
+                  Sign up
+                </NavLink>
+              </span>
             )}
           </span>
         </div>
-        <Language></Language>
+        {/* <Language></Language> */}
       </div>
     </div>
   );
