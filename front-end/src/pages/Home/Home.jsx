@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 // cpn
-import Banner from "../../components/Banner/Banner";
-import FoodSection from "../../components/FoodSection/FoodSection";
-import OurStory from "../../components/OurStory/OurStory";
+import Banner from "components/Banner/Banner";
+import FoodSection from "components/FoodSection/FoodSection";
+import OurStory from "components/OurStory/OurStory";
 
 // fake data
-import categories from "../../assets/FakeData/categories.json";
+import categories from "assets/FakeData/categories.json";
+import AllProduct from "components/Product/AllProduct";
 const Home = () => {
   const [bakeryGroup, setBakeryGroup] = useState([]);
   const [beverageGroup, setBeverageGroup] = useState([]);
@@ -59,6 +60,7 @@ const Home = () => {
           "https://breadtalkvietnam.com/wp-content/uploads/2023/06/BreadTalk-Studio_14-min-min.jpg"
         }
       ></OurStory>
+      <AllProduct></AllProduct>
     </>
   );
 };

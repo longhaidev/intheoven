@@ -2,7 +2,7 @@
 import Layout from "Layout";
 import Home from "pages/Home/Home";
 import Product from "pages/Menu/Product";
-import AllProduct from "pages/Menu/AllProduct";
+import Menu from "pages/Menu/Menu";
 import ErrorRoute from "pages/PageNotFound/ErrorRoute";
 import ProductDetail from "pages/Order/ProductDetail";
 import Cart from "pages/Cart/Cart";
@@ -33,7 +33,7 @@ export const routes = [
       },
       {
         path: "/menus/all",
-        element: <AllProduct></AllProduct>,
+        element: <Menu></Menu>,
       },
       {
         path: "/menus/:category",

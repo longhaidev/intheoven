@@ -24,55 +24,31 @@ export default function ProductDetail() {
   const [productQuantity, setProductQuantity] = useState(1);
   const [relatedProduct, setRelatedProduct] = useState([]);
   // get product
-  useEffect(() => {
-    getProductDetail();
-    switch (category) {
-      case "bread":
-        getRelatedProduct("coffee");
-        break;
-      case "pastry":
-        getRelatedProduct("blended");
-        break;
-      case "sandwich":
-        getRelatedProduct("coffee");
-        break;
-      case "cake":
-        getRelatedProduct("tea");
-        break;
-      case "tea":
-        getRelatedProduct("pastry");
-        break;
-      case "coffee":
-        getRelatedProduct("bread");
-        break;
-      case "blended":
-        getRelatedProduct("sandwich");
-        break;
-      default:
-        getRelatedProduct("coffee");
-        break;
-    }
-    window.scrollTo(0, 0);
-  }, [productId]);
-
-  const getProductDetail = () => {
-    raw.map((categoryItem) => {
-      if (categoryItem.category === category) {
-        categoryItem.products.map((product) => {
-          if (product.id === productId) {
-            setProductDetail(product);
-          }
-        });
-      }
-    });
+  const relatedProductMap = {
+    bread: "coffee",
+    pastry: "blended",
+    sandwich: "coffee",
+    cake: "tea",
+    tea: "bread",
+    coffee: "pastry",
+    blended: "cake",
   };
 
+  const getProductDetail = () => {
+    const productList = raw.find((item) => item.category === category);
+    if (productList) {
+      const product = productList.products.find(
+        (item) => item.id === productId
+      );
+      setProductDetail(product);
+    } else {
+      setProductDetail(null);
+    }
+  };
   const getRelatedProduct = (category) => {
-    raw.map((productItem) => {
-      if (productItem.category === category) {
-        setRelatedProduct(productItem.products);
-      }
-    });
+    let relatedCategory = relatedProductMap[category];
+    const relatedList = raw.find((item) => item.category === relatedCategory);
+    setRelatedProduct(relatedList.products);
   };
 
   const resetQuantity = () => {
@@ -90,8 +66,14 @@ export default function ProductDetail() {
       setProductQuantity(productQuantity - 1);
     } else return;
   };
-  console.log(">>> check render from product detail");
 
+  useEffect(() => {
+    getProductDetail();
+    getRelatedProduct(category);
+    window.scrollTo(0, 0);
+  }, [productId]);
+
+  console.log(">>> check render from product detail");
   return (
     <div className="capitalize mb-6">
       {/* direct */}

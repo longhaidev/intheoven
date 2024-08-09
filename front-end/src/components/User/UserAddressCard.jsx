@@ -1,21 +1,24 @@
 import React, { useEffect, useRef } from "react";
 import DefaultButton from "../Button/DefaultButton";
+import CustomButton from "components/Button/CustomButton";
 
 export default function UserAddressCard(props) {
-  const { isDefault } = props;
+  const { addressDetail } = props;
   const handleClick = () => {
     console.log("click");
   };
+  console.log(addressDetail);
+
   return (
-    <div className="flex flex-row justify-between items-center w-full p-1 mt-2">
+    <div className="flex flex-row justify-between items-center gap-2 w-full p-1 mt-2">
       <div id="content" className="w-full">
         <h3 className="text-[20px]">Jon stewart doe</h3>
-        {isDefault && (
+        {addressDetail.isDefault && (
           <p className="text-[12px] bg-[#ff6d00] text-white rounded-lg w-fit pl-[5px] pr-[5px]">
             Default
           </p>
         )}
-        <h2 className="text-[16px]">0123456789</h2>
+        <h2 className="text-[16px]"></h2>
         <p className="text-[14px] lg:text-[16px]">
           1600 Amphitheatre Parkway Apartment 1, 2323, 12323, Mountain View,
           United States
@@ -28,56 +31,51 @@ export default function UserAddressCard(props) {
         >
           <div id="action-group" className="flex flex-row mb-2">
             <span>
-              <DefaultButton
-                content="Edit"
-                styles={{
-                  width: "fit-content",
+              <CustomButton
+                content={"Edit"}
+                type={"secondary"}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#cae1fd",
+                    color: "#006fee",
+                    border: "none",
+                  },
+                  color: "#006fee",
                   border: "none",
-                  textTransform: "none",
-                  padding: "5px",
-                  fontSize: "16px",
                 }}
-                primaryColor="#fff"
-                textColor="#006fee"
-                textColorOnHover="#006fee"
-                secondaryColor="#cae1fd"
-              ></DefaultButton>
+              ></CustomButton>
             </span>
             <span
               className={` ${
-                isDefault ? " pointer-events-none opacity-45" : ""
+                addressDetail.isDefault ? " pointer-events-none opacity-45" : ""
               }`}
               onClick={handleClick}
             >
-              <DefaultButton
-                content="Delete"
-                styles={{
-                  width: "fit-content",
+              <CustomButton
+                content={"Delete"}
+                type={"secondary"}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#f3126033",
+                    color: "#b91c1c",
+                    border: "none",
+                  },
+                  color: "#b91c1c",
                   border: "none",
-                  textTransform: "none",
-                  padding: "5px",
-                  fontSize: "16px",
                 }}
-                primaryColor="#fff"
-                textColor="#b91c1c"
-                textColorOnHover="#b91c1c"
-                secondaryColor="#f3126033"
-              ></DefaultButton>
+              ></CustomButton>
             </span>
           </div>
           <div
-            className={`${isDefault ? "pointer-events-none opacity-45" : ""}`}
+            className={`w-full ${
+              addressDetail.isDefault ? "pointer-events-none opacity-45" : ""
+            }`}
           >
-            <DefaultButton
-              content="Set as default"
-              primaryColor="#fff"
-              secondaryColor="#ff6d00"
-              styles={{
-                border: "solid 1px #ff6d00",
-                textTransform: "none",
-                fontSize: "16px",
-              }}
-            ></DefaultButton>
+            <CustomButton
+              type={"secondary"}
+              content={"Set as default"}
+              sx={{ width: "100%" }}
+            ></CustomButton>
           </div>
         </div>
       </div>

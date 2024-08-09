@@ -1,26 +1,40 @@
 import React, { useState } from "react";
 import "./ModalAddAddress.scss";
 import { TextField } from "@mui/material";
-import DefaultButton from "../Button/DefaultButton";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import CustomButton from "components/Button/CustomButton";
+// validate
+import { userNewAddressFormSchema } from "utils/Validators/validateSchema";
+// dummy data
+import { cityOptions } from "assets/FakeData/FakeData";
 export default function ModalAddAddress(props) {
   const { show, setShow } = props;
   const INITIALADDRESS = {
     name: "",
     phone: "",
+    email: "",
     city: "",
     address: "",
   };
-  const [newAddr, setNewAddr] = useState(INITIALADDRESS);
-  const handleOnChangeForm = (event) => {
-    setNewAddr({ ...newAddr, [event.target.name]: event.target.value });
-  };
-  const handleAddNewAddress = () => {
-    console.log(newAddr);
-    setNewAddr(INITIALADDRESS);
-    setShow(false);
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: INITIALADDRESS,
+    resolver: yupResolver(userNewAddressFormSchema),
+  });
   const handleCloseModal = () => {
     setShow(false);
+    reset();
+  };
+  const handleAddNewAddress = (data) => {
+    console.log(data);
+    // not to let reset here, need to call api make promise to check if success then reset in useEffect - back when working on back-end
+    reset();
+    handleCloseModal();
   };
   return (
     <div
@@ -43,7 +57,9 @@ export default function ModalAddAddress(props) {
               label="Full Name"
               name="name"
               variant="outlined"
-              onChange={handleOnChangeForm}
+              error={!!errors.name}
+              helperText={errors.name ? errors?.name.message : ""}
+              {...register("name")}
             />
             <span className="flex flex-row gap-2">
               <TextField
@@ -53,7 +69,9 @@ export default function ModalAddAddress(props) {
                 label="Email"
                 name="email"
                 variant="outlined"
-                onChange={handleOnChangeForm}
+                error={!!errors.name}
+                helperText={errors.name ? errors?.name.message : ""}
+                {...register("email")}
               />
 
               <TextField
@@ -63,7 +81,9 @@ export default function ModalAddAddress(props) {
                 label="Phone number"
                 name="phone"
                 variant="outlined"
-                onChange={handleOnChangeForm}
+                error={!!errors.phone}
+                helperText={errors.phone ? errors?.phone.message : ""}
+                {...register("phone")}
               />
             </span>
 
@@ -74,7 +94,9 @@ export default function ModalAddAddress(props) {
               label="City"
               name="city"
               variant="outlined"
-              onChange={handleOnChangeForm}
+              error={!!errors.city}
+              helperText={errors.city ? errors?.city.message : ""}
+              {...register("city")}
             />
 
             <TextField
@@ -84,25 +106,23 @@ export default function ModalAddAddress(props) {
               label="Full Address"
               name="address"
               variant="outlined"
-              onChange={handleOnChangeForm}
+              error={!!errors.address}
+              helperText={errors.address ? errors?.address.message : ""}
+              {...register("address")}
             />
             <span className="flex flex-row gap-2 items-end">
-              <DefaultButton
-                content="Save"
-                primaryColor="#ff6d00"
-                textColor="#fff"
-                styles={{ textTransform: "none" }}
-                handleClick={handleAddNewAddress}
-              ></DefaultButton>
-              <DefaultButton
-                content="Close"
-                primaryColor="#fff"
-                secondaryColor="#ff6d00"
-                styles={{
-                  border: "solid 1px #ff6d00",
-                  textTransform: "none",
-                }}
-              ></DefaultButton>
+              <CustomButton
+                type={"primary"}
+                content={"Save"}
+                handleClick={handleSubmit(handleAddNewAddress)}
+                sx={{ width: "100%" }}
+              ></CustomButton>
+              <CustomButton
+                type={"secondary"}
+                content={"Close"}
+                sx={{ width: "100%" }}
+                handleClick={handleCloseModal}
+              ></CustomButton>
             </span>
           </div>
         </div>

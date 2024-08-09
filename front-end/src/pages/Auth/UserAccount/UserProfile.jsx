@@ -1,15 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 // UI & image
 import blankImg from "assets/Pictures/blank-img-user1.png";
 import { TextField, Menu, MenuItem } from "@mui/material";
 // components
 import DefaultButton from "components/Button/DefaultButton";
+import CustomButton from "components/Button/CustomButton";
+// validate
+import { yupResolver } from "@hookform/resolvers/yup";
+import { userEditProfileFormSchema } from "utils/Validators/validateSchema";
 export default function UserProfile() {
+  // fetch user profile...
+  const [isEdit, setIsEdit] = useState(false);
+  const [userProfile, setUserProfile] = useState({
+    name: "",
+    phone: "",
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(userEditProfileFormSchema),
+  });
+  const handleFetchUserProfile = () => {
+    // call api
+  };
+  const handleUpdateProfile = (data) => {
+    console.log(data);
+    setIsEdit(false);
+  };
+  // didmount
   useEffect(() => {
+    handleFetchUserProfile();
     window.scrollTo(0, 0);
   }, []);
-  // fetch user profile...
-
   return (
     <div className="p-[14px] border border-gray-300 rounded-md">
       <div>
@@ -46,44 +71,56 @@ export default function UserProfile() {
               variant="outlined"
             />
             <TextField
+              disabled={!isEdit}
               className="w-full mb-3"
               size="small"
               id="outlined-basic"
               label="Name"
               name="name"
               variant="outlined"
+              error={!!errors.name}
+              helperText={errors.name ? errors?.name.message : ""}
+              {...register("name")}
             />
 
             <TextField
+              disabled={!isEdit}
               className="w-full mb-3"
               size="small"
               id="outlined-basic"
               label="Phone"
               name="phone"
               variant="outlined"
-            />
-            <TextField
-              className="w-full mb-3"
-              size="small"
-              id="outlined-basic"
-              label="Full Address"
-              name="address"
-              variant="outlined"
+              error={!!errors.phone}
+              helperText={errors.phone ? errors?.phone.message : ""}
+              {...register("phone")}
             />
           </div>
           <div className="lg:w-full lg:items-center lg:flex lg:flex-row lg:justify-center">
-            <DefaultButton
-              content="Save"
-              styles={{
-                width: "100%",
-                fontSize: "16px",
-                "@media (min-width:1024px)": { width: "fit-content" },
-              }}
-              primaryColor="#ff6d00"
-              secondaryColor="#ff6d00"
-              textColor="#fff"
-              textColorOnHover="#fff"
-            ></DefaultButton>
+            {isEdit ? (
+              <CustomButton
+                content={"Save"}
+                type={"secondary"}
+                handleClick={handleSubmit(handleUpdateProfile)}
+                sx={{ width: "100%" }}
+              ></CustomButton>
+            ) : (
+              <CustomButton
+                content={"Edit"}
+                type={"secondary"}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "#cae1fd",
+                    color: "#006fee",
+                    border: "solid 1px #006fee",
+                  },
+                  color: "#006fee",
+                  border: "solid 1px #006fee",
+                  width: "100%",
+                }}
+                handleClick={() => setIsEdit(true)}
+              ></CustomButton>
+            )}
           </div>
         </div>
       </div>

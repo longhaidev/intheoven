@@ -1,17 +1,39 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 // UI
 import { TextField } from "@mui/material";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 // components
 import DefaultButton from "../../../components/Button/DefaultButton";
+// validate
+import { userChangePasswordSchema } from "utils/Validators/validateSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 export default function ChangePassword() {
-  // const [showPassword, setShowPassword] = useState(false);
-  const [showPassword, setShowPassword] = useState({
+  const INITSHOWPASSWORDSTATE = {
     current_password: false,
     new_password: false,
     confirm_password: false,
+  };
+  const INITIALPASSWORDFORM = {
+    password: "",
+    newPassword: "",
+    confirmPassword: "",
+  };
+  const [showPassword, setShowPassword] = useState(INITSHOWPASSWORDSTATE);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: INITIALPASSWORDFORM,
+    resolver: yupResolver(userChangePasswordSchema),
   });
+
+  const handleChangePassword = (data) => {
+    console.log(data);
+  };
   return (
     <div className="border border-gray-300 rounded-md p-[14px] w-full">
       <div>
@@ -31,6 +53,9 @@ export default function ChangePassword() {
                 name="currentPassword"
                 variant="outlined"
                 type={showPassword.current_password ? "text" : "password"}
+                error={!!errors.password}
+                helperText={errors.password ? errors?.password.message : ""}
+                {...register("password")}
               />
               <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
                 {!showPassword.current_password ? (
@@ -76,6 +101,11 @@ export default function ChangePassword() {
                 name="newPassword"
                 variant="outlined"
                 type={showPassword.new_password ? "text" : "password"}
+                error={!!errors.newPassword}
+                helperText={
+                  errors.newPassword ? errors?.newPassword.message : ""
+                }
+                {...register("newPassword")}
               />
               <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
                 {!showPassword.new_password ? (
@@ -102,6 +132,11 @@ export default function ChangePassword() {
                 name="confirmPassword"
                 variant="outlined"
                 type={showPassword.confirm_password ? "text" : "password"}
+                error={!!errors.confirmPassword}
+                helperText={
+                  errors.confirmPassword ? errors?.confirmPassword.message : ""
+                }
+                {...register("confirmPassword")}
               />
               <div className="absolute right-[5px] top-[3px] w-[20px] h-[34px] flex flex-row justify-center items-center">
                 {!showPassword.confirm_password ? (
@@ -131,8 +166,9 @@ export default function ChangePassword() {
               content="Change password"
               styles={{ textTransform: "none", fontSize: "16px" }}
               textColor="#fff"
+              handleClick={handleSubmit(handleChangePassword)}
             ></DefaultButton>
-            <DefaultButton
+            {/* <DefaultButton
               content="Cancel"
               primaryColor="#fff"
               secondaryColor="#ff6d00"
@@ -142,7 +178,7 @@ export default function ChangePassword() {
                 fontSize: "16px",
               }}
               textColor="#ff6d00"
-            ></DefaultButton>
+            ></DefaultButton> */}
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   account: {
     email: "",
     username: "",
+    address: [{}],
   },
   isAuthenticated: false,
 };
