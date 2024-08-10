@@ -1,86 +1,132 @@
-const UserModel = require("../models/UserModel");
+const UserModel = require("@models/UserModel");
 const bcrypt = require("bcrypt");
-const generateAccessToken = require("./JwtServices");
-const generateRefreshToken = require("./JwtServices");
-// main
-const createUser = (newUser) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      //   check exist user
-      const isExistUser = await UserModel.findOne({
-        email: newUser.email,
-      });
-      if (isExistUser !== null) {
-        resolve({
-          DT: "",
-          EC: 1,
-          EM: `User with email ${isExistUser?.email} is already exist`,
-        });
-      }
-      const hashPassword = await bcrypt.hashSync(newUser.password, 10);
-      const res = await UserModel.create({
-        ...newUser,
-        password: hashPassword,
-      });
-      if (res) {
-        resolve({
-          DT: res,
-          EC: 0,
-          EM: "Create new user successfully",
-        });
-      }
-    } catch (err) {
-      reject(err);
+const {
+  generateAccessToken,
+  generateRefreshToken,
+  verifyToken,
+} = require("@utils/JwtServices");
+
+// Create a new user
+const createUser = async (newUser) => {
+  try {
+    // Check if user already exists
+    const existingUser = await UserModel.findOne({ email: newUser.email });
+    if (existingUser) {
+      return {
+        DT: "",
+        EC: 1,
+        EM: `User with email ${existingUser.email} already exists`,
+      };
     }
-  });
+
+    // Hash the password and create the user
+    const hashedPassword = bcrypt.hashSync(newUser.password, 10);
+    const user = await UserModel.create({
+      ...newUser,
+      password: hashedPassword,
+    });
+
+    return {
+      DT: user,
+      EC: 0,
+      EM: "User created successfully",
+    };
+  } catch (err) {
+    console.error("Error creating user:", err.message);
+    throw new Error("Error creating user");
+  }
 };
 
-const doLoginUser = (loginUser) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      //  verifile login user
-      const existUser = await UserModel.findOne({
-        email: loginUser.email,
-      });
-      if (!existUser) {
-        resolve({
-          DT: "",
-          EC: 1,
-          EM: "User is not exist",
-        });
-      }
-      const isCorrectPassword = bcrypt.compareSync(
-        loginUser.password,
-        existUser.password
-      );
-      if (!isCorrectPassword) {
-        resolve({
-          DT: "",
-          EC: 1,
-          EM: "Password or email is incorrect",
-        });
-      }
-      const access_token = await generateAccessToken({
-        id: existUser.id,
-        isAdmin: existUser.isAdmin,
-        secret: process.env.ACCESS_TOKEN_KEY,
-      });
-      const refresh_token = await generateRefreshToken({
-        id: existUser.id,
-        secret: process.env.REFRESH_TOKEN_KEY,
-      });
-
-      resolve({
-        DT: { ...existUser._doc, refresh_token, access_token },
-        EC: 0,
-        EM: "Login succeed",
-      });
-    } catch (err) {
-      reject(err);
+// Log in a user
+const doLoginUser = async (loginUser) => {
+  try {
+    // Find the user
+    const user = await UserModel.findOne({ email: loginUser.email });
+    if (!user) {
+      return {
+        DT: "",
+        EC: 1,
+        EM: "User does not exist",
+      };
     }
-  });
+
+    // Check if the password is correct
+    const isPasswordCorrect = bcrypt.compareSync(
+      loginUser.password,
+      user.password
+    );
+    if (!isPasswordCorrect) {
+      return {
+        DT: "",
+        EC: 1,
+        EM: "Incorrect password",
+      };
+    }
+
+    // Generate tokens
+    const accessToken = await generateAccessToken({
+      id: user.id,
+      isAdmin: user.isAdmin,
+    });
+    const refreshToken = await generateRefreshToken({ id: user.id });
+
+    return {
+      DT: {
+        ...user._doc,
+        access_token: accessToken,
+        refresh_token: refreshToken,
+      },
+      EC: 0,
+      EM: "Login successful",
+    };
+  } catch (err) {
+    console.error("Error logging in user:", err.message);
+    throw new Error("Error logging in user");
+  }
 };
+
+// Update a user's details
+const doUpdateUser = async (userId, updateData, accessToken) => {
+  try {
+    // Verify the token
+    const isAuthorized = await verifyToken({
+      access_token: accessToken,
+      userId,
+    });
+    if (!isAuthorized) {
+      return {
+        DT: "",
+        EC: 1,
+        EM: "Unauthorized",
+      };
+    }
+
+    // Find and update the user
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        DT: "",
+        EC: 1,
+        EM: "User not found",
+      };
+    }
+
+    const updatedUser = await UserModel.findByIdAndUpdate(userId, updateData, {
+      new: true,
+    });
+    return {
+      DT: updatedUser,
+      EC: 0,
+      EM: "User updated successfully",
+    };
+  } catch (err) {
+    console.error("Error updating user:", err.message);
+    throw new Error("Error updating user");
+  }
+};
+
 module.exports = {
   createUser,
   doLoginUser,
+  doUpdateUser,
 };
