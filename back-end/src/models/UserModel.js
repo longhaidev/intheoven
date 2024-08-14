@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       require: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -17,6 +18,7 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: String,
       require: true,
+      unique: true,
     },
     isAdmin: {
       type: Boolean,

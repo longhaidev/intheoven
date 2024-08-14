@@ -6,7 +6,7 @@ const generateAccessToken = (payload) => {
       payload,
     },
     process.env.ACCESS_TOKEN_KEY,
-    { expiresIn: "1h" }
+    { expiresIn: "30s" }
   );
   return access_token;
 };
@@ -22,15 +22,15 @@ const generateRefreshToken = (payload) => {
   return refresh_token;
 };
 
-const verifyToken = async ({ access_token, userId }) => {
+const verifyToken = ({ access_token, userId }) => {
   try {
     const decoded = jwt.verify(access_token, process.env.ACCESS_TOKEN_KEY);
     if (decoded.payload.id !== userId) {
-      throw new Error("User ID does not match the token");
+      return null;
     }
     return decoded.payload.id;
   } catch (err) {
-    throw new Error("Invalid or expired token");
+    return null;
   }
 };
 

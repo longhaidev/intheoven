@@ -1,8 +1,11 @@
 const router = require("express").Router();
 const userController = require("@controllers/userController");
-
-router.post("/register", userController.createUser);
-router.post("/login", userController.doLoginUser);
-router.put("/profile/:id", userController.doUpdateUser);
+const middlewareController = require("@controllers/middlewareController");
+router.get("/all", middlewareController.verifyToken, userController.getAllUser);
+router.delete(
+  "/delete/:id",
+  middlewareController.verifyTokenAndIsAdmin,
+  userController.deleteUser
+);
 
 module.exports = router;
